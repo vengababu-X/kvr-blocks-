@@ -3,114 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KVR Bricks & Granites | Quality Construction Materials</title>
+    <title>KVR Bricks & Granites | Premium Quality</title>
+    <!-- तालीविन्द सीएसएस (Tailwind CSS) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- फॉन्ट ऑसम (Font Awesome) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- गूगल फॉन्ट्स (Google Fonts) -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --primary: #b33939;
-            --secondary: #2c3e50;
+            --primary: #c0392b;
+            --dark: #121212;
+            --accent: #f39c12;
         }
         body {
-            font-family: 'Inter', 'Noto Sans Telugu', sans-serif;
-            scroll-behavior: smooth;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
         }
-        .telugu { font-family: 'Noto Sans Telugu', sans-serif; }
-        .product-card:hover img { transform: scale(1.05); }
-        .gradient-overlay {
-            background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.8));
+        .telugu-font { font-family: 'Noto Sans Telugu', sans-serif; }
+        
+        /* स्मूथ स्क्रॉल एनिमेशन (Smooth Scroll Animation) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
         }
-        .fade-in { animation: fadeIn 0.8s ease-in-out; }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ग्लासमोर्फिज्म (Glassmorphism) */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px border rgba(255, 255, 255, 0.1);
+        }
+
+        /* फ्लोटिंग व्हाट्सएप (Floating WhatsApp) */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25d366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .whatsapp-float:hover { transform: scale(1.15) rotate(10deg); }
+
+        /* प्रॉडक्ट इमेज होवर (Product Image Hover) */
+        .product-card img {
+            transition: transform 0.6s ease;
+        }
+        .product-card:hover img {
+            transform: scale(1.1);
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md shadow-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex-shrink-0 flex items-center">
-                    <span class="text-3xl font-bold text-[#b33939]">KVR</span>
-                    <span class="ml-2 text-xl font-semibold text-gray-700 hidden sm:block" id="nav-brand">Bricks & Granites</span>
-                </div>
-                <div class="hidden md:flex space-x-8 items-center">
-                    <a href="#home" class="nav-link hover:text-[#b33939] transition" data-key="navHome">Home</a>
-                    <a href="#products" class="nav-link hover:text-[#b33939] transition" data-key="navProducts">Products</a>
-                    <a href="#about" class="nav-link hover:text-[#b33939] transition" data-key="navAbout">About Us</a>
-                    <a href="#contact" class="nav-link hover:text-[#b33939] transition" data-key="navContact">Contact</a>
-                    <button onclick="toggleLanguage()" class="bg-[#b33939] text-white px-4 py-2 rounded-full font-semibold hover:bg-red-800 transition shadow-lg">
-                        <i class="fas fa-language mr-2"></i> <span id="lang-btn">తెలుగు</span>
-                    </button>
-                </div>
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden flex items-center gap-4">
-                    <button onclick="toggleLanguage()" class="text-sm bg-[#b33939] text-white px-3 py-1 rounded-full">
-                        <span id="lang-btn-mobile">తెలుగు</span>
-                    </button>
-                    <button id="mobile-menu-button" class="text-gray-600 focus:outline-none">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
+    <!-- नेविगेशन बार (Navigation Bar) -->
+    <nav class="fixed w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 glass border-b border-white/10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center font-bold text-xl">K</div>
+                <span class="text-2xl font-extrabold tracking-tighter">KVR <span class="text-red-500 text-sm font-normal">BRICKS</span></span>
             </div>
-        </div>
-        <!-- Mobile Dropdown -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t p-4 flex flex-col space-y-4 shadow-xl">
-            <a href="#home" class="nav-link" data-key="navHome">Home</a>
-            <a href="#products" class="nav-link" data-key="navProducts">Products</a>
-            <a href="#about" class="nav-link" data-key="navAbout">About Us</a>
-            <a href="#contact" class="nav-link" data-key="navContact">Contact</a>
+            
+            <div class="hidden md:flex gap-8 items-center font-semibold text-sm uppercase tracking-widest">
+                <a href="#home" class="hover:text-red-500 transition" data-translate="navHome">Home</a>
+                <a href="#products" class="hover:text-red-500 transition" data-translate="navProducts">Products</a>
+                <a href="#about" class="hover:text-red-500 transition" data-translate="navAbout">About</a>
+                <a href="#contact" class="hover:text-red-500 transition" data-translate="navContact">Contact</a>
+                <button onclick="switchLang()" class="ml-4 border border-white/20 px-4 py-1 rounded-full text-xs hover:bg-white hover:text-black transition uppercase">
+                    <i class="fas fa-globe mr-1"></i> <span id="langLabel">తెలుగు</span>
+                </button>
+            </div>
+
+            <!-- मोबाइल मेनु बटन (Mobile Menu Button) -->
+            <div class="md:hidden flex items-center gap-4">
+                <button onclick="switchLang()" class="text-xs border border-white/20 px-2 py-1 rounded">తెలుగు</button>
+                <i class="fas fa-bars text-xl"></i>
+            </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1590069230002-70cc694767d7?q=80&w=2000&auto=format&fit=crop" alt="Hero Background" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-black/50"></div>
+    <!-- हीरो सेक्शन (Hero Section) -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20">
+        <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10"></div>
+        <div class="absolute inset-0 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1590069230002-70cc694767d7?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-40 scale-105" alt="Hero Background">
         </div>
-        <div class="relative z-10 text-center px-4 fade-in">
-            <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight" data-key="heroTitle">
-                Building Your Dreams <br><span class="text-[#f1c40f]">With Quality Bricks</span>
+        
+        <div class="relative z-20 text-center px-4 max-w-4xl reveal">
+            <h1 id="heroTitle" class="text-5xl md:text-8xl font-extrabold mb-6 leading-none">
+                BUILDING <span class="text-red-600">STRENGTH</span> <br> WITH KVR
             </h1>
-            <p class="text-xl text-gray-200 mb-10 max-w-2xl mx-auto" data-key="heroSub">
-                Premium quality hard bricks, soft bricks, and exquisite granites for enduring constructions.
+            <p id="heroSubtitle" class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
+                Discover the finest collection of hard bricks, soft bricks, and luxury granites crafted for generations of excellence.
             </p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#products" class="bg-[#b33939] text-white px-8 py-4 rounded-lg font-bold hover:scale-105 transition transform" data-key="heroBtnPrimary">View Products</a>
-                <a href="#contact" class="bg-white text-gray-900 px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition shadow-xl" data-key="heroBtnSecondary">Get a Quote</a>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#products" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold transition shadow-2xl shadow-red-900/40" data-translate="btnProducts">Explore Products</a>
+                <a href="#contact" class="glass px-8 py-4 rounded-full font-bold hover:bg-white hover:text-black transition" data-translate="btnContact">Get In Touch</a>
             </div>
         </div>
     </section>
 
-    <!-- Products Section -->
-    <section id="products" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4" data-key="prodTitle">Our Premium Products</h2>
-                <div class="h-1 w-24 bg-[#b33939] mx-auto"></div>
+    <!-- प्रॉडक्ट्स सेक्शन (Products Section) -->
+    <section id="products" class="py-24 px-6 md:px-12 bg-black">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4 reveal">
+                <div>
+                    <h6 class="text-red-600 font-bold uppercase tracking-widest text-xs mb-2" data-translate="collectionTitle">Our Collection</h6>
+                    <h2 class="text-4xl md:text-6xl font-extrabold" data-translate="productHeading">Superior Materials</h2>
+                </div>
+                <div class="flex gap-4 overflow-x-auto pb-2 w-full md:w-auto">
+                    <button onclick="filterProducts('all')" class="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-red-600 transition text-sm font-bold" data-translate="catAll">All Items</button>
+                    <button onclick="filterProducts('hard')" class="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-red-600 transition text-sm font-bold" data-translate="catHard">Hard Bricks</button>
+                    <button onclick="filterProducts('soft')" class="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-red-600 transition text-sm font-bold" data-translate="catSoft">Soft Bricks</button>
+                    <button onclick="filterProducts('granite')" class="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-red-600 transition text-sm font-bold" data-translate="catGranite">Granite</button>
+                    <button onclick="filterProducts('walls')" class="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-red-600 transition text-sm font-bold" data-translate="catWalls">Walls</button>
+                </div>
             </div>
 
-            <!-- Categories Tabs -->
-            <div class="flex flex-wrap justify-center gap-4 mb-12">
-                <button onclick="filterProducts('all')" class="filter-btn active bg-gray-100 px-6 py-2 rounded-full font-semibold hover:bg-[#b33939] hover:text-white transition" data-key="catAll">All</button>
-                <button onclick="filterProducts('hard-bricks')" class="filter-btn bg-gray-100 px-6 py-2 rounded-full font-semibold hover:bg-[#b33939] hover:text-white transition" data-key="catHard">Hard Bricks</button>
-                <button onclick="filterProducts('soft-bricks')" class="filter-btn bg-gray-100 px-6 py-2 rounded-full font-semibold hover:bg-[#b33939] hover:text-white transition" data-key="catSoft">Soft Bricks</button>
-                <button onclick="filterProducts('granite')" class="filter-btn bg-gray-100 px-6 py-2 rounded-full font-semibold hover:bg-[#b33939] hover:text-white transition" data-key="catGranite">Granite</button>
-                <button onclick="filterProducts('walls')" class="filter-btn bg-gray-100 px-6 py-2 rounded-full font-semibold hover:bg-[#b33939] hover:text-white transition" data-key="catWalls">Pre-Designed Walls</button>
-            </div>
-
-            <!-- Product Grid -->
-            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- प्रॉडक्ट ग्रिड (Product Grid) -->
+            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- गिटहब एसेट पाथ्स का उपयोग करके डेटा (Data using GitHub Asset Paths) -->
                 <!-- Hard Bricks -->
-                <div class="product-card group relative overflow-hidden rounded-xl shadow-lg" data-category="hard-bricks">
-                    <img src="https://placehold.co/600x400/8b4513/ffffff?text=Hard+Brick+121914" alt="Hard Brick 121914" class="w-full h-72 object-cover transition duration-500">
-                    <div class="absolute inset-0 gradient-overlay flex items-end p-6">
+                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="hard">
+                    <img src="Assets/20260125_121914.jpg" class="w-full h-80 object-cover" alt="Hard Brick 121914">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <span class="text-red-500 font-bold text-xs uppercase tracking-widest">Hard Brick</span>
+                        <h4 class="text-xl font-bold">Premium Ref: 121914</h4>
+                    </div>
+                </div>
+                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="hard">
+                    <img src="Assets/20260125_121921.jpg" class="w-full h-80 object-cover" alt="Hard Brick 121921">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <span class="text-red-500 font-bold text-xs uppercase tracking-widest">Hard Brick</span>
+                        <h4 class="text-xl font-bold">Premium Ref: 121921</h4>
+                    </div>
+                </div>
+                
+                <!-- Soft Bricks -->
+                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="soft">
+                    <img src="Assets/20260125_122114.jpg" class="w-full h-80 object-cover" alt="Soft Brick 122114">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <span class="text-orange-500 font-bold text-xs uppercase tracking-widest">Soft Brick</span>
+                        <h4 class="text-xl font-bold">Texture Ref: 122114</h4>
+                    </div>
+                </div>
+
+                <!-- Granite -->
+                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="granite">
+                    <img src="Assets/20260125_123522.jpg" class="w-full h-80 object-cover" alt="Granite 123522">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <span class="text-blue-400 font-bold text-xs uppercase tracking-widest">Luxury Granite</span>
+                        <h4 class="text-xl font-bold">Mirror Finish 123522</h4>
+                    </div>
+                </div>
+
+                <!-- Pre-Designed Walls -->
+                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="walls">
+                    <img src="Assets/20260125_123600.jpg" class="w-full h-80 object-cover" alt="Wall 123600">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest">Designer Wall</span>
+                        <h4 class="text-xl font-bold">Standard 123600</h4>
+                    </div>
+                </div>
+                <!-- अन्य इमेज्स (Other Images) -->
+                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="granite">
+                    <img src="Assets/20260125_123816.jpg" class="w-full h-80 object-cover" alt="Granite 123816">
+                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                        <span class="text-blue-400 font-bold text-xs uppercase tracking-widest">Granite</span>
+                        <h4 class="text-xl font-bold">Polished Ref: 123816</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- संपर्क सेक्शन (Contact Section) -->
+    <section id="contact" class="py-24 px-6 md:px-12 bg-zinc-950">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="reveal">
+                <h2 class="text-4xl md:text-6xl font-extrabold mb-8" data-translate="contactHeading">Let's Build Together</h2>
+                <p class="text-gray-400 mb-8" data-translate="contactText">Have questions about our bricks or granites? Fill out the form or reach us directly on WhatsApp.</p>
+                
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center"><i class="fas fa-phone"></i></div>
                         <div>
+                            <p class="text-xs text-gray-500 uppercase">Call/WhatsApp</p>
+                            <p class="text-xl font-bold">+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center"><i class="fas fa-map-marker-alt text-red-500"></i></div>
+                        <div>
+                            <p class="text-xs text-gray-500 uppercase">Location</p>
+                            <p class="text-xl font-bold">KVR Factory, Telangana</p>
+                            <a href="https://maps.app.goo.gl/LUvSYkV6Tcnc3VtN7" target="_blank" class="text-red-500 text-sm hover:underline">View on Google Maps</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- संपर्क फॉर्म (Contact Form) -->
+            <div class="glass p-8 md:p-12 rounded-3xl reveal">
+                <form id="contactForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <input type="text" placeholder="Full Name" class="bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:ring-2 focus:ring-red-600 outline-none transition" required>
+                        <input type="tel" placeholder="Phone Number" class="bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:ring-2 focus:ring-red-600 outline-none transition" required>
+                    </div>
+                    <textarea rows="4" placeholder="Your Inquiry (e.g. Need 10k Hard Bricks)" class="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:ring-2 focus:ring-red-600 outline-none transition" required></textarea>
+                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-4 rounded-xl font-bold uppercase tracking-widest transition flex items-center justify-center gap-2">
+                        Send Message <i class="fas fa-paper-plane text-xs"></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- व्हाट्सएप फ्लोटिंग बटन (WhatsApp Floating Button) -->
+    <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- फुटर (Footer) -->
+    <footer class="py-12 px-6 border-t border-white/10 text-center text-gray-600 text-sm">
+        <div class="mb-6 flex justify-center gap-4">
+            <i class="fab fa-facebook hover:text-white transition cursor-pointer text-lg"></i>
+            <i class="fab fa-instagram hover:text-white transition cursor-pointer text-lg"></i>
+            <i class="fab fa-linkedin hover:text-white transition cursor-pointer text-lg"></i>
+        </div>
+        <p>&copy; 2026 KVR Bricks & Granites. Designed with Excellence.</p>
+    </footer>
+
+    <!-- जावास्क्रिप्ट (JavaScript) -->
+    <script>
+        // भाषा डेटा (Language Data)
+        const translations = {
+            en: {
+                navHome: "Home", navProducts: "Products", navAbout: "About", navContact: "Contact",
+                heroTitle: "BUILDING <span class='text-red-600'>STRENGTH</span> <br> WITH KVR",
+                heroSubtitle: "Discover the finest collection of hard bricks, soft bricks, and luxury granites crafted for generations of excellence.",
+                btnProducts: "Explore Products", btnContact: "Get In Touch",
+                collectionTitle: "Our Collection", productHeading: "Superior Materials",
+                catAll: "All Items", catHard: "Hard Bricks", catSoft: "Soft Bricks", catGranite: "Granite", catWalls: "Walls",
+                contactHeading: "Let's Build Together",
+                contactText: "Have questions about our bricks or granites? Fill out the form or reach us directly on WhatsApp.",
+                langLabel: "తెలుగు"
+            },
+            te: {
+                navHome: "హోమ్", navProducts: "ఉత్పత్తులు", navAbout: "మా గురించి", navContact: "సంప్రదించండి",
+                heroTitle: "KVRతో <span class='text-red-600'>బలమైన</span> <br> నిర్మాణం",
+                heroSubtitle: "తరతరాల శ్రేష్ఠత కోసం రూపొందించిన హార్డ్ ఇటుకలు, సాఫ్ట్ ఇటుకలు మరియు విలాసవంతమైన గ్రానైట్‌ల ఉత్తమ సేకరణను కనుగొనండి.",
+                btnProducts: "ఉత్పత్తులను చూడండి", btnContact: "సంప్రదించండి",
+                collectionTitle: "మా సేకరణ", productHeading: "అత్యుత్తమ మెటీరియల్స్",
+                catAll: "అన్నీ", catHard: "హార్డ్ ఇటుకలు", catSoft: "సాఫ్ట్ ఇటుకలు", catGranite: "గ్రానైట్", catWalls: "గోడలు",
+                contactHeading: "కలిసి నిర్మిద్దాం",
+                contactText: "మా ఇటుకలు లేదా గ్రానైట్‌ల గురించి ప్రశ్నలు ఉన్నాయా? ఫారమ్‌ను నింపండి లేదా నేరుగా వాట్సాప్‌లో మమ్మల్ని సంప్రదించండి.",
+                langLabel: "English"
+            }
+        };
+
+        let currentLang = 'en';
+
+        // भाषा स्विच करें (Switch Language)
+        function switchLang() {
+            currentLang = currentLang === 'en' ? 'te' : 'en';
+            const data = translations[currentLang];
+            
+            document.querySelectorAll('[data-translate]').forEach(el => {
+                const key = el.getAttribute('data-translate');
+                el.innerText = data[key];
+            });
+
+            document.getElementById('heroTitle').innerHTML = data.heroTitle;
+            document.getElementById('heroSubtitle').innerText = data.heroSubtitle;
+            document.getElementById('langLabel').innerText = data.langLabel;
+
+            // फोंट बदलें (Font Change)
+            if(currentLang === 'te') {
+                document.body.classList.add('telugu-font');
+            } else {
+                document.body.classList.remove('telugu-font');
+            }
+        }
+
+        // प्रॉडक्ट फ़िल्टर (Product Filter)
+        function filterProducts(cat) {
+            const cards = document.querySelectorAll('.product-card');
+            cards.forEach(card => {
+                if (cat === 'all' || card.dataset.category === cat) {
+                    card.style.display = 'block';
+                    setTimeout(() => card.style.opacity = '1', 10);
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => card.style.display = 'none', 300);
+                }
+            });
+        }
+
+        // स्क्रॉल रिवील एनीमेशन (Scroll Reveal Animation)
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        // आरंभिक चेक (Initial Check)
+        reveal();
+
+        // फॉर्म सबमिशन (Form Submission)
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert("Message Sent! We will contact you shortly.");
+        });
+    </script>
+</body>
+</html>
+
                             <p class="text-sm text-yellow-400 font-bold uppercase tracking-widest" data-key="catHard">Hard Bricks</p>
                             <h3 class="text-xl font-bold text-white">Ref: 121914</h3>
                         </div>
