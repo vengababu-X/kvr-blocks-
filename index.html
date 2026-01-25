@@ -1,116 +1,359 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KVR Blocks - Premium Masonry Solutions</title>
+    <title>KVR Bricks | Premium Cement Blocks Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f8fafc;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fdfdfd;
         }
 
-        .brick-card {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.9);
+            backdrop-filter: blur(10px);
         }
 
-        .brick-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        .product-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .img-container {
-            aspect-ratio: 4/3;
-            overflow: hidden;
-            background: #e2e8f0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        .img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        .sticker-icon {
+            filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
 
-        .status-badge {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .gallery-img {
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover .gallery-img {
+            transform: scale(1.1);
         }
     </style>
 </head>
-<body class="text-slate-900">
+<body class="text-slate-900 antialiased">
 
     <!-- Navigation -->
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
+    <nav class="glass-nav text-white sticky top-0 z-50 w-full border-b border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <div class="flex items-center gap-2">
-                    <div class="bg-blue-600 p-2 rounded-lg text-white">
-                        <i class="fas fa-cubes fa-lg"></i>
+            <div class="flex items-center justify-between h-20">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-orange-600 p-2 rounded-xl shadow-lg shadow-orange-900/20">
+                        <i data-lucide="blocks" class="h-6 w-6 text-white"></i>
                     </div>
-                    <span class="font-bold text-xl tracking-tight">KVR<span class="text-blue-600">BLOCKS</span></span>
+                    <div>
+                        <span class="font-extrabold text-2xl tracking-tighter block leading-none">KVR</span>
+                        <span class="text-[10px] uppercase tracking-[0.2em] text-orange-400 font-bold">Bricks & Blocks</span>
+                    </div>
                 </div>
-                <div class="hidden md:flex space-x-8">
-                    <a href="#" class="text-slate-600 hover:text-blue-600 font-medium">Products</a>
-                    <a href="#" class="text-slate-600 hover:text-blue-600 font-medium">Specifications</a>
-                    <a href="#" class="text-slate-600 hover:text-blue-600 font-medium">Contact</a>
+                
+                <div class="hidden md:flex items-center space-x-10">
+                    <a href="#about" class="text-sm font-semibold hover:text-orange-400 transition">Our Yard</a>
+                    <a href="#products" class="text-sm font-semibold hover:text-orange-400 transition">Products</a>
+                    <a href="#gallery" class="text-sm font-semibold hover:text-orange-400 transition">Portfolio</a>
+                    <a href="tel:9764238394" class="bg-white text-slate-900 px-6 py-2.5 rounded-full text-sm font-bold hover:bg-orange-500 hover:text-white transition-all shadow-lg">
+                        Call Expert
+                    </a>
                 </div>
-                <button class="bg-blue-600 text-white px-5 py-2 rounded-full font-medium hover:bg-blue-700 transition">
-                    Inquire Now
+
+                <button id="mobile-menu-btn" class="md:hidden p-2 text-slate-300">
+                    <i data-lucide="menu"></i>
                 </button>
             </div>
         </div>
+        <!-- Mobile Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-900 border-t border-slate-800 px-4 py-6 space-y-4">
+            <a href="#about" class="block text-lg font-medium">About Us</a>
+            <a href="#products" class="block text-lg font-medium">Available Sizes</a>
+            <a href="#gallery" class="block text-lg font-medium">Gallery</a>
+            <a href="tel:9764238394" class="block bg-orange-600 text-white text-center py-4 rounded-xl font-bold">Call: 9764238394</a>
+        </div>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="py-12 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-slate-900 mb-4">
-                High-Quality Cement Solid Blocks
-            </h1>
-            <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-                Precision engineered for structural integrity. Available in multiple sizes for all building requirements.
-            </p>
+    <!-- Hero Portfolio Header -->
+    <section class="relative pt-16 pb-24 overflow-hidden bg-slate-950">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full opacity-30 pointer-events-none">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-orange-600 rounded-full blur-[120px]"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-600 rounded-full blur-[120px]"></div>
         </div>
-    </header>
+        
+        <div class="relative max-w-7xl mx-auto px-4 text-center">
+            <span class="inline-block py-1 px-4 rounded-full bg-slate-800 text-orange-400 text-xs font-bold tracking-widest uppercase mb-6 border border-slate-700">
+                Direct Manufacturer Portfolio
+            </span>
+            <h1 class="text-5xl md:text-7xl font-extrabold text-white mb-6 tracking-tight">
+                Solid Strength for <br/> <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-600">Every Foundation.</span>
+            </h1>
+            <p class="text-slate-400 text-xl max-w-2xl mx-auto mb-10 leading-relaxed">
+                Manufacturer and supplier of premium cement blocks in Cherlapalli, Hyderabad. High load-bearing capacity with immediate site delivery.
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="#products" class="bg-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-orange-700 transition-all shadow-xl shadow-orange-900/40">
+                    View Available Stock
+                </a>
+                <a href="https://wa.me/919764238394" class="bg-slate-800 text-white border border-slate-700 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-700 transition-all">
+                    WhatsApp Inquiry
+                </a>
+            </div>
+        </div>
+    </section>
 
-    <!-- Product Gallery -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-20">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            <!-- Product 1: 6x8x12 -->
-            <div class="brick-card bg-white rounded-2xl overflow-hidden border border-slate-200">
-                <div class="img-container relative">
-                    <!-- GitHub image reference: 20260125_121914.jpg -->
-                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121914.jpg" 
-                         alt="Cement Block 6x8x12" 
-                         onerror="this.parentElement.innerHTML='<div class=\'text-slate-400 flex flex-col items-center\'><i class=\'fas fa-image fa-3x mb-2\'></i><span>6x8x12 Image</span></div>'">
-                    <div class="absolute top-4 left-4">
-                        <span class="status-badge bg-blue-600 text-white px-2 py-1 rounded shadow-sm font-bold">Solid</span>
+    <!-- About Section: Highlighting the Yard -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <div class="relative">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-4">
+                            <!-- Using your yard photos from GitHub -->
+                            <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121942.jpg" alt="KVR Yard Stock" class="rounded-2xl shadow-lg w-full h-64 object-cover" onerror="this.src='https://images.unsplash.com/photo-1590074160453-62529a738435?auto=format&fit=crop&q=80&w=600'">
+                            <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122027.jpg" alt="Factory Site" class="rounded-2xl shadow-lg w-full h-48 object-cover" onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=600'">
+                        </div>
+                        <div class="pt-10">
+                            <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121932.jpg" alt="Production Line" class="rounded-2xl shadow-lg w-full h-96 object-cover" onerror="this.src='https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&q=80&w=600'">
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-orange-600 text-white p-8 rounded-3xl shadow-2xl hidden md:block">
+                        <span class="text-4xl font-black block">10k+</span>
+                        <span class="text-xs font-bold uppercase tracking-wider">Blocks Ready to Dispatch</span>
                     </div>
                 </div>
-                <div class="p-6">
-                    <h3 class="text-xl font-bold mb-2">Standard Solid Block</h3>
-                    <div class="flex items-center gap-2 text-slate-500 mb-4">
-                        <i class="fas fa-ruler-combined"></i>
-                        <span class="font-semibold text-slate-700">6" × 8" × 12"</span>
+                
+                <div>
+                    <h2 class="text-sm font-bold text-orange-600 uppercase tracking-widest mb-4">Manufacturer Since 2020</h2>
+                    <h3 class="text-4xl font-bold text-slate-900 mb-6 leading-tight">We are the Source. No Middlemen, Just Pure Quality.</h3>
+                    <p class="text-slate-600 text-lg mb-8">
+                        KVR Bricks operates a state-of-the-art manufacturing facility in Cherlapalli. We manage the entire lifecycle from raw material selection to final curing, ensuring that every block delivered to your site meets high-pressure standards.
+                    </p>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-blue-100 p-2 rounded-lg text-blue-600"><i data-lucide="shield-check"></i></div>
+                            <span class="font-bold text-slate-700">ISO Standard Mix</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-green-100 p-2 rounded-lg text-green-600"><i data-lucide="truck"></i></div>
+                            <span class="font-bold text-slate-700">Direct Transport</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-orange-100 p-2 rounded-lg text-orange-600"><i data-lucide="clock"></i></div>
+                            <span class="font-bold text-slate-700">Immediate Load</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="bg-purple-100 p-2 rounded-lg text-purple-600"><i data-lucide="users"></i></div>
+                            <span class="font-bold text-slate-700">Builder Partner</span>
+                        </div>
                     </div>
-                    <ul class="text-sm text-slate-600 space-y-2 mb-6">
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Load Bearing Strength</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Smooth Finishing</li>
-                        <li><i class="fas fa-check text-green-500 mr-2"></i>Uniform Dimensions</li>
-                    </ul>
-                    <button class="w-full py-3 border border-blue-600 text-blue-600 font-bold rounded-xl hover:bg-blue-50 transition">
-                        View Details
-                    </button>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Product Availability Portfolio -->
+    <section id="products" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Available Dimensions</h2>
+                <p class="text-slate-500">We currently maintain stock for the following three primary sizes.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Size 1 -->
+                <div class="product-card bg-white rounded-3xl p-8 border border-slate-200">
+                    <div class="h-48 mb-6 bg-slate-100 rounded-2xl overflow-hidden relative">
+                        <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121914.jpg" alt="6x8x12 Block" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">In Stock</div>
+                    </div>
+                    <h4 class="text-xs font-bold text-orange-600 uppercase mb-2">Standard Heavy</h4>
+                    <h3 class="text-3xl font-black text-slate-900 mb-4">6" × 8" × 12"</h3>
+                    <p class="text-slate-500 text-sm mb-6">Best for external load-bearing walls and boundary walls. Highly durable against weathering.</p>
+                    <div class="flex justify-between items-center pt-6 border-t border-slate-100">
+                        <span class="text-slate-400 text-xs italic">Min Order: 500 pcs</span>
+                        <a href="https://wa.me/919764238394?text=Interested%20in%206x8x12" class="text-orange-600 font-bold hover:underline">Inquire Size</a>
+                    </div>
+                </div>
+
+                <!-- Size 2 -->
+                <div class="product-card bg-white rounded-3xl p-8 border border-slate-200">
+                    <div class="h-48 mb-6 bg-slate-100 rounded-2xl overflow-hidden relative">
+                        <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121921.jpg" alt="6x6x12 Block" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-green-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">In Stock</div>
+                    </div>
+                    <h4 class="text-xs font-bold text-orange-600 uppercase mb-2">Masonry Choice</h4>
+                    <h3 class="text-3xl font-black text-slate-900 mb-4">6" × 6" × 12"</h3>
+                    <p class="text-slate-500 text-sm mb-6">Optimized for residential partition walls. Easy handling and faster construction speed.</p>
+                    <div class="flex justify-between items-center pt-6 border-t border-slate-100">
+                        <span class="text-slate-400 text-xs italic">Min Order: 500 pcs</span>
+                        <a href="https://wa.me/919764238394?text=Interested%20in%206x6x12" class="text-orange-600 font-bold hover:underline">Inquire Size</a>
+                    </div>
+                </div>
+
+                <!-- Size 3 -->
+                <div class="product-card bg-white rounded-3xl p-8 border border-slate-200">
+                    <div class="h-48 mb-6 bg-slate-100 rounded-2xl overflow-hidden relative">
+                        <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121932.jpg" alt="4x8x16 Block" class="w-full h-full object-cover">
+                        <div class="absolute top-4 right-4 bg-orange-500 text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase">High Demand</div>
+                    </div>
+                    <h4 class="text-xs font-bold text-orange-600 uppercase mb-2">Slim Structural</h4>
+                    <h3 class="text-3xl font-black text-slate-900 mb-4">4" × 8" × 16"</h3>
+                    <p class="text-slate-500 text-sm mb-6">Large surface area allows for quicker wall raising with less mortar usage. Perfect for modern builds.</p>
+                    <div class="flex justify-between items-center pt-6 border-t border-slate-100">
+                        <span class="text-slate-400 text-xs italic">Min Order: 500 pcs</span>
+                        <a href="https://wa.me/919764238394?text=Interested%20in%204x8x16" class="text-orange-600 font-bold hover:underline">Inquire Size</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Full Image Gallery Portfolio -->
+    <section id="gallery" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+                <div>
+                    <h2 class="text-4xl font-extrabold text-slate-900 mb-2">Facility & Stock</h2>
+                    <p class="text-slate-500">Live shots from our production yard in Hyderabad.</p>
+                </div>
+                <div class="flex gap-2">
+                    <button class="px-5 py-2 rounded-full bg-slate-100 text-slate-900 font-bold text-sm hover:bg-orange-600 hover:text-white transition">All Photos</button>
+                    <button class="px-5 py-2 rounded-full bg-slate-100 text-slate-900 font-bold text-sm hover:bg-orange-600 hover:text-white transition">Production</button>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <!-- Image 1 -->
+                <div class="gallery-item relative overflow-hidden rounded-3xl group aspect-square">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121914.jpg" class="gallery-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="text-white h-8 w-8"></i>
+                    </div>
+                </div>
+                <!-- Image 2 -->
+                <div class="gallery-item relative overflow-hidden rounded-3xl group aspect-square">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121921.jpg" class="gallery-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="text-white h-8 w-8"></i>
+                    </div>
+                </div>
+                <!-- Image 3 -->
+                <div class="gallery-item relative overflow-hidden rounded-3xl group aspect-square md:col-span-2 md:row-span-2">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121932.jpg" class="gallery-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="text-white h-12 w-12"></i>
+                    </div>
+                </div>
+                <!-- Image 4 -->
+                <div class="gallery-item relative overflow-hidden rounded-3xl group aspect-square">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121942.jpg" class="gallery-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="text-white h-8 w-8"></i>
+                    </div>
+                </div>
+                <!-- Image 5 -->
+                <div class="gallery-item relative overflow-hidden rounded-3xl group aspect-square">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122027.jpg" class="gallery-img w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                        <i data-lucide="zoom-in" class="text-white h-8 w-8"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticker Icons Info Grid -->
+    <section class="py-20 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 text-center">
+                <div class="group">
+                    <div class="sticker-icon bg-gradient-to-br from-orange-400 to-orange-600 w-24 h-24 rounded-full mx-auto flex items-center justify-center mb-6 ring-8 ring-slate-800 transition-transform group-hover:scale-110">
+                        <i data-lucide="award" class="h-10 w-10 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Quality Grade A</h3>
+                    <p class="text-slate-400 text-sm">We use 53-grade cement for maximum bonding and block life.</p>
+                </div>
+                <div class="group">
+                    <div class="sticker-icon bg-gradient-to-br from-blue-400 to-blue-600 w-24 h-24 rounded-full mx-auto flex items-center justify-center mb-6 ring-8 ring-slate-800 transition-transform group-hover:scale-110">
+                        <i data-lucide="handshake" class="h-10 w-10 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Fair Pricing</h3>
+                    <p class="text-slate-400 text-sm">Transparent rates with special discounts for bulk builder orders.</p>
+                </div>
+                <div class="group">
+                    <div class="sticker-icon bg-gradient-to-br from-green-400 to-green-600 w-24 h-24 rounded-full mx-auto flex items-center justify-center mb-6 ring-8 ring-slate-800 transition-transform group-hover:scale-110">
+                        <i data-lucide="truck" class="h-10 w-10 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Reliable Transit</h3>
+                    <p class="text-slate-400 text-sm">Own fleet of trucks for timely delivery across Hyderabad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing/Order Info -->
+    <section class="py-24 bg-white border-t border-slate-100">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="bg-slate-50 rounded-[40px] p-8 md:p-16 relative overflow-hidden border border-slate-200 shadow-xl">
+                <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-4xl font-extrabold text-slate-900 mb-6">Let's Negotiate Your Next Project.</h2>
+                        <p class="text-slate-600 mb-8">Whether it's a small home or a massive apartment complex, we provide tailored quotes based on your volume.</p>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-4">
+                                <i data-lucide="phone" class="text-orange-600"></i>
+                                <span class="text-xl font-bold">9764238394</span>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <i data-lucide="map-pin" class="text-orange-600"></i>
+                                <span class="text-slate-700">Cherlapalli, Hyderabad</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-3xl shadow-lg">
+                        <h3 class="font-bold text-lg mb-4 text-center">Contact Manufacturer</h3>
+                        <a href="tel:9764238394" class="block w-full bg-slate-900 text-white text-center py-4 rounded-xl font-bold mb-4 hover:bg-orange-600 transition">Call to Order</a>
+                        <a href="https://wa.me/919764238394" class="block w-full border-2 border-slate-900 text-slate-900 text-center py-4 rounded-xl font-bold hover:bg-slate-50 transition">WhatsApp Details</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-950 py-12 text-slate-500 border-t border-slate-900">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm">&copy; 2026 KVR Bricks & Concrete Products. Established Quality.</p>
+            <p class="text-xs mt-2 font-mono">Cherlapalli Manufacturing Unit</p>
+        </div>
+    </footer>
+
+    <script>
+        // Init Lucide Icons
+        lucide.createIcons();
+
+        // Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close menu on click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => menu.classList.add('hidden'));
+        });
+    </script>
+</body>
+</html>
+
             </div>
 
             <!-- Product 2: 6x6x12 -->
