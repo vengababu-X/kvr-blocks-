@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KVR Bricks - Pre-Designed Walls & Brick Supplier</title>
+    <title>KVR Bricks - Brick Builders</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -12,7 +12,7 @@
             --brick-red: #B22222;
             --granite-black: #1A1A1B;
         }
-        body { font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
+        body { font-family: sans-serif; background-color: #f4f4f5; }
         .bg-brick-red { background-color: var(--brick-red); }
         .text-brick-red { color: var(--brick-red); }
         .section { display: none; }
@@ -20,49 +20,47 @@
         .img-card {
             aspect-ratio: 4/3;
             object-fit: cover;
-            border-radius: 0.5rem;
+            border-radius: 4px;
             width: 100%;
-            border: 1px solid #e2e8f0;
+            border: 1px solid #d1d5db;
             background: #fff;
-            transition: transform 0.2s;
         }
-        .img-card:hover { transform: scale(1.02); }
     </style>
 </head>
-<body class="text-slate-900">
+<body class="text-zinc-900">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white shadow-md z-50">
+    <nav class="fixed top-0 w-full bg-white border-b border-zinc-200 z-50">
         <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
             <div class="flex items-center gap-2 cursor-pointer" onclick="showSection('home')">
                 <div class="flex flex-col leading-none">
-                    <span class="text-xl font-black text-red-700">KVR BRICKS</span>
-                    <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter lang-en">Quality Cement & Clay Bricks Supplier</span>
-                    <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter lang-te hidden">నాణ్యమైన సిమెంట్ మరియు క్లే ఇటుకల సరఫరాదారు</span>
+                    <span class="text-xl font-bold text-red-700">KVR BRICKS</span>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase lang-en">Quality Cement & Clay Bricks Supplier</span>
+                    <span class="text-[10px] font-bold text-zinc-500 uppercase lang-te hidden">నాణ్యమైన సిమెంట్ మరియు క్లే ఇటుకల సరఫరాదారు</span>
                 </div>
             </div>
 
-            <div class="hidden md:flex items-center gap-6 font-bold text-sm uppercase">
-                <a onclick="showSection('home')" class="nav-link hover:text-red-700 cursor-pointer" data-en="Home" data-te="హోమ్">Home</a>
-                <a onclick="showSection('products')" class="nav-link hover:text-red-700 cursor-pointer" data-en="Products" data-te="ఉత్పత్తులు">Products</a>
-                <a onclick="showSection('about')" class="nav-link hover:text-red-700 cursor-pointer" data-en="About Us" data-te="మా గురించి">About Us</a>
-                <a onclick="showSection('contact')" class="nav-link hover:text-red-700 cursor-pointer" data-en="Contact" data-te="కాంటాక్ట్">Contact</a>
-                <button onclick="toggleLanguage()" class="bg-slate-100 px-4 py-1 rounded-full border flex items-center gap-1">
-                    <i data-lucide="globe" class="w-4 h-4"></i>
+            <div class="hidden md:flex items-center gap-8 font-bold text-xs uppercase tracking-widest">
+                <a onclick="showSection('home')" class="cursor-pointer hover:text-red-700" data-en="Home" data-te="హోమ్">Home</a>
+                <a onclick="showSection('products')" class="cursor-pointer hover:text-red-700" data-en="Products" data-te="ఉత్పత్తులు">Products</a>
+                <a onclick="showSection('about')" class="cursor-pointer hover:text-red-700" data-en="About" data-te="మా గురించి">About</a>
+                <a onclick="showSection('contact')" class="cursor-pointer hover:text-red-700" data-en="Contact" data-te="కాంటాక్ట్">Contact</a>
+                <button onclick="toggleLanguage()" class="bg-zinc-100 px-3 py-1 rounded border border-zinc-300 flex items-center gap-1">
+                    <i data-lucide="globe" class="w-3 h-3"></i>
                     <span id="langBtnText">తెలుగు</span>
                 </button>
             </div>
 
             <div class="md:hidden flex items-center gap-2">
-                <button onclick="toggleLanguage()" class="text-xs font-bold border px-2 py-1 rounded">TE/EN</button>
+                <button onclick="toggleLanguage()" class="text-[10px] font-bold border px-2 py-1 rounded">TE/EN</button>
                 <button onclick="toggleMobileMenu()"><i data-lucide="menu"></i></button>
             </div>
         </div>
         
-        <div id="mobileMenu" class="hidden md:hidden bg-white border-t p-4 flex flex-col gap-4 font-bold uppercase text-sm">
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t p-4 flex flex-col gap-4 font-bold uppercase text-xs">
             <a onclick="showSection('home'); toggleMobileMenu()" data-en="Home" data-te="హోమ్">Home</a>
             <a onclick="showSection('products'); toggleMobileMenu()" data-en="Products" data-te="ఉత్పత్తులు">Products</a>
-            <a onclick="showSection('about'); toggleMobileMenu()" data-en="About Us" data-te="మా గురించి">About Us</a>
+            <a onclick="showSection('about'); toggleMobileMenu()" data-en="About" data-te="మా గురించి">About</a>
             <a onclick="showSection('contact'); toggleMobileMenu()" data-en="Contact" data-te="కాంటాక్ట్">Contact</a>
         </div>
     </nav>
@@ -71,36 +69,34 @@
         
         <!-- HOME -->
         <section id="home" class="section active">
-            <div class="relative h-[65vh] bg-slate-900 flex items-center justify-center text-center px-4 overflow-hidden">
-                <div class="absolute inset-0 opacity-50 bg-[url('https://images.unsplash.com/photo-1590069230002-70cc3044a739?q=80&w=2000')] bg-cover bg-center"></div>
-                <div class="relative z-10 max-w-3xl">
+            <div class="bg-zinc-800 py-20 px-4 text-center border-b border-zinc-300">
+                <div class="max-w-4xl mx-auto">
                     <div class="inline-block bg-brick-red text-white text-[10px] font-bold px-3 py-1 rounded mb-4 uppercase" data-en="Bulk Stock Available" data-te="బల్క్ స్టాక్ అందుబాటులో ఉంది">Bulk Stock Available</div>
-                    <h1 class="text-4xl md:text-7xl font-black text-white mb-4 uppercase tracking-tighter" data-en="Cement Brick Suppliers" data-te="సిమెంట్ ఇటుకల సరఫరాదారులు">Cement Brick Suppliers</h1>
-                    <p class="text-slate-200 text-lg md:text-xl font-medium mb-10" data-en="Specialists in Pre-Designed Walls & Quality Bricks" data-te="ప్రీ-డిజైన్డ్ గోడలు మరియు నాణ్యమైన ఇటుకలలో నిపుణులు">Specialists in Pre-Designed Walls & Quality Bricks</p>
+                    <h1 class="text-4xl md:text-6xl font-bold text-white mb-4 uppercase" data-en="Cement Brick Suppliers" data-te="సిమెంట్ ఇటుకల సరఫరాదారులు">Cement Brick Suppliers</h1>
+                    <p class="text-zinc-400 text-lg mb-10 font-bold uppercase tracking-widest" data-en="Brick Makers & Builders" data-te="ఇటుకల తయారీదారులు మరియు బిల్డర్లు">Brick Makers & Builders</p>
                     <div class="flex flex-wrap justify-center gap-4">
-                        <a href="tel:9764238494" class="bg-brick-red text-white px-10 py-4 rounded-lg font-black flex items-center gap-2 hover:scale-105 transition shadow-2xl">
-                            <i data-lucide="phone"></i> <span data-en="Call Now" data-te="కాల్ చేయండి">Call Now</span>
+                        <a href="tel:9764238494" class="bg-brick-red text-white px-8 py-3 rounded font-bold flex items-center gap-2">
+                            <i data-lucide="phone" class="w-5 h-5"></i> <span data-en="Call 9764238494" data-te="కాల్ చేయండి: 9764238494">Call 9764238494</span>
                         </a>
-                        <a href="https://wa.me/919764238494" class="bg-green-600 text-white px-10 py-4 rounded-lg font-black flex items-center gap-2 hover:scale-105 transition shadow-2xl">
-                            <i data-lucide="message-square"></i> <span>WhatsApp</span>
+                        <a href="https://wa.me/919764238494" class="bg-green-700 text-white px-8 py-3 rounded font-bold flex items-center gap-2">
+                            <i data-lucide="message-square" class="w-5 h-5"></i> <span>WhatsApp</span>
                         </a>
                     </div>
                 </div>
             </div>
 
-            <div class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-white p-10 rounded-2xl shadow-sm border-t-4 border-red-700">
-                    <h3 class="font-black text-xl mb-3" data-en="Ready Stock" data-te="రెడీ స్టాక్">Ready Stock</h3>
-                    <p class="text-slate-500 text-sm" data-en="We maintain massive inventory for immediate project needs." data-te="తక్షణ ప్రాజెక్ట్ అవసరాల కోసం మేము భారీ స్టాక్‌ను నిర్వహిస్తాము.">We maintain massive inventory for immediate project needs.</p>
+            <div class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 border border-zinc-200">
+                    <h3 class="font-bold text-lg mb-2" data-en="Ready Stock" data-te="రెడీ స్టాక్">Ready Stock</h3>
+                    <p class="text-zinc-500 text-sm" data-en="Directly from the makers. Ready for delivery." data-te="తయారీదారుల నుండి నేరుగా. డెలివరీకి సిద్ధంగా ఉంది.">Directly from the makers. Ready for delivery.</p>
                 </div>
-                <div class="bg-white p-10 rounded-2xl shadow-sm border-t-4 border-slate-800">
-                    <h3 class="font-black text-xl mb-3" data-en="Fast Delivery" data-te="వేగవంతమైన డెలివరీ">Fast Delivery</h3>
-                    <p class="text-slate-500 text-sm" data-en="Reliable transportation across Hyderabad and surroundings." data-te="హైదరాబాద్ మరియు పరిసర ప్రాంతాలలో నమ్మకమైన రవాణా.">Reliable transportation across Hyderabad and surroundings.</p>
+                <div class="bg-white p-6 border border-zinc-200">
+                    <h3 class="font-bold text-lg mb-2" data-en="Fast Delivery" data-te="వేగవంతమైన డెలివరీ">Fast Delivery</h3>
+                    <p class="text-zinc-500 text-sm" data-en="Delivery across Cherlapalli and Hyderabad." data-te="చెర్లపల్లి మరియు హైదరాబాద్ అంతటా డెలివరీ.">Delivery across Cherlapalli and Hyderabad.</p>
                 </div>
-                <div class="bg-white p-10 rounded-2xl shadow-sm border-t-4 border-red-700 text-center">
-                    <p class="text-xs font-bold text-slate-400 uppercase mb-1">Proprietor</p>
-                    <p class="text-2xl font-black">B. Kumari</p>
-                    <p class="text-red-700 font-bold mt-2">Cherlapalli, Hyderabad</p>
+                <div class="bg-white p-6 border border-zinc-200">
+                    <h3 class="font-bold text-lg mb-2" data-en="Brick Builders" data-te="ఇటుక బిల్డర్లు">Brick Builders</h3>
+                    <p class="text-zinc-500 text-sm">B. Kumari • Cherlapalli, Hyderabad</p>
                 </div>
             </div>
         </section>
@@ -108,76 +104,62 @@
         <!-- PRODUCTS -->
         <section id="products" class="section">
             <div class="max-w-7xl mx-auto px-4 py-12">
-                <h2 class="text-3xl font-black mb-12 border-l-8 border-red-700 pl-4 uppercase" data-en="Construction Materials" data-te="నిర్మాణ సామగ్రి">Construction Materials</h2>
+                <h2 class="text-2xl font-bold mb-10 border-b-2 border-zinc-800 pb-2 uppercase" data-en="Brick Maker Products" data-te="ఇటుకల తయారీ ఉత్పత్తులు">Brick Maker Products</h2>
 
-                <!-- Pre-Designed Walls (Corrected Category) -->
-                <div class="mb-20">
-                    <div class="flex items-center gap-3 mb-6">
-                        <i data-lucide="wall-paper" class="text-red-700"></i>
-                        <h3 class="text-2xl font-black uppercase text-slate-800" data-en="Pre-Designed Walls" data-te="ముందే రూపొందించిన గోడలు (Compound Walls)">Pre-Designed Walls</h3>
-                    </div>
-                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="wallGrid"></div>
+                <!-- Pre-Designed Walls -->
+                <div class="mb-16">
+                    <h3 class="text-lg font-bold uppercase mb-4 text-zinc-600" data-en="Pre-Designed Walls" data-te="ముందే రూపొందించిన గోడలు">Pre-Designed Walls</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4" id="wallGrid"></div>
                 </div>
 
                 <!-- Soft Bricks -->
-                <div class="mb-20">
-                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
-                        <div class="flex items-center gap-3">
-                            <i data-lucide="brick-wall" class="text-red-700"></i>
-                            <h3 class="text-2xl font-black uppercase text-slate-800" data-en="Soft Bricks" data-te="సాఫ్ట్ బ్రిక్స్">Soft Bricks</h3>
-                        </div>
-                        <div class="bg-slate-900 text-white px-4 py-2 rounded font-bold text-sm">
-                            <span data-en="Dimensions: 2 feet (L) x 8 inches (W)" data-te="కొలతలు: 2 అడుగుల పొడవు x 8 అంగుళాల వెడల్పు">Dimensions: 2 feet (L) x 8 inches (W)</span>
-                        </div>
+                <div class="mb-16">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-lg font-bold uppercase text-zinc-600" data-en="Soft Bricks" data-te="సాఫ్ట్ బ్రిక్స్">Soft Bricks</h3>
+                        <div class="text-[10px] font-bold bg-zinc-200 px-2 py-1">2ft (L) x 8in (W)</div>
                     </div>
-                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="softGrid"></div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="softGrid"></div>
                 </div>
 
                 <!-- Solid Cement Bricks -->
-                <div class="mb-20">
-                    <h3 class="text-2xl font-black uppercase mb-6 text-slate-800" data-en="Solid Cement Bricks" data-te="సాలిడ్ సిమెంట్ ఇటుకలు">Solid Cement Bricks</h3>
-                    <div class="bg-white rounded-xl shadow-sm border overflow-hidden max-w-2xl">
-                        <table class="w-full text-left">
-                            <thead class="bg-slate-50 border-b">
+                <div class="mb-16">
+                    <h3 class="text-lg font-bold uppercase mb-4 text-zinc-600" data-en="Solid Cement Bricks" data-te="సాలిడ్ సిమెంట్ ఇటుకలు">Solid Cement Bricks</h3>
+                    <div class="bg-white border border-zinc-200 overflow-hidden max-w-lg">
+                        <table class="w-full text-left text-sm">
+                            <thead class="bg-zinc-50 border-b">
                                 <tr>
-                                    <th class="px-6 py-4 font-black uppercase text-xs text-slate-500" data-en="Size (Inches)" data-te="సైజు">Size (Inches)</th>
-                                    <th class="px-6 py-4 font-black uppercase text-xs text-slate-500">Value</th>
+                                    <th class="px-4 py-2 font-bold uppercase" data-en="Size (Inches)" data-te="సైజు">Size (Inches)</th>
+                                    <th class="px-4 py-2 font-bold uppercase">Value</th>
                                 </tr>
                             </thead>
-                            <tbody class="divide-y font-bold text-lg">
-                                <tr><td class="px-6 py-4">6 × 8 × 12</td><td class="px-6 py-4 text-red-700">28</td></tr>
-                                <tr><td class="px-6 py-4">6 × 6 × 12</td><td class="px-6 py-4 text-red-700">25</td></tr>
-                                <tr><td class="px-6 py-4">4 × 8 × 16</td><td class="px-6 py-4 text-red-700">28</td></tr>
+                            <tbody class="divide-y font-bold">
+                                <tr><td class="px-4 py-3">6 × 8 × 12</td><td class="px-4 py-3 text-red-700">28</td></tr>
+                                <tr><td class="px-4 py-3">6 × 6 × 12</td><td class="px-4 py-3 text-red-700">25</td></tr>
+                                <tr><td class="px-4 py-3">4 × 8 × 16</td><td class="px-4 py-3 text-red-700">28</td></tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
 
                 <!-- Granite -->
-                <div class="mb-20">
-                    <h3 class="text-2xl font-black uppercase mb-6 text-slate-800" data-en="Premium Granite" data-te="ప్రీమియం గ్రానైట్">Premium Granite</h3>
-                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4" id="graniteGrid"></div>
+                <div class="mb-16">
+                    <h3 class="text-lg font-bold uppercase mb-4 text-zinc-600" data-en="Granite" data-te="గ్రానైట్">Granite</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-6 gap-4" id="graniteGrid"></div>
                 </div>
             </div>
         </section>
 
         <!-- ABOUT -->
         <section id="about" class="section">
-            <div class="max-w-4xl mx-auto px-4 py-16">
-                <div class="bg-white p-10 md:p-16 rounded-3xl shadow-sm border">
-                    <h2 class="text-4xl font-black mb-10 uppercase tracking-tight" data-en="Company Profile" data-te="కంపెనీ వివరాలు">Company Profile</h2>
-                    <p class="text-xl text-slate-600 leading-relaxed mb-12" data-en="KVR Bricks is a premier supplier in Cherlapalli, Hyderabad. We provide robust construction materials including pre-designed wall panels and high-strength cement bricks. Our commitment is to quality and availability for bulk construction projects." data-te="కేవీఆర్ బ్రిక్స్ హైదరాబాద్‌లోని చెర్లపల్లిలో ఒక ప్రముఖ సరఫరాదారు. మేము ప్రీ-డిజైన్డ్ వాల్ ప్యానెల్స్ మరియు అధిక సామర్థ్యం గల సిమెంట్ ఇటుకలతో సహా బలమైన నిర్మాణ సామగ్రిని అందిస్తాము.">
-                        KVR Bricks is a premier supplier in Cherlapalli, Hyderabad. We provide robust construction materials including pre-designed wall panels and high-strength cement bricks.
+            <div class="max-w-3xl mx-auto px-4 py-16">
+                <div class="bg-white p-8 border border-zinc-200">
+                    <h2 class="text-2xl font-bold mb-6 uppercase" data-en="Brick Builders" data-te="ఇటుక బిల్డర్లు">Brick Builders</h2>
+                    <p class="text-zinc-600 leading-relaxed mb-8" data-en="We are brick makers based in Cherlapalli, Hyderabad. We build and supply cement bricks, clay bricks, and pre-designed walls directly. Bulk stock is always available." data-te="మేము హైదరాబాద్‌లోని చెర్లపల్లిలో ఉన్న ఇటుకల తయారీదారులము. మేము సిమెంట్ ఇటుకలు, క్లే ఇటుకలు మరియు ముందే రూపొందించిన గోడలను నేరుగా తయారు చేసి సరఫరా చేస్తాము. బల్క్ స్టాక్ ఎల్లప్పుడూ అందుబాటులో ఉంటుంది.">
+                        We are brick makers based in Cherlapalli, Hyderabad. We build and supply cement bricks, clay bricks, and pre-designed walls directly. Bulk stock is always available.
                     </p>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 border-t pt-10">
-                        <div>
-                            <p class="text-xs font-bold text-slate-400 uppercase mb-2">Owner</p>
-                            <p class="text-3xl font-black text-slate-900">B. Kumari</p>
-                        </div>
-                        <div>
-                            <p class="text-xs font-bold text-slate-400 uppercase mb-2">Stock Availability</p>
-                            <p class="text-2xl font-black text-green-600 uppercase" data-en="Bulk Stock Ready" data-te="బల్క్ స్టాక్ సిద్ధంగా ఉంది">Bulk Stock Ready</p>
-                        </div>
+                    <div class="border-t pt-6 space-y-2">
+                        <p class="text-xs font-bold text-zinc-400 uppercase">Owner / Proprietor</p>
+                        <p class="text-xl font-bold text-zinc-900">B. Kumari</p>
                     </div>
                 </div>
             </div>
@@ -185,39 +167,129 @@
 
         <!-- CONTACT -->
         <section id="contact" class="section">
-            <div class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-2 gap-16">
+            <div class="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 md:grid-cols-2 gap-12">
                 <div>
-                    <h2 class="text-4xl font-black mb-10 uppercase" data-en="Get in Touch" data-te="సంప్రదించండి">Get in Touch</h2>
-                    <div class="space-y-10">
-                        <div class="flex items-center gap-6">
-                            <div class="bg-brick-red text-white p-5 rounded-2xl shadow-xl"><i data-lucide="phone" size="32"></i></div>
+                    <h2 class="text-2xl font-bold mb-8 uppercase" data-en="Contact Brick Builders" data-te="సంప్రదించండి">Contact Brick Builders</h2>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-brick-red text-white p-3 rounded"><i data-lucide="phone"></i></div>
                             <div>
-                                <p class="text-xs font-bold text-slate-400 uppercase">Phone / WhatsApp</p>
-                                <p class="text-3xl font-black">97642 38494</p>
+                                <p class="text-[10px] font-bold text-zinc-400 uppercase">Phone</p>
+                                <p class="text-xl font-bold">97642 38494</p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-6">
-                            <div class="bg-slate-800 text-white p-5 rounded-2xl shadow-xl"><i data-lucide="map-pin" size="32"></i></div>
+                        <div class="flex items-center gap-4">
+                            <div class="bg-zinc-800 text-white p-3 rounded"><i data-lucide="map-pin"></i></div>
                             <div>
-                                <p class="text-xs font-bold text-slate-400 uppercase">Location</p>
-                                <p class="text-2xl font-black">Cherlapalli, Hyderabad</p>
+                                <p class="text-[10px] font-bold text-zinc-400 uppercase">Location</p>
+                                <p class="text-lg font-bold">Cherlapalli, Hyderabad</p>
                             </div>
                         </div>
-                        <div class="pt-6 space-y-4">
-                            <a href="tel:9764238494" class="block w-full bg-brick-red text-white py-5 rounded-2xl font-black text-center text-xl shadow-lg hover:brightness-110 transition">CALL 97642 38494</a>
-                            <a href="https://wa.me/919764238494" class="block w-full bg-green-600 text-white py-5 rounded-2xl font-black text-center text-xl shadow-lg hover:brightness-110 transition uppercase">WhatsApp Order</a>
+                        <div class="pt-4 space-y-2">
+                            <a href="tel:9764238494" class="block w-full bg-brick-red text-white py-3 rounded font-bold text-center uppercase tracking-widest">Call Now</a>
+                            <a href="https://wa.me/919764238494" class="block w-full bg-green-700 text-white py-3 rounded font-bold text-center uppercase tracking-widest">WhatsApp Message</a>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-slate-900 text-white p-12 rounded-[2.5rem] flex flex-col items-center justify-center text-center shadow-2xl">
-                    <div class="bg-white p-5 rounded-3xl mb-8">
-                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://wa.me/919764238494" alt="QR" class="w-52 h-52">
-                    </div>
-                    <h3 class="text-2xl font-black mb-2 uppercase" data-en="Scan for Orders" data-te="ఆర్డర్ల కోసం స్కాన్ చేయండి">Scan for Orders</h3>
-                    <p class="text-slate-400 font-bold uppercase tracking-widest text-sm">B. Kumari • Cherlapalli</p>
+                <div class="bg-zinc-100 p-8 border border-zinc-200 flex flex-col items-center text-center">
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/919764238494" alt="QR" class="w-40 h-40 bg-white p-2 border mb-4">
+                    <h3 class="text-sm font-bold uppercase" data-en="Scan for contact & orders" data-te="ఆర్డర్ల కోసం స్కాన్ చేయండి">Scan for contact & orders</h3>
+                    <p class="text-zinc-500 text-xs mt-1">B. Kumari • 97642 38494</p>
                 </div>
             </div>
-            <div class="w-full h-[450px] bg-slate-200 mt-12">
-                <iframe src="
+            <div class="w-full h-80 bg-zinc-200 mt-12 grayscale border-t border-zinc-300">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.2893264426563!2d78.60156947516625!3d17.44583798345479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9ec0f1359c5d%3A0x7d06e23b0a7c4618!2sCherlapalli%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-zinc-900 text-zinc-500 py-12 px-4 text-xs font-bold uppercase tracking-widest border-t border-zinc-800">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <h2 class="text-xl font-bold text-white">KVR BRICKS</h2>
+                <p class="mt-1" data-en="Brick Builders & Makers" data-te="ఇటుక బిల్డర్లు మరియు తయారీదారులు">Brick Builders & Makers</p>
+            </div>
+            <div class="text-center md:text-right space-y-1">
+                <p>Cherlapalli, Hyderabad</p>
+                <p>97642 38494</p>
+                <p>Owner: B. Kumari</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Actions -->
+    <div class="md:hidden fixed bottom-4 left-4 right-4 flex gap-2 z-50">
+        <a href="tel:9764238494" class="flex-1 bg-brick-red text-white p-4 rounded flex items-center justify-center gap-2 font-bold shadow-xl">
+            <i data-lucide="phone" class="w-4 h-4"></i> CALL
+        </a>
+        <a href="https://wa.me/919764238494" class="flex-1 bg-green-700 text-white p-4 rounded flex items-center justify-center gap-2 font-bold shadow-xl">
+            <i data-lucide="message-square" class="w-4 h-4"></i> WHATSAPP
+        </a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        const BASE = "https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/";
+        let currentLang = 'en';
+
+        const assets = {
+            wall: [
+                "Assets/20260125_121914.jpg", "Assets/20260125_121921.jpg",
+                "Assets/20260125_121932.jpg", "Assets/20260125_121942.jpg",
+                "Assets/20260125_122027.jpg", "Assets/20260125_123600.jpg",
+                "Assets/20260125_123602.jpg", "Assets/20260125_123537.jpg",
+                "Assets/20260125_123526.jpg"
+            ],
+            soft: [
+                "Assets/20260125_122114.jpg", "Assets/20260125_122123.jpg",
+                "Assets/20260125_122106.jpg", "Assets/20260125_122050.jpg"
+            ],
+            granite: [
+                "Assets/20260125_123522.jpg", "Assets/20260125_123516.jpg",
+                "Assets/20260125_123510.jpg", "Assets/20260125_123504.jpg",
+                "Assets/20260125_123816.jpg", "Assets/20260125_123820.jpg"
+            ]
+        };
+
+        function render() {
+            Object.keys(assets).forEach(key => {
+                const grid = document.getElementById(`${key}Grid`);
+                if (!grid) return;
+                assets[key].forEach(path => {
+                    const img = document.createElement('img');
+                    img.src = BASE + path;
+                    img.className = "img-card";
+                    img.loading = "lazy";
+                    img.onerror = () => img.style.display = 'none';
+                    grid.appendChild(img);
+                });
+            });
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'te' : 'en';
+            document.getElementById('langBtnText').innerText = currentLang === 'en' ? 'తెలుగు' : 'English';
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.innerText = el.getAttribute(`data-${currentLang}`);
+            });
+            document.querySelectorAll('.lang-en').forEach(el => el.classList.toggle('hidden', currentLang === 'te'));
+            document.querySelectorAll('.lang-te').forEach(el => el.classList.toggle('hidden', currentLang === 'en'));
+        }
+
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        }
+
+        window.onload = render;
+    </script>
+</body>
+</html>
 
