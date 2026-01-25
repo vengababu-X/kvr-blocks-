@@ -1,542 +1,223 @@
-import React, { useState, useEffect } from 'react';
-import { Phone, MessageSquare, MapPin, Menu, X, Globe, ArrowRight, Construction, BrickWall, LayoutDashboard, User } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVR Bricks - Pre-Designed Walls & Brick Supplier</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --cement-grey: #8E9196;
+            --brick-red: #B22222;
+            --granite-black: #1A1A1B;
+        }
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f8fafc; }
+        .bg-brick-red { background-color: var(--brick-red); }
+        .text-brick-red { color: var(--brick-red); }
+        .section { display: none; }
+        .section.active { display: block; }
+        .img-card {
+            aspect-ratio: 4/3;
+            object-fit: cover;
+            border-radius: 0.5rem;
+            width: 100%;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            transition: transform 0.2s;
+        }
+        .img-card:hover { transform: scale(1.02); }
+    </style>
+</head>
+<body class="text-slate-900">
 
-const ASSET_BASE = "https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/";
-
-const translations = {
-  en: {
-    nav: { home: "Home", products: "Products", about: "About", contact: "Contact" },
-    hero: {
-      headline: "Cement Brick Suppliers",
-      tagline: "Quality Cement & Clay Bricks Supplier",
-      cta: "Call Now",
-      whatsapp: "WhatsApp Us"
-    },
-    common: {
-      call: "Call",
-      whatsapp: "WhatsApp",
-      location: "Cherlapalli, Hyderabad",
-      owner: "Owner / Proprietor",
-      bulk: "Bulk Stock Available",
-      scan: "Scan for contact & orders",
-      readyStock: "Ready Stock",
-      fastDelivery: "Fast Delivery",
-      dimensions: "Dimensions",
-      length: "Length",
-      width: "Width"
-    },
-    products: {
-      title: "Our Products",
-      hardBricks: "Hard Bricks",
-      softBricks: "Soft Bricks",
-      solidBricks: "Solid Cement Bricks",
-      granite: "Granite",
-      walls: "Pre-Designed Walls",
-      softSpecs: "2 feet Length x 8 inches Width"
-    },
-    about: {
-      title: "About Us",
-      description: "KVR Bricks is a trusted local supplier of high-quality construction materials in Hyderabad. We specialize in cement and clay bricks, providing reliable solutions for your building needs.",
-      whyUs: "Why Choose Us?",
-      points: ["Quality Materials", "Direct Supplier", "Bulk Stock Availability", "Timely Delivery"]
-    },
-    contact: {
-      title: "Contact Us",
-      getInTouch: "Get In Touch",
-      address: "Cherlapalli, Hyderabad, Telangana",
-      openingHours: "Open for Orders"
-    }
-  },
-  te: {
-    nav: { home: "హోమ్", products: "ఉత్పత్తులు", about: "మా గురించి", contact: "కాంటాక్ట్" },
-    hero: {
-      headline: "సిమెంట్ ఇటుకల సరఫరాదారులు",
-      tagline: "నాణ్యమైన సిమెంట్ మరియు క్లే ఇటుకల సరఫరాదారు",
-      cta: "కాల్ చేయండి",
-      whatsapp: "వాట్సాప్"
-    },
-    common: {
-      call: "కాల్",
-      whatsapp: "వాట్సాప్",
-      location: "చెర్లపల్లి, హైదరాబాద్",
-      owner: "యజమాని / ప్రోప్రైటర్",
-      bulk: "బల్క్ స్టాక్ అందుబాటులో ఉంది",
-      scan: "కాంటాక్ట్ మరియు ఆర్డర్ల కోసం స్కాన్ చేయండి",
-      readyStock: "రెడీ స్టాక్",
-      fastDelivery: "వేగవంతమైన డెలివరీ",
-      dimensions: "కొలతలు",
-      length: "పొడవు",
-      width: "వెడల్పు"
-    },
-    products: {
-      title: "మా ఉత్పత్తులు",
-      hardBricks: "హార్డ్ బ్రిక్స్ (గట్టి ఇటుకలు)",
-      softBricks: "సాఫ్ట్ బ్రిక్స్ (మెత్తని ఇటుకలు)",
-      solidBricks: "సాలిడ్ సిమెంట్ ఇటుకలు",
-      granite: "గ్రానైట్",
-      walls: "ముందే రూపొందించిన గోడలు",
-      softSpecs: "పొడవు: 2 అడుగులు | వెడల్పు: 8 అంగుళాలు"
-    },
-    about: {
-      title: "మా గురించి",
-      description: "కేవీఆర్ బ్రిక్స్ హైదరాబాద్‌లో అత్యుత్తమ నిర్మాణ సామగ్రిని సరఫరా చేసే సంస్థ. మేము సిమెంట్ మరియు క్లే ఇటుకలలో ప్రత్యేకత కలిగి ఉన్నాము.",
-      whyUs: "మమ్మల్ని ఎందుకు ఎంచుకోవాలి?",
-      points: ["నాణ్యమైన మెటీరియల్స్", "నేరుగా సరఫరా", "బల్క్ స్టాక్ అందుబాటు", "సమయానికి డెలివరీ"]
-    },
-    contact: {
-      title: "కాంటాక్ట్",
-      getInTouch: "మమ్మల్ని సంప్రదించండి",
-      address: "చెర్లపల్లి, హైదరాబాద్, తెలంగాణ",
-      openingHours: "ఆర్డర్ల కోసం సంప్రదించండి"
-    }
-  }
-};
-
-const productData = {
-  hardBricks: [
-    "Assets/20260125_121914.jpg",
-    "Assets/20260125_121921.jpg",
-    "Assets/20260125_121932.jpg",
-    "Assets/20260125_121942.jpg",
-    "Assets/20260125_122027.jpg"
-  ],
-  softBricks: [
-    "Assets/20260125_122114.jpg",
-    "Assets/20260125_122123.jpg",
-    "Assets/20260125_122106.jpg",
-    "Assets/20260125_122050.jpg"
-  ],
-  granite: [
-    "Assets/20260125_123522.jpg",
-    "Assets/20260125_123516.jpg",
-    "Assets/20260125_123510.jpg",
-    "Assets/20260125_123504.jpg",
-    "Assets/20260125_123816.jpg",
-    "Assets/20260125_123820.jpg"
-  ],
-  walls: [
-    "Assets/20260125_123600.jpg",
-    "Assets/20260125_123602.jpg",
-    "Assets/20260125_123537.jpg",
-    "Assets/20260125_123526.jpg"
-  ],
-  solidCementBricks: [
-    { size: "6 × 8 × 12", value: "28" },
-    { size: "6 × 6 × 12", value: "25" },
-    { size: "4 × 8 × 16", value: "28" }
-  ]
-};
-
-const App = () => {
-  const [lang, setLang] = useState('en');
-  const [activeTab, setActiveTab] = useState('home');
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const t = translations[lang];
-
-  const handleCall = () => window.open("tel:9764238494");
-  const handleWhatsApp = () => window.open("https://wa.me/919764238494");
-
-  const NavItem = ({ tab, label }) => (
-    <button
-      onClick={() => { setActiveTab(tab); setIsMenuOpen(false); window.scrollTo(0,0); }}
-      className={`px-4 py-2 text-sm font-semibold transition-colors ${activeTab === tab ? 'text-red-600' : 'text-gray-600 hover:text-red-500'}`}
-    >
-      {label}
-    </button>
-  );
-
-  return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2" onClick={() => setActiveTab('home')}>
-              <div className="flex items-center cursor-pointer">
-                <span className="text-2xl font-black text-gray-800 tracking-tighter">KVR</span>
-                <span className="ml-1 px-2 py-0.5 bg-red-600 text-white text-xs font-bold rounded">BRICKS</span>
-              </div>
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full bg-white shadow-md z-50">
+        <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="showSection('home')">
+                <div class="flex flex-col leading-none">
+                    <span class="text-xl font-black text-red-700">KVR BRICKS</span>
+                    <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter lang-en">Quality Cement & Clay Bricks Supplier</span>
+                    <span class="text-[9px] font-bold text-slate-500 uppercase tracking-tighter lang-te hidden">నాణ్యమైన సిమెంట్ మరియు క్లే ఇటుకల సరఫరాదారు</span>
+                </div>
             </div>
 
-            {/* Desktop Nav */}
-            <div className="hidden md:flex items-center space-x-4">
-              <NavItem tab="home" label={t.nav.home} />
-              <NavItem tab="products" label={t.nav.products} />
-              <NavItem tab="about" label={t.nav.about} />
-              <NavItem tab="contact" label={t.nav.contact} />
-              <button 
-                onClick={() => setLang(lang === 'en' ? 'te' : 'en')}
-                className="ml-4 flex items-center gap-1 px-3 py-1 border rounded-full text-xs font-bold hover:bg-gray-100 transition-colors"
-              >
-                <Globe size={14} /> {lang === 'en' ? 'తెలుగు' : 'English'}
-              </button>
+            <div class="hidden md:flex items-center gap-6 font-bold text-sm uppercase">
+                <a onclick="showSection('home')" class="nav-link hover:text-red-700 cursor-pointer" data-en="Home" data-te="హోమ్">Home</a>
+                <a onclick="showSection('products')" class="nav-link hover:text-red-700 cursor-pointer" data-en="Products" data-te="ఉత్పత్తులు">Products</a>
+                <a onclick="showSection('about')" class="nav-link hover:text-red-700 cursor-pointer" data-en="About Us" data-te="మా గురించి">About Us</a>
+                <a onclick="showSection('contact')" class="nav-link hover:text-red-700 cursor-pointer" data-en="Contact" data-te="కాంటాక్ట్">Contact</a>
+                <button onclick="toggleLanguage()" class="bg-slate-100 px-4 py-1 rounded-full border flex items-center gap-1">
+                    <i data-lucide="globe" class="w-4 h-4"></i>
+                    <span id="langBtnText">తెలుగు</span>
+                </button>
             </div>
 
-            {/* Mobile Nav Toggle */}
-            <div className="md:hidden flex items-center gap-4">
-               <button 
-                onClick={() => setLang(lang === 'en' ? 'te' : 'en')}
-                className="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-[10px] font-bold"
-              >
-                {lang === 'en' ? 'TE' : 'EN'}
-              </button>
-              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-600">
-                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-              </button>
+            <div class="md:hidden flex items-center gap-2">
+                <button onclick="toggleLanguage()" class="text-xs font-bold border px-2 py-1 rounded">TE/EN</button>
+                <button onclick="toggleMobileMenu()"><i data-lucide="menu"></i></button>
             </div>
-          </div>
         </div>
-
-        {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden bg-white border-t px-4 py-4 flex flex-col space-y-2 animate-in slide-in-from-top duration-300">
-            <button onClick={() => {setActiveTab('home'); setIsMenuOpen(false);}} className="py-2 text-left font-semibold">{t.nav.home}</button>
-            <button onClick={() => {setActiveTab('products'); setIsMenuOpen(false);}} className="py-2 text-left font-semibold">{t.nav.products}</button>
-            <button onClick={() => {setActiveTab('about'); setIsMenuOpen(false);}} className="py-2 text-left font-semibold">{t.nav.about}</button>
-            <button onClick={() => {setActiveTab('contact'); setIsMenuOpen(false);}} className="py-2 text-left font-semibold">{t.nav.contact}</button>
-          </div>
-        )}
-      </nav>
-
-      {/* Main Content */}
-      <main className="pt-16 pb-20">
         
-        {/* Home Tab */}
-        {activeTab === 'home' && (
-          <>
-            {/* Hero Section */}
-            <section className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-gray-900">
-              <div className="absolute inset-0 z-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1590069230002-70cc3044a739?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
-              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80"></div>
-              
-              <div className="relative z-10 text-center px-4 max-w-4xl">
-                <div className="mb-4 inline-block px-4 py-1 bg-red-600 text-white text-xs font-bold tracking-widest rounded-full uppercase">
-                  {t.common.bulk}
-                </div>
-                <h1 className="text-4xl md:text-6xl font-black text-white mb-4 drop-shadow-lg">
-                  {t.hero.headline}
-                </h1>
-                <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto font-medium">
-                  {t.hero.tagline}
-                </p>
-                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                  <button onClick={handleCall} className="w-full sm:w-auto flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold transition-all shadow-xl hover:scale-105 active:scale-95">
-                    <Phone size={20} /> {t.hero.cta}
-                  </button>
-                  <button onClick={handleWhatsApp} className="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold transition-all shadow-xl hover:scale-105 active:scale-95">
-                    <MessageSquare size={20} /> {t.hero.whatsapp}
-                  </button>
-                </div>
-              </div>
-            </section>
+        <div id="mobileMenu" class="hidden md:hidden bg-white border-t p-4 flex flex-col gap-4 font-bold uppercase text-sm">
+            <a onclick="showSection('home'); toggleMobileMenu()" data-en="Home" data-te="హోమ్">Home</a>
+            <a onclick="showSection('products'); toggleMobileMenu()" data-en="Products" data-te="ఉత్పత్తులు">Products</a>
+            <a onclick="showSection('about'); toggleMobileMenu()" data-en="About Us" data-te="మా గురించి">About Us</a>
+            <a onclick="showSection('contact'); toggleMobileMenu()" data-en="Contact" data-te="కాంటాక్ట్">Contact</a>
+        </div>
+    </nav>
 
-            {/* Quick Stats/Features */}
-            <section className="bg-white py-12 px-4">
-              <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-                {[
-                  { icon: <Construction className="text-red-600" />, title: t.common.readyStock, desc: "Immediate fulfillment for all order sizes." },
-                  { icon: <BrickWall className="text-red-600" />, title: t.common.bulk, desc: "Sufficient capacity for large infrastructure projects." },
-                  { icon: <MapPin className="text-red-600" />, title: t.common.fastDelivery, desc: "Optimized logistics based in Cherlapalli, Hyderabad." }
-                ].map((item, idx) => (
-                  <div key={idx} className="flex flex-col items-center text-center p-6 border rounded-xl bg-gray-50">
-                    <div className="mb-4 p-3 bg-white rounded-full shadow-sm">{item.icon}</div>
-                    <h3 className="text-lg font-bold mb-2">{item.title}</h3>
-                    <p className="text-sm text-gray-600">{item.desc}</p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* Featured Product Preview */}
-            <section className="py-16 px-4 bg-gray-50">
-              <div className="max-w-7xl mx-auto">
-                <div className="flex justify-between items-end mb-10">
-                  <div>
-                    <h2 className="text-3xl font-black mb-2">{t.products.title}</h2>
-                    <div className="h-1.5 w-20 bg-red-600 rounded-full"></div>
-                  </div>
-                  <button onClick={() => setActiveTab('products')} className="text-red-600 font-bold flex items-center gap-1 hover:gap-2 transition-all">
-                    View All <ArrowRight size={18} />
-                  </button>
+    <main class="pt-16 min-h-screen">
+        
+        <!-- HOME -->
+        <section id="home" class="section active">
+            <div class="relative h-[65vh] bg-slate-900 flex items-center justify-center text-center px-4 overflow-hidden">
+                <div class="absolute inset-0 opacity-50 bg-[url('https://images.unsplash.com/photo-1590069230002-70cc3044a739?q=80&w=2000')] bg-cover bg-center"></div>
+                <div class="relative z-10 max-w-3xl">
+                    <div class="inline-block bg-brick-red text-white text-[10px] font-bold px-3 py-1 rounded mb-4 uppercase" data-en="Bulk Stock Available" data-te="బల్క్ స్టాక్ అందుబాటులో ఉంది">Bulk Stock Available</div>
+                    <h1 class="text-4xl md:text-7xl font-black text-white mb-4 uppercase tracking-tighter" data-en="Cement Brick Suppliers" data-te="సిమెంట్ ఇటుకల సరఫరాదారులు">Cement Brick Suppliers</h1>
+                    <p class="text-slate-200 text-lg md:text-xl font-medium mb-10" data-en="Specialists in Pre-Designed Walls & Quality Bricks" data-te="ప్రీ-డిజైన్డ్ గోడలు మరియు నాణ్యమైన ఇటుకలలో నిపుణులు">Specialists in Pre-Designed Walls & Quality Bricks</p>
+                    <div class="flex flex-wrap justify-center gap-4">
+                        <a href="tel:9764238494" class="bg-brick-red text-white px-10 py-4 rounded-lg font-black flex items-center gap-2 hover:scale-105 transition shadow-2xl">
+                            <i data-lucide="phone"></i> <span data-en="Call Now" data-te="కాల్ చేయండి">Call Now</span>
+                        </a>
+                        <a href="https://wa.me/919764238494" class="bg-green-600 text-white px-10 py-4 rounded-lg font-black flex items-center gap-2 hover:scale-105 transition shadow-2xl">
+                            <i data-lucide="message-square"></i> <span>WhatsApp</span>
+                        </a>
+                    </div>
                 </div>
-                
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <div className="group relative overflow-hidden rounded-xl h-64 shadow-lg cursor-pointer" onClick={() => setActiveTab('products')}>
-                    <img src={`${ASSET_BASE}${productData.hardBricks[0]}`} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Hard Bricks" />
-                    <div className="absolute inset-0 bg-black/40 flex items-end p-4">
-                      <span className="text-white font-bold text-sm">{t.products.hardBricks}</span>
-                    </div>
-                  </div>
-                  <div className="group relative overflow-hidden rounded-xl h-64 shadow-lg cursor-pointer" onClick={() => setActiveTab('products')}>
-                    <img src={`${ASSET_BASE}${productData.softBricks[0]}`} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Soft Bricks" />
-                    <div className="absolute inset-0 bg-black/40 flex items-end p-4">
-                      <span className="text-white font-bold text-sm">{t.products.softBricks}</span>
-                    </div>
-                  </div>
-                  <div className="group relative overflow-hidden rounded-xl h-64 shadow-lg cursor-pointer" onClick={() => setActiveTab('products')}>
-                    <img src={`${ASSET_BASE}${productData.granite[0]}`} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Granite" />
-                    <div className="absolute inset-0 bg-black/40 flex items-end p-4">
-                      <span className="text-white font-bold text-sm">{t.products.granite}</span>
-                    </div>
-                  </div>
-                  <div className="group relative overflow-hidden rounded-xl h-64 shadow-lg cursor-pointer" onClick={() => setActiveTab('products')}>
-                    <img src={`${ASSET_BASE}${productData.walls[0]}`} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Walls" />
-                    <div className="absolute inset-0 bg-black/40 flex items-end p-4">
-                      <span className="text-white font-bold text-sm">{t.products.walls}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </>
-        )}
-
-        {/* Products Tab */}
-        {activeTab === 'products' && (
-          <section className="py-12 px-4 max-w-7xl mx-auto">
-            <h1 className="text-4xl font-black mb-12 text-center uppercase tracking-tight">{t.products.title}</h1>
-            
-            {/* Hard Bricks */}
-            <div className="mb-16">
-              <div className="flex items-center gap-3 mb-6">
-                <LayoutDashboard className="text-red-600" />
-                <h2 className="text-2xl font-bold">{t.products.hardBricks}</h2>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-                {productData.hardBricks.map((img, i) => (
-                  <div key={i} className="aspect-square rounded-lg overflow-hidden border shadow-sm group">
-                    <img src={`${ASSET_BASE}${img}`} alt="Hard Brick" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                  </div>
-                ))}
-              </div>
             </div>
 
-            {/* Soft Bricks */}
-            <div className="mb-16">
-              <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
-                <div className="flex items-center gap-3">
-                  <LayoutDashboard className="text-red-600" />
-                  <h2 className="text-2xl font-bold">{t.products.softBricks}</h2>
+            <div class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white p-10 rounded-2xl shadow-sm border-t-4 border-red-700">
+                    <h3 class="font-black text-xl mb-3" data-en="Ready Stock" data-te="రెడీ స్టాక్">Ready Stock</h3>
+                    <p class="text-slate-500 text-sm" data-en="We maintain massive inventory for immediate project needs." data-te="తక్షణ ప్రాజెక్ట్ అవసరాల కోసం మేము భారీ స్టాక్‌ను నిర్వహిస్తాము.">We maintain massive inventory for immediate project needs.</p>
                 </div>
-                <div className="bg-red-50 border border-red-200 px-4 py-2 rounded-lg text-sm font-bold text-red-700">
-                   {t.products.softSpecs}
+                <div class="bg-white p-10 rounded-2xl shadow-sm border-t-4 border-slate-800">
+                    <h3 class="font-black text-xl mb-3" data-en="Fast Delivery" data-te="వేగవంతమైన డెలివరీ">Fast Delivery</h3>
+                    <p class="text-slate-500 text-sm" data-en="Reliable transportation across Hyderabad and surroundings." data-te="హైదరాబాద్ మరియు పరిసర ప్రాంతాలలో నమ్మకమైన రవాణా.">Reliable transportation across Hyderabad and surroundings.</p>
                 </div>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {productData.softBricks.map((img, i) => (
-                  <div key={i} className="aspect-square rounded-lg overflow-hidden border shadow-sm group">
-                    <img src={`${ASSET_BASE}${img}`} alt="Soft Brick" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                  </div>
-                ))}
-              </div>
+                <div class="bg-white p-10 rounded-2xl shadow-sm border-t-4 border-red-700 text-center">
+                    <p class="text-xs font-bold text-slate-400 uppercase mb-1">Proprietor</p>
+                    <p class="text-2xl font-black">B. Kumari</p>
+                    <p class="text-red-700 font-bold mt-2">Cherlapalli, Hyderabad</p>
+                </div>
             </div>
+        </section>
 
-            {/* Solid Bricks Sizes */}
-            <div className="mb-16">
-               <div className="flex items-center gap-3 mb-6">
-                <LayoutDashboard className="text-red-600" />
-                <h2 className="text-2xl font-bold">{t.products.solidBricks}</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                {productData.solidCementBricks.map((item, i) => (
-                  <div key={i} className="bg-white p-6 rounded-xl border-l-4 border-red-600 shadow-md flex justify-between items-center">
-                    <div>
-                      <p className="text-xs uppercase text-gray-500 font-bold mb-1">Dimensions (Inches)</p>
-                      <h3 className="text-xl font-black text-gray-800">{item.size}</h3>
+        <!-- PRODUCTS -->
+        <section id="products" class="section">
+            <div class="max-w-7xl mx-auto px-4 py-12">
+                <h2 class="text-3xl font-black mb-12 border-l-8 border-red-700 pl-4 uppercase" data-en="Construction Materials" data-te="నిర్మాణ సామగ్రి">Construction Materials</h2>
+
+                <!-- Pre-Designed Walls (Corrected Category) -->
+                <div class="mb-20">
+                    <div class="flex items-center gap-3 mb-6">
+                        <i data-lucide="wall-paper" class="text-red-700"></i>
+                        <h3 class="text-2xl font-black uppercase text-slate-800" data-en="Pre-Designed Walls" data-te="ముందే రూపొందించిన గోడలు (Compound Walls)">Pre-Designed Walls</h3>
                     </div>
-                    <div className="text-center">
-                      <span className="text-3xl font-black text-red-600">{item.value}</span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Granite */}
-            <div className="mb-16">
-              <div className="flex items-center gap-3 mb-6">
-                <LayoutDashboard className="text-red-600" />
-                <h2 className="text-2xl font-bold">{t.products.granite}</h2>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-                {productData.granite.map((img, i) => (
-                  <div key={i} className="aspect-square rounded-lg overflow-hidden border shadow-sm group">
-                    <img src={`${ASSET_BASE}${img}`} alt="Granite" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Pre-Designed Walls */}
-            <div className="mb-16">
-              <div className="flex items-center gap-3 mb-6">
-                <LayoutDashboard className="text-red-600" />
-                <h2 className="text-2xl font-bold">{t.products.walls}</h2>
-              </div>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                {productData.walls.map((img, i) => (
-                  <div key={i} className="aspect-[3/4] rounded-lg overflow-hidden border shadow-sm group">
-                    <img src={`${ASSET_BASE}${img}`} alt="Wall Design" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* About Tab */}
-        {activeTab === 'about' && (
-          <section className="py-12 px-4 max-w-4xl mx-auto">
-            <h1 className="text-4xl font-black mb-8 text-center">{t.about.title}</h1>
-            
-            <div className="bg-white p-8 rounded-2xl shadow-xl border mb-12">
-              <div className="flex items-center gap-4 mb-6">
-                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-red-600">
-                  <User size={32} />
+                    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6" id="wallGrid"></div>
                 </div>
+
+                <!-- Soft Bricks -->
+                <div class="mb-20">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-6">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="brick-wall" class="text-red-700"></i>
+                            <h3 class="text-2xl font-black uppercase text-slate-800" data-en="Soft Bricks" data-te="సాఫ్ట్ బ్రిక్స్">Soft Bricks</h3>
+                        </div>
+                        <div class="bg-slate-900 text-white px-4 py-2 rounded font-bold text-sm">
+                            <span data-en="Dimensions: 2 feet (L) x 8 inches (W)" data-te="కొలతలు: 2 అడుగుల పొడవు x 8 అంగుళాల వెడల్పు">Dimensions: 2 feet (L) x 8 inches (W)</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6" id="softGrid"></div>
+                </div>
+
+                <!-- Solid Cement Bricks -->
+                <div class="mb-20">
+                    <h3 class="text-2xl font-black uppercase mb-6 text-slate-800" data-en="Solid Cement Bricks" data-te="సాలిడ్ సిమెంట్ ఇటుకలు">Solid Cement Bricks</h3>
+                    <div class="bg-white rounded-xl shadow-sm border overflow-hidden max-w-2xl">
+                        <table class="w-full text-left">
+                            <thead class="bg-slate-50 border-b">
+                                <tr>
+                                    <th class="px-6 py-4 font-black uppercase text-xs text-slate-500" data-en="Size (Inches)" data-te="సైజు">Size (Inches)</th>
+                                    <th class="px-6 py-4 font-black uppercase text-xs text-slate-500">Value</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y font-bold text-lg">
+                                <tr><td class="px-6 py-4">6 × 8 × 12</td><td class="px-6 py-4 text-red-700">28</td></tr>
+                                <tr><td class="px-6 py-4">6 × 6 × 12</td><td class="px-6 py-4 text-red-700">25</td></tr>
+                                <tr><td class="px-6 py-4">4 × 8 × 16</td><td class="px-6 py-4 text-red-700">28</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Granite -->
+                <div class="mb-20">
+                    <h3 class="text-2xl font-black uppercase mb-6 text-slate-800" data-en="Premium Granite" data-te="ప్రీమియం గ్రానైట్">Premium Granite</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4" id="graniteGrid"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT -->
+        <section id="about" class="section">
+            <div class="max-w-4xl mx-auto px-4 py-16">
+                <div class="bg-white p-10 md:p-16 rounded-3xl shadow-sm border">
+                    <h2 class="text-4xl font-black mb-10 uppercase tracking-tight" data-en="Company Profile" data-te="కంపెనీ వివరాలు">Company Profile</h2>
+                    <p class="text-xl text-slate-600 leading-relaxed mb-12" data-en="KVR Bricks is a premier supplier in Cherlapalli, Hyderabad. We provide robust construction materials including pre-designed wall panels and high-strength cement bricks. Our commitment is to quality and availability for bulk construction projects." data-te="కేవీఆర్ బ్రిక్స్ హైదరాబాద్‌లోని చెర్లపల్లిలో ఒక ప్రముఖ సరఫరాదారు. మేము ప్రీ-డిజైన్డ్ వాల్ ప్యానెల్స్ మరియు అధిక సామర్థ్యం గల సిమెంట్ ఇటుకలతో సహా బలమైన నిర్మాణ సామగ్రిని అందిస్తాము.">
+                        KVR Bricks is a premier supplier in Cherlapalli, Hyderabad. We provide robust construction materials including pre-designed wall panels and high-strength cement bricks.
+                    </p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-10 border-t pt-10">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase mb-2">Owner</p>
+                            <p class="text-3xl font-black text-slate-900">B. Kumari</p>
+                        </div>
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase mb-2">Stock Availability</p>
+                            <p class="text-2xl font-black text-green-600 uppercase" data-en="Bulk Stock Ready" data-te="బల్క్ స్టాక్ సిద్ధంగా ఉంది">Bulk Stock Ready</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTACT -->
+        <section id="contact" class="section">
+            <div class="max-w-7xl mx-auto px-4 py-16 grid grid-cols-1 lg:grid-cols-2 gap-16">
                 <div>
-                  <h2 className="text-2xl font-bold text-gray-800">{t.common.owner}</h2>
-                  <p className="text-xl font-black text-red-600">B. Kumari</p>
+                    <h2 class="text-4xl font-black mb-10 uppercase" data-en="Get in Touch" data-te="సంప్రదించండి">Get in Touch</h2>
+                    <div class="space-y-10">
+                        <div class="flex items-center gap-6">
+                            <div class="bg-brick-red text-white p-5 rounded-2xl shadow-xl"><i data-lucide="phone" size="32"></i></div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase">Phone / WhatsApp</p>
+                                <p class="text-3xl font-black">97642 38494</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-6">
+                            <div class="bg-slate-800 text-white p-5 rounded-2xl shadow-xl"><i data-lucide="map-pin" size="32"></i></div>
+                            <div>
+                                <p class="text-xs font-bold text-slate-400 uppercase">Location</p>
+                                <p class="text-2xl font-black">Cherlapalli, Hyderabad</p>
+                            </div>
+                        </div>
+                        <div class="pt-6 space-y-4">
+                            <a href="tel:9764238494" class="block w-full bg-brick-red text-white py-5 rounded-2xl font-black text-center text-xl shadow-lg hover:brightness-110 transition">CALL 97642 38494</a>
+                            <a href="https://wa.me/919764238494" class="block w-full bg-green-600 text-white py-5 rounded-2xl font-black text-center text-xl shadow-lg hover:brightness-110 transition uppercase">WhatsApp Order</a>
+                        </div>
+                    </div>
                 </div>
-              </div>
-              
-              <p className="text-gray-700 leading-relaxed text-lg mb-8">
-                {t.about.description}
-              </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="p-6 bg-gray-50 rounded-xl">
-                  <h3 className="text-lg font-bold mb-4 border-b pb-2">{t.about.whyUs}</h3>
-                  <ul className="space-y-3">
-                    {t.about.points.map((pt, i) => (
-                      <li key={i} className="flex items-center gap-2 text-sm font-medium">
-                        <div className="w-1.5 h-1.5 bg-red-600 rounded-full"></div>
-                        {pt}
-                      </li>
-                    ))}
-                  </ul>
+                <div class="bg-slate-900 text-white p-12 rounded-[2.5rem] flex flex-col items-center justify-center text-center shadow-2xl">
+                    <div class="bg-white p-5 rounded-3xl mb-8">
+                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://wa.me/919764238494" alt="QR" class="w-52 h-52">
+                    </div>
+                    <h3 class="text-2xl font-black mb-2 uppercase" data-en="Scan for Orders" data-te="ఆర్డర్ల కోసం స్కాన్ చేయండి">Scan for Orders</h3>
+                    <p class="text-slate-400 font-bold uppercase tracking-widest text-sm">B. Kumari • Cherlapalli</p>
                 </div>
-                <div className="flex flex-col justify-center items-center p-6 border-2 border-dashed rounded-xl border-gray-300">
-                  <BrickWall size={48} className="text-gray-300 mb-4" />
-                  <p className="text-center font-bold text-gray-500">{t.common.bulk}</p>
-                </div>
-              </div>
             </div>
-          </section>
-        )}
-
-        {/* Contact Tab */}
-        {activeTab === 'contact' && (
-          <section className="py-12 px-4 max-w-7xl mx-auto">
-             <h1 className="text-4xl font-black mb-12 text-center uppercase tracking-tight">{t.contact.title}</h1>
-             
-             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                {/* Contact Info */}
-                <div className="space-y-8">
-                   <div className="bg-white p-8 rounded-2xl shadow-lg border">
-                      <h2 className="text-2xl font-bold mb-6">{t.contact.getInTouch}</h2>
-                      
-                      <div className="space-y-6">
-                        <div className="flex items-start gap-4">
-                           <div className="p-3 bg-red-50 text-red-600 rounded-lg">
-                              <Phone size={24} />
-                           </div>
-                           <div>
-                              <p className="text-xs text-gray-500 font-bold uppercase">Call / WhatsApp</p>
-                              <p className="text-xl font-black">97642 38494</p>
-                           </div>
-                        </div>
-
-                        <div className="flex items-start gap-4">
-                           <div className="p-3 bg-red-50 text-red-600 rounded-lg">
-                              <MapPin size={24} />
-                           </div>
-                           <div>
-                              <p className="text-xs text-gray-500 font-bold uppercase">Location</p>
-                              <p className="text-xl font-black">{t.contact.address}</p>
-                           </div>
-                        </div>
-
-                        <div className="pt-6">
-                          <button onClick={handleCall} className="w-full mb-3 bg-red-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-700 transition-colors shadow-lg">
-                            <Phone size={20} /> Call Now
-                          </button>
-                          <button onClick={handleWhatsApp} className="w-full bg-green-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-green-700 transition-colors shadow-lg">
-                            <MessageSquare size={20} /> WhatsApp Us
-                          </button>
-                        </div>
-                      </div>
-                   </div>
-
-                   {/* QR Code Section */}
-                   <div className="bg-gray-800 text-white p-8 rounded-2xl flex flex-col items-center text-center">
-                      <div className="w-48 h-48 bg-white p-2 rounded-lg mb-4">
-                         {/* Placeholder for QR - In real use, a generated QR would go here */}
-                         <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">
-                           <img 
-                              src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/919764238494" 
-                              alt="Scan for contact" 
-                              className="w-full h-full"
-                            />
-                         </div>
-                      </div>
-                      <p className="text-lg font-bold">{t.common.scan}</p>
-                      <p className="text-gray-400 text-sm mt-1">97642 38494</p>
-                   </div>
-                </div>
-
-                {/* Map Section */}
-                <div className="h-[400px] lg:h-full rounded-2xl overflow-hidden shadow-lg border">
-                  <iframe 
-                    title="KVR Bricks Location"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.2893264426563!2d78.60156947516625!3d17.44583798345479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9ec0f1359c5d%3A0x7d06e23b0a7c4618!2sCherlapalli%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
-                    width="100%" 
-                    height="100%" 
-                    style={{ border: 0 }} 
-                    allowFullScreen="" 
-                    loading="lazy"
-                  ></iframe>
-                </div>
-             </div>
-          </section>
-        )}
-      </main>
-
-      {/* Sticky Bottom Actions (Mobile) */}
-      <div className="md:hidden fixed bottom-4 left-4 right-4 flex gap-2 z-40">
-        <button onClick={handleCall} className="flex-1 bg-red-600 text-white p-4 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black active:scale-95 transition-transform">
-          <Phone size={24} /> {t.common.call}
-        </button>
-        <button onClick={handleWhatsApp} className="flex-1 bg-green-600 text-white p-4 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black active:scale-95 transition-transform">
-          <MessageSquare size={24} /> {t.common.whatsapp}
-        </button>
-      </div>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4 border-t border-gray-800">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="text-center md:text-left">
-            <div className="flex items-center justify-center md:justify-start mb-2">
-              <span className="text-3xl font-black tracking-tighter">KVR</span>
-              <span className="ml-1 px-2 py-0.5 bg-red-600 text-white text-xs font-bold rounded">BRICKS</span>
-            </div>
-            <p className="text-gray-400 text-sm max-w-xs">{t.hero.tagline}</p>
-          </div>
-          
-          <div className="flex flex-col items-center md:items-end gap-2">
-            <p className="font-bold text-red-500">B. Kumari ({t.common.owner})</p>
-            <p className="text-gray-400 flex items-center gap-2"><Phone size={14} /> 97642 38494</p>
-            <p className="text-gray-400 flex items-center gap-2"><MapPin size={14} /> Cherlapalli, Hyderabad</p>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-xs">
-          © 2026 KVR BRICKS. All rights reserved. Professional Building Materials.
-        </div>
-      </footer>
-    </div>
-  );
-};
-
-export default App;
-
+            <div class="w-full h-[450px] bg-slate-200 mt-12">
+                <iframe src="
 
