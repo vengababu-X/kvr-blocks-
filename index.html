@@ -1,665 +1,542 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KVR Bricks & Granites | Premium Quality</title>
-    <!-- तालीविन्द सीएसएस (Tailwind CSS) -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- फॉन्ट ऑसम (Font Awesome) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <!-- गूगल फॉन्ट्स (Google Fonts) -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Telugu:wght@400;700&family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --primary: #c0392b;
-            --dark: #121212;
-            --accent: #f39c12;
-        }
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0a0a0a;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-        .telugu-font { font-family: 'Noto Sans Telugu', sans-serif; }
+import React, { useState, useEffect } from 'react';
+import { Phone, MessageSquare, MapPin, Menu, X, Globe, ArrowRight, Construction, BrickWall, LayoutDashboard, User } from 'lucide-react';
+
+const ASSET_BASE = "https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/";
+
+const translations = {
+  en: {
+    nav: { home: "Home", products: "Products", about: "About", contact: "Contact" },
+    hero: {
+      headline: "Cement Brick Suppliers",
+      tagline: "Quality Cement & Clay Bricks Supplier",
+      cta: "Call Now",
+      whatsapp: "WhatsApp Us"
+    },
+    common: {
+      call: "Call",
+      whatsapp: "WhatsApp",
+      location: "Cherlapalli, Hyderabad",
+      owner: "Owner / Proprietor",
+      bulk: "Bulk Stock Available",
+      scan: "Scan for contact & orders",
+      readyStock: "Ready Stock",
+      fastDelivery: "Fast Delivery",
+      dimensions: "Dimensions",
+      length: "Length",
+      width: "Width"
+    },
+    products: {
+      title: "Our Products",
+      hardBricks: "Hard Bricks",
+      softBricks: "Soft Bricks",
+      solidBricks: "Solid Cement Bricks",
+      granite: "Granite",
+      walls: "Pre-Designed Walls",
+      softSpecs: "2 feet Length x 8 inches Width"
+    },
+    about: {
+      title: "About Us",
+      description: "KVR Bricks is a trusted local supplier of high-quality construction materials in Hyderabad. We specialize in cement and clay bricks, providing reliable solutions for your building needs.",
+      whyUs: "Why Choose Us?",
+      points: ["Quality Materials", "Direct Supplier", "Bulk Stock Availability", "Timely Delivery"]
+    },
+    contact: {
+      title: "Contact Us",
+      getInTouch: "Get In Touch",
+      address: "Cherlapalli, Hyderabad, Telangana",
+      openingHours: "Open for Orders"
+    }
+  },
+  te: {
+    nav: { home: "హోమ్", products: "ఉత్పత్తులు", about: "మా గురించి", contact: "కాంటాక్ట్" },
+    hero: {
+      headline: "సిమెంట్ ఇటుకల సరఫరాదారులు",
+      tagline: "నాణ్యమైన సిమెంట్ మరియు క్లే ఇటుకల సరఫరాదారు",
+      cta: "కాల్ చేయండి",
+      whatsapp: "వాట్సాప్"
+    },
+    common: {
+      call: "కాల్",
+      whatsapp: "వాట్సాప్",
+      location: "చెర్లపల్లి, హైదరాబాద్",
+      owner: "యజమాని / ప్రోప్రైటర్",
+      bulk: "బల్క్ స్టాక్ అందుబాటులో ఉంది",
+      scan: "కాంటాక్ట్ మరియు ఆర్డర్ల కోసం స్కాన్ చేయండి",
+      readyStock: "రెడీ స్టాక్",
+      fastDelivery: "వేగవంతమైన డెలివరీ",
+      dimensions: "కొలతలు",
+      length: "పొడవు",
+      width: "వెడల్పు"
+    },
+    products: {
+      title: "మా ఉత్పత్తులు",
+      hardBricks: "హార్డ్ బ్రిక్స్ (గట్టి ఇటుకలు)",
+      softBricks: "సాఫ్ట్ బ్రిక్స్ (మెత్తని ఇటుకలు)",
+      solidBricks: "సాలిడ్ సిమెంట్ ఇటుకలు",
+      granite: "గ్రానైట్",
+      walls: "ముందే రూపొందించిన గోడలు",
+      softSpecs: "పొడవు: 2 అడుగులు | వెడల్పు: 8 అంగుళాలు"
+    },
+    about: {
+      title: "మా గురించి",
+      description: "కేవీఆర్ బ్రిక్స్ హైదరాబాద్‌లో అత్యుత్తమ నిర్మాణ సామగ్రిని సరఫరా చేసే సంస్థ. మేము సిమెంట్ మరియు క్లే ఇటుకలలో ప్రత్యేకత కలిగి ఉన్నాము.",
+      whyUs: "మమ్మల్ని ఎందుకు ఎంచుకోవాలి?",
+      points: ["నాణ్యమైన మెటీరియల్స్", "నేరుగా సరఫరా", "బల్క్ స్టాక్ అందుబాటు", "సమయానికి డెలివరీ"]
+    },
+    contact: {
+      title: "కాంటాక్ట్",
+      getInTouch: "మమ్మల్ని సంప్రదించండి",
+      address: "చెర్లపల్లి, హైదరాబాద్, తెలంగాణ",
+      openingHours: "ఆర్డర్ల కోసం సంప్రదించండి"
+    }
+  }
+};
+
+const productData = {
+  hardBricks: [
+    "Assets/20260125_121914.jpg",
+    "Assets/20260125_121921.jpg",
+    "Assets/20260125_121932.jpg",
+    "Assets/20260125_121942.jpg",
+    "Assets/20260125_122027.jpg"
+  ],
+  softBricks: [
+    "Assets/20260125_122114.jpg",
+    "Assets/20260125_122123.jpg",
+    "Assets/20260125_122106.jpg",
+    "Assets/20260125_122050.jpg"
+  ],
+  granite: [
+    "Assets/20260125_123522.jpg",
+    "Assets/20260125_123516.jpg",
+    "Assets/20260125_123510.jpg",
+    "Assets/20260125_123504.jpg",
+    "Assets/20260125_123816.jpg",
+    "Assets/20260125_123820.jpg"
+  ],
+  walls: [
+    "Assets/20260125_123600.jpg",
+    "Assets/20260125_123602.jpg",
+    "Assets/20260125_123537.jpg",
+    "Assets/20260125_123526.jpg"
+  ],
+  solidCementBricks: [
+    { size: "6 × 8 × 12", value: "28" },
+    { size: "6 × 6 × 12", value: "25" },
+    { size: "4 × 8 × 16", value: "28" }
+  ]
+};
+
+const App = () => {
+  const [lang, setLang] = useState('en');
+  const [activeTab, setActiveTab] = useState('home');
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const t = translations[lang];
+
+  const handleCall = () => window.open("tel:9764238494");
+  const handleWhatsApp = () => window.open("https://wa.me/919764238494");
+
+  const NavItem = ({ tab, label }) => (
+    <button
+      onClick={() => { setActiveTab(tab); setIsMenuOpen(false); window.scrollTo(0,0); }}
+      className={`px-4 py-2 text-sm font-semibold transition-colors ${activeTab === tab ? 'text-red-600' : 'text-gray-600 hover:text-red-500'}`}
+    >
+      {label}
+    </button>
+  );
+
+  return (
+    <div className="min-h-screen bg-gray-50 text-gray-900 font-sans">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 bg-white shadow-md z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center gap-2" onClick={() => setActiveTab('home')}>
+              <div className="flex items-center cursor-pointer">
+                <span className="text-2xl font-black text-gray-800 tracking-tighter">KVR</span>
+                <span className="ml-1 px-2 py-0.5 bg-red-600 text-white text-xs font-bold rounded">BRICKS</span>
+              </div>
+            </div>
+
+            {/* Desktop Nav */}
+            <div className="hidden md:flex items-center space-x-4">
+              <NavItem tab="home" label={t.nav.home} />
+              <NavItem tab="products" label={t.nav.products} />
+              <NavItem tab="about" label={t.nav.about} />
+              <NavItem tab="contact" label={t.nav.contact} />
+              <button 
+                onClick={() => setLang(lang === 'en' ? 'te' : 'en')}
+                className="ml-4 flex items-center gap-1 px-3 py-1 border rounded-full text-xs font-bold hover:bg-gray-100 transition-colors"
+              >
+                <Globe size={14} /> {lang === 'en' ? 'తెలుగు' : 'English'}
+              </button>
+            </div>
+
+            {/* Mobile Nav Toggle */}
+            <div className="md:hidden flex items-center gap-4">
+               <button 
+                onClick={() => setLang(lang === 'en' ? 'te' : 'en')}
+                className="flex items-center gap-1 px-2 py-1 bg-gray-100 rounded text-[10px] font-bold"
+              >
+                {lang === 'en' ? 'TE' : 'EN'}
+              </button>
+              <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-gray-600">
+                {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile Menu */}
+        {isMenuOpen && (
+          <div className="md:hidden bg-white border-t px-4 py-4 flex flex-col space-y-2 animate-in slide-in-from-top duration-300">
+            <button onClick={() => {setActiveTab('home'); setIsMenuOpen(false);}} className="py-2 text-left font-semibold">{t.nav.home}</button>
+            <button onClick={() => {setActiveTab('products'); setIsMenuOpen(false);}} className="py-2 text-left font-semibold">{t.nav.products}</button>
+            <button onClick={() => {setActiveTab('about'); setIsMenuOpen(false);}} className="py-2 text-left font-semibold">{t.nav.about}</button>
+            <button onClick={() => {setActiveTab('contact'); setIsMenuOpen(false);}} className="py-2 text-left font-semibold">{t.nav.contact}</button>
+          </div>
+        )}
+      </nav>
+
+      {/* Main Content */}
+      <main className="pt-16 pb-20">
         
-        /* स्मूथ स्क्रॉल एनिमेशन (Smooth Scroll Animation) */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ग्लासमोर्फिज्म (Glassmorphism) */
-        .glass {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px border rgba(255, 255, 255, 0.1);
-        }
-
-        /* फ्लोटिंग व्हाट्सएप (Floating WhatsApp) */
-        .whatsapp-float {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: #25d366;
-            color: white;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 30px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
-            z-index: 1000;
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .whatsapp-float:hover { transform: scale(1.15) rotate(10deg); }
-
-        /* प्रॉडक्ट इमेज होवर (Product Image Hover) */
-        .product-card img {
-            transition: transform 0.6s ease;
-        }
-        .product-card:hover img {
-            transform: scale(1.1);
-        }
-    </style>
-</head>
-<body>
-
-    <!-- नेविगेशन बार (Navigation Bar) -->
-    <nav class="fixed w-full z-50 transition-all duration-300 py-4 px-6 md:px-12 glass border-b border-white/10">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex items-center gap-2">
-                <div class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center font-bold text-xl">K</div>
-                <span class="text-2xl font-extrabold tracking-tighter">KVR <span class="text-red-500 text-sm font-normal">BRICKS</span></span>
-            </div>
-            
-            <div class="hidden md:flex gap-8 items-center font-semibold text-sm uppercase tracking-widest">
-                <a href="#home" class="hover:text-red-500 transition" data-translate="navHome">Home</a>
-                <a href="#products" class="hover:text-red-500 transition" data-translate="navProducts">Products</a>
-                <a href="#about" class="hover:text-red-500 transition" data-translate="navAbout">About</a>
-                <a href="#contact" class="hover:text-red-500 transition" data-translate="navContact">Contact</a>
-                <button onclick="switchLang()" class="ml-4 border border-white/20 px-4 py-1 rounded-full text-xs hover:bg-white hover:text-black transition uppercase">
-                    <i class="fas fa-globe mr-1"></i> <span id="langLabel">తెలుగు</span>
-                </button>
-            </div>
-
-            <!-- मोबाइल मेनु बटन (Mobile Menu Button) -->
-            <div class="md:hidden flex items-center gap-4">
-                <button onclick="switchLang()" class="text-xs border border-white/20 px-2 py-1 rounded">తెలుగు</button>
-                <i class="fas fa-bars text-xl"></i>
-            </div>
-        </div>
-    </nav>
-
-    <!-- हीरो सेक्शन (Hero Section) -->
-    <section id="home" class="relative min-h-screen flex items-center justify-center pt-20">
-        <div class="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10"></div>
-        <div class="absolute inset-0 overflow-hidden">
-            <img src="https://images.unsplash.com/photo-1590069230002-70cc694767d7?auto=format&fit=crop&q=80" class="w-full h-full object-cover opacity-40 scale-105" alt="Hero Background">
-        </div>
-        
-        <div class="relative z-20 text-center px-4 max-w-4xl reveal">
-            <h1 id="heroTitle" class="text-5xl md:text-8xl font-extrabold mb-6 leading-none">
-                BUILDING <span class="text-red-600">STRENGTH</span> <br> WITH KVR
-            </h1>
-            <p id="heroSubtitle" class="text-gray-400 text-lg md:text-xl mb-10 max-w-2xl mx-auto">
-                Discover the finest collection of hard bricks, soft bricks, and luxury granites crafted for generations of excellence.
-            </p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#products" class="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full font-bold transition shadow-2xl shadow-red-900/40" data-translate="btnProducts">Explore Products</a>
-                <a href="#contact" class="glass px-8 py-4 rounded-full font-bold hover:bg-white hover:text-black transition" data-translate="btnContact">Get In Touch</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- प्रॉडक्ट्स सेक्शन (Products Section) -->
-    <section id="products" class="py-24 px-6 md:px-12 bg-black">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-4 reveal">
-                <div>
-                    <h6 class="text-red-600 font-bold uppercase tracking-widest text-xs mb-2" data-translate="collectionTitle">Our Collection</h6>
-                    <h2 class="text-4xl md:text-6xl font-extrabold" data-translate="productHeading">Superior Materials</h2>
-                </div>
-                <div class="flex gap-4 overflow-x-auto pb-2 w-full md:w-auto">
-                    <button onclick="filterProducts('all')" class="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-red-600 transition text-sm font-bold" data-translate="catAll">All Items</button>
-                    <button onclick="filterProducts('hard')" class="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-red-600 transition text-sm font-bold" data-translate="catHard">Hard Bricks</button>
-                    <button onclick="filterProducts('soft')" class="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-red-600 transition text-sm font-bold" data-translate="catSoft">Soft Bricks</button>
-                    <button onclick="filterProducts('granite')" class="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-red-600 transition text-sm font-bold" data-translate="catGranite">Granite</button>
-                    <button onclick="filterProducts('walls')" class="px-6 py-2 rounded-full border border-white/10 bg-white/5 hover:bg-red-600 transition text-sm font-bold" data-translate="catWalls">Walls</button>
-                </div>
-            </div>
-
-            <!-- प्रॉडक्ट ग्रिड (Product Grid) -->
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- गिटहब एसेट पाथ्स का उपयोग करके डेटा (Data using GitHub Asset Paths) -->
-                <!-- Hard Bricks -->
-                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="hard">
-                    <img src="Assets/20260125_121914.jpg" class="w-full h-80 object-cover" alt="Hard Brick 121914">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                        <span class="text-red-500 font-bold text-xs uppercase tracking-widest">Hard Brick</span>
-                        <h4 class="text-xl font-bold">Premium Ref: 121914</h4>
-                    </div>
-                </div>
-                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="hard">
-                    <img src="Assets/20260125_121921.jpg" class="w-full h-80 object-cover" alt="Hard Brick 121921">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                        <span class="text-red-500 font-bold text-xs uppercase tracking-widest">Hard Brick</span>
-                        <h4 class="text-xl font-bold">Premium Ref: 121921</h4>
-                    </div>
-                </div>
-                
-                <!-- Soft Bricks -->
-                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="soft">
-                    <img src="Assets/20260125_122114.jpg" class="w-full h-80 object-cover" alt="Soft Brick 122114">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                        <span class="text-orange-500 font-bold text-xs uppercase tracking-widest">Soft Brick</span>
-                        <h4 class="text-xl font-bold">Texture Ref: 122114</h4>
-                    </div>
-                </div>
-
-                <!-- Granite -->
-                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="granite">
-                    <img src="Assets/20260125_123522.jpg" class="w-full h-80 object-cover" alt="Granite 123522">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                        <span class="text-blue-400 font-bold text-xs uppercase tracking-widest">Luxury Granite</span>
-                        <h4 class="text-xl font-bold">Mirror Finish 123522</h4>
-                    </div>
-                </div>
-
-                <!-- Pre-Designed Walls -->
-                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="walls">
-                    <img src="Assets/20260125_123600.jpg" class="w-full h-80 object-cover" alt="Wall 123600">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                        <span class="text-emerald-400 font-bold text-xs uppercase tracking-widest">Designer Wall</span>
-                        <h4 class="text-xl font-bold">Standard 123600</h4>
-                    </div>
-                </div>
-                <!-- अन्य इमेज्स (Other Images) -->
-                <div class="product-card group relative overflow-hidden rounded-3xl bg-zinc-900 reveal" data-category="granite">
-                    <img src="Assets/20260125_123816.jpg" class="w-full h-80 object-cover" alt="Granite 123816">
-                    <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
-                        <span class="text-blue-400 font-bold text-xs uppercase tracking-widest">Granite</span>
-                        <h4 class="text-xl font-bold">Polished Ref: 123816</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- संपर्क सेक्शन (Contact Section) -->
-    <section id="contact" class="py-24 px-6 md:px-12 bg-zinc-950">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-            <div class="reveal">
-                <h2 class="text-4xl md:text-6xl font-extrabold mb-8" data-translate="contactHeading">Let's Build Together</h2>
-                <p class="text-gray-400 mb-8" data-translate="contactText">Have questions about our bricks or granites? Fill out the form or reach us directly on WhatsApp.</p>
-                
-                <div class="space-y-6">
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-red-600 flex items-center justify-center"><i class="fas fa-phone"></i></div>
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase">Call/WhatsApp</p>
-                            <p class="text-xl font-bold">+91 98765 43210</p>
-                        </div>
-                    </div>
-                    <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center"><i class="fas fa-map-marker-alt text-red-500"></i></div>
-                        <div>
-                            <p class="text-xs text-gray-500 uppercase">Location</p>
-                            <p class="text-xl font-bold">KVR Factory, Telangana</p>
-                            <a href="https://maps.app.goo.gl/LUvSYkV6Tcnc3VtN7" target="_blank" class="text-red-500 text-sm hover:underline">View on Google Maps</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- संपर्क फॉर्म (Contact Form) -->
-            <div class="glass p-8 md:p-12 rounded-3xl reveal">
-                <form id="contactForm" class="space-y-6">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <input type="text" placeholder="Full Name" class="bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:ring-2 focus:ring-red-600 outline-none transition" required>
-                        <input type="tel" placeholder="Phone Number" class="bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:ring-2 focus:ring-red-600 outline-none transition" required>
-                    </div>
-                    <textarea rows="4" placeholder="Your Inquiry (e.g. Need 10k Hard Bricks)" class="w-full bg-white/5 border border-white/10 rounded-xl px-6 py-4 focus:ring-2 focus:ring-red-600 outline-none transition" required></textarea>
-                    <button type="submit" class="w-full bg-red-600 hover:bg-red-700 py-4 rounded-xl font-bold uppercase tracking-widest transition flex items-center justify-center gap-2">
-                        Send Message <i class="fas fa-paper-plane text-xs"></i>
-                    </button>
-                </form>
-            </div>
-        </div>
-    </section>
-
-    <!-- व्हाट्सएप फ्लोटिंग बटन (WhatsApp Floating Button) -->
-    <a href="https://wa.me/919876543210" target="_blank" class="whatsapp-float">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- फुटर (Footer) -->
-    <footer class="py-12 px-6 border-t border-white/10 text-center text-gray-600 text-sm">
-        <div class="mb-6 flex justify-center gap-4">
-            <i class="fab fa-facebook hover:text-white transition cursor-pointer text-lg"></i>
-            <i class="fab fa-instagram hover:text-white transition cursor-pointer text-lg"></i>
-            <i class="fab fa-linkedin hover:text-white transition cursor-pointer text-lg"></i>
-        </div>
-        <p>&copy; 2026 KVR Bricks & Granites. Designed with Excellence.</p>
-    </footer>
-
-    <!-- जावास्क्रिप्ट (JavaScript) -->
-    <script>
-        // भाषा डेटा (Language Data)
-        const translations = {
-            en: {
-                navHome: "Home", navProducts: "Products", navAbout: "About", navContact: "Contact",
-                heroTitle: "BUILDING <span class='text-red-600'>STRENGTH</span> <br> WITH KVR",
-                heroSubtitle: "Discover the finest collection of hard bricks, soft bricks, and luxury granites crafted for generations of excellence.",
-                btnProducts: "Explore Products", btnContact: "Get In Touch",
-                collectionTitle: "Our Collection", productHeading: "Superior Materials",
-                catAll: "All Items", catHard: "Hard Bricks", catSoft: "Soft Bricks", catGranite: "Granite", catWalls: "Walls",
-                contactHeading: "Let's Build Together",
-                contactText: "Have questions about our bricks or granites? Fill out the form or reach us directly on WhatsApp.",
-                langLabel: "తెలుగు"
-            },
-            te: {
-                navHome: "హోమ్", navProducts: "ఉత్పత్తులు", navAbout: "మా గురించి", navContact: "సంప్రదించండి",
-                heroTitle: "KVRతో <span class='text-red-600'>బలమైన</span> <br> నిర్మాణం",
-                heroSubtitle: "తరతరాల శ్రేష్ఠత కోసం రూపొందించిన హార్డ్ ఇటుకలు, సాఫ్ట్ ఇటుకలు మరియు విలాసవంతమైన గ్రానైట్‌ల ఉత్తమ సేకరణను కనుగొనండి.",
-                btnProducts: "ఉత్పత్తులను చూడండి", btnContact: "సంప్రదించండి",
-                collectionTitle: "మా సేకరణ", productHeading: "అత్యుత్తమ మెటీరియల్స్",
-                catAll: "అన్నీ", catHard: "హార్డ్ ఇటుకలు", catSoft: "సాఫ్ట్ ఇటుకలు", catGranite: "గ్రానైట్", catWalls: "గోడలు",
-                contactHeading: "కలిసి నిర్మిద్దాం",
-                contactText: "మా ఇటుకలు లేదా గ్రానైట్‌ల గురించి ప్రశ్నలు ఉన్నాయా? ఫారమ్‌ను నింపండి లేదా నేరుగా వాట్సాప్‌లో మమ్మల్ని సంప్రదించండి.",
-                langLabel: "English"
-            }
-        };
-
-        let currentLang = 'en';
-
-        // भाषा स्विच करें (Switch Language)
-        function switchLang() {
-            currentLang = currentLang === 'en' ? 'te' : 'en';
-            const data = translations[currentLang];
-            
-            document.querySelectorAll('[data-translate]').forEach(el => {
-                const key = el.getAttribute('data-translate');
-                el.innerText = data[key];
-            });
-
-            document.getElementById('heroTitle').innerHTML = data.heroTitle;
-            document.getElementById('heroSubtitle').innerText = data.heroSubtitle;
-            document.getElementById('langLabel').innerText = data.langLabel;
-
-            // फोंट बदलें (Font Change)
-            if(currentLang === 'te') {
-                document.body.classList.add('telugu-font');
-            } else {
-                document.body.classList.remove('telugu-font');
-            }
-        }
-
-        // प्रॉडक्ट फ़िल्टर (Product Filter)
-        function filterProducts(cat) {
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach(card => {
-                if (cat === 'all' || card.dataset.category === cat) {
-                    card.style.display = 'block';
-                    setTimeout(() => card.style.opacity = '1', 10);
-                } else {
-                    card.style.opacity = '0';
-                    setTimeout(() => card.style.display = 'none', 300);
-                }
-            });
-        }
-
-        // स्क्रॉल रिवील एनीमेशन (Scroll Reveal Animation)
-        function reveal() {
-            var reveals = document.querySelectorAll(".reveal");
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var elementTop = reveals[i].getBoundingClientRect().top;
-                var elementVisible = 150;
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add("active");
-                }
-            }
-        }
-
-        window.addEventListener("scroll", reveal);
-        // आरंभिक चेक (Initial Check)
-        reveal();
-
-        // फॉर्म सबमिशन (Form Submission)
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert("Message Sent! We will contact you shortly.");
-        });
-    </script>
-</body>
-</html>
-
-                            <p class="text-sm text-yellow-400 font-bold uppercase tracking-widest" data-key="catHard">Hard Bricks</p>
-                            <h3 class="text-xl font-bold text-white">Ref: 121914</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card group relative overflow-hidden rounded-xl shadow-lg" data-category="hard-bricks">
-                    <img src="https://placehold.co/600x400/8b4513/ffffff?text=Hard+Brick+121921" alt="Hard Brick 121921" class="w-full h-72 object-cover transition duration-500">
-                    <div class="absolute inset-0 gradient-overlay flex items-end p-6">
-                        <div>
-                            <p class="text-sm text-yellow-400 font-bold uppercase tracking-widest" data-key="catHard">Hard Bricks</p>
-                            <h3 class="text-xl font-bold text-white">Ref: 121921</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card group relative overflow-hidden rounded-xl shadow-lg" data-category="hard-bricks">
-                    <img src="https://placehold.co/600x400/8b4513/ffffff?text=Hard+Brick+121932" alt="Hard Brick 121932" class="w-full h-72 object-cover transition duration-500">
-                    <div class="absolute inset-0 gradient-overlay flex items-end p-6">
-                        <div>
-                            <p class="text-sm text-yellow-400 font-bold uppercase tracking-widest" data-key="catHard">Hard Bricks</p>
-                            <h3 class="text-xl font-bold text-white">Ref: 121932</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Soft Bricks -->
-                <div class="product-card group relative overflow-hidden rounded-xl shadow-lg" data-category="soft-bricks">
-                    <img src="https://placehold.co/600x400/d2691e/ffffff?text=Soft+Brick+20260125_122114" alt="Soft Brick 1" class="w-full h-72 object-cover transition duration-500">
-                    <div class="absolute inset-0 gradient-overlay flex items-end p-6">
-                        <div>
-                            <p class="text-sm text-yellow-400 font-bold uppercase tracking-widest" data-key="catSoft">Soft Bricks</p>
-                            <h3 class="text-xl font-bold text-white">Ref: 122114</h3>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card group relative overflow-hidden rounded-xl shadow-lg" data-category="soft-bricks">
-                    <img src="https://placehold.co/600x400/d2691e/ffffff?text=Soft+Brick+20260125_122123" alt="Soft Brick 2" class="w-full h-72 object-cover transition duration-500">
-                    <div class="absolute inset-0 gradient-overlay flex items-end p-6">
-                        <div>
-                            <p class="text-sm text-yellow-400 font-bold uppercase tracking-widest" data-key="catSoft">Soft Bricks</p>
-                            <h3 class="text-xl font-bold text-white">Ref: 122123</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Granite -->
-                <div class="product-card group relative overflow-hidden rounded-xl shadow-lg" data-category="granite">
-                    <img src="https://placehold.co/600x400/333333/ffffff?text=Granite+20260125-123522" alt="Granite 1" class="w-full h-72 object-cover transition duration-500">
-                    <div class="absolute inset-0 gradient-overlay flex items-end p-6">
-                        <div>
-                            <p class="text-sm text-yellow-400 font-bold uppercase tracking-widest" data-key="catGranite">Granite</p>
-                            <h3 class="text-xl font-bold text-white">Ref: 123522</h3>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Walls -->
-                <div class="product-card group relative overflow-hidden rounded-xl shadow-lg" data-category="walls">
-                    <img src="https://placehold.co/600x400/556b2f/ffffff?text=Wall+20260125_123600" alt="Wall 1" class="w-full h-72 object-cover transition duration-500">
-                    <div class="absolute inset-0 gradient-overlay flex items-end p-6">
-                        <div>
-                            <p class="text-sm text-yellow-400 font-bold uppercase tracking-widest" data-key="catWalls">Pre-Designed Walls</p>
-                            <h3 class="text-xl font-bold text-white">Ref: 123600</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-24 bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                <div class="relative">
-                    <img src="https://images.unsplash.com/photo-1517581177682-a085bb7ffb15?q=80&w=1000&auto=format&fit=crop" alt="About KVR" class="rounded-2xl shadow-2xl relative z-10">
-                    <div class="absolute -bottom-6 -right-6 w-full h-full border-4 border-[#b33939] rounded-2xl z-0"></div>
-                </div>
-                <div>
-                    <h2 class="text-4xl font-bold mb-6" data-key="aboutTitle">Experience & Trust</h2>
-                    <p class="text-gray-300 text-lg mb-8 leading-relaxed" data-key="aboutText">
-                        KVR Bricks & Granites has been a pioneer in construction supplies for years. We specialize in producing high-strength hard bricks and aesthetic granites that stand the test of time. Our commitment to quality ensures that your home or project is built on a foundation of excellence.
-                    </p>
-                    <div class="grid grid-cols-2 gap-8">
-                        <div>
-                            <p class="text-3xl font-bold text-[#b33939]">10+</p>
-                            <p class="text-gray-400" data-key="statYears">Years Experience</p>
-                        </div>
-                        <div>
-                            <p class="text-3xl font-bold text-[#b33939]">500+</p>
-                            <p class="text-gray-400" data-key="statClients">Happy Clients</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 mb-4" data-key="contactTitle">Get In Touch</h2>
-                <div class="h-1 w-24 bg-[#b33939] mx-auto"></div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Info & Map -->
-                <div class="space-y-8">
-                    <div class="flex items-start space-x-4">
-                        <div class="bg-red-100 p-4 rounded-lg text-[#b33939]">
-                            <i class="fas fa-map-marker-alt text-2xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-bold" data-key="locTitle">Location</h4>
-                            <p class="text-gray-600" data-key="locText">KVR Bricks Factory Area, Telangana, India</p>
-                            <a href="https://maps.app.goo.gl/LUvSYkV6Tcnc3VtN7" target="_blank" class="text-[#b33939] font-semibold hover:underline mt-2 inline-block" data-key="viewMap">Open in Google Maps</a>
-                        </div>
-                    </div>
-
-                    <div class="flex items-start space-x-4">
-                        <div class="bg-red-100 p-4 rounded-lg text-[#b33939]">
-                            <i class="fas fa-phone-alt text-2xl"></i>
-                        </div>
-                        <div>
-                            <h4 class="text-xl font-bold" data-key="callTitle">Call Us</h4>
-                            <p class="text-gray-600">+91 98765 43210</p>
-                        </div>
-                    </div>
-
-                    <!-- Embedded Map -->
-                    <div class="rounded-xl overflow-hidden shadow-lg h-64 border border-gray-200">
-                        <iframe 
-                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d15220.000000000!2d78.4744!3d17.3850!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin" 
-                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-                        </iframe>
-                    </div>
-                </div>
-
-                <!-- Contact Form -->
-                <div class="bg-gray-50 p-8 rounded-2xl shadow-sm border border-gray-200">
-                    <form onsubmit="event.preventDefault(); showSuccessMessage();" class="space-y-6">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2" data-key="formName">Full Name</label>
-                            <input type="text" required class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#b33939] outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2" data-key="formPhone">Phone Number</label>
-                            <input type="tel" required class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#b33939] outline-none">
-                        </div>
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-700 mb-2" data-key="formMessage">Your Requirements</label>
-                            <textarea rows="4" class="w-full px-4 py-3 rounded-lg border focus:ring-2 focus:ring-[#b33939] outline-none"></textarea>
-                        </div>
-                        <button type="submit" class="w-full bg-[#b33939] text-white py-4 rounded-lg font-bold hover:bg-red-800 transition" data-key="formBtn">Send Message</button>
-                    </form>
-                    <div id="success-msg" class="hidden mt-4 p-4 bg-green-100 text-green-700 rounded-lg text-center font-semibold">
-                        Message sent successfully!
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-xl font-bold mb-4">KVR Bricks & Granites</p>
-            <p class="text-gray-500 mb-8" data-key="footerTag">Quality construction, built for generations.</p>
-            <div class="flex justify-center space-x-6 mb-8">
-                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-whatsapp"></i></a>
-            </div>
-            <p class="text-gray-600 text-sm">© 2026 KVR Bricks. All Rights Reserved.</p>
-        </div>
-    </footer>
-
-    <script>
-        // Language Data
-        const translations = {
-            en: {
-                navHome: "Home",
-                navProducts: "Products",
-                navAbout: "About Us",
-                navContact: "Contact",
-                navBrand: "Bricks & Granites",
-                langBtn: "తెలుగు",
-                heroTitle: "Building Your Dreams <br><span class='text-[#f1c40f]'>With Quality Bricks</span>",
-                heroSub: "Premium quality hard bricks, soft bricks, and exquisite granites for enduring constructions.",
-                heroBtnPrimary: "View Products",
-                heroBtnSecondary: "Get a Quote",
-                prodTitle: "Our Premium Products",
-                catAll: "All",
-                catHard: "Hard Bricks",
-                catSoft: "Soft Bricks",
-                catGranite: "Granite",
-                catWalls: "Pre-Designed Walls",
-                aboutTitle: "Experience & Trust",
-                aboutText: "KVR Bricks & Granites has been a pioneer in construction supplies for years. We specialize in producing high-strength hard bricks and aesthetic granites that stand the test of time.",
-                statYears: "Years Experience",
-                statClients: "Happy Clients",
-                contactTitle: "Get In Touch",
-                locTitle: "Location",
-                locText: "KVR Bricks Factory Area, Telangana, India",
-                callTitle: "Call Us",
-                viewMap: "Open in Google Maps",
-                formName: "Full Name",
-                formPhone: "Phone Number",
-                formMessage: "Your Requirements",
-                formBtn: "Send Message",
-                footerTag: "Quality construction, built for generations.",
-                success: "Message sent successfully!"
-            },
-            te: {
-                navHome: "హోమ్",
-                navProducts: "ఉత్పత్తులు",
-                navAbout: "మా గురించి",
-                navContact: "సంప్రదించండి",
-                navBrand: "బ్రిక్స్ & గ్రానైట్స్",
-                langBtn: "English",
-                heroTitle: "నాణ్యమైన ఇటుకలతో <br><span class='text-[#f1c40f]'>మీ కలల నిర్మాణం</span>",
-                heroSub: "మన్నికైన నిర్మాణాల కోసం ప్రీమియం నాణ్యత గల హార్డ్ ఇటుకలు, సాఫ్ట్ ఇటుకలు మరియు అద్భుతమైన గ్రానైట్లు.",
-                heroBtnPrimary: "ఉత్పత్తులను చూడండి",
-                heroBtnSecondary: "ధర అడగండి",
-                prodTitle: "మా నాణ్యమైన ఉత్పత్తులు",
-                catAll: "అన్నీ",
-                catHard: "హార్డ్ ఇటుకలు",
-                catSoft: "సాఫ్ట్ ఇటుకలు",
-                catGranite: "గ్రానైట్",
-                catWalls: "గోడ నమూనాలు",
-                aboutTitle: "అనుభవం & నమ్మకం",
-                aboutText: "KVR బ్రిక్స్ & గ్రానైట్స్ నిర్మాణ రంగంలో దశాబ్దాల అనుభవం కలిగిన సంస్థ. మేము అత్యంత దృఢమైన ఇటుకలను మరియు అందమైన గ్రానైట్లను అందిస్తున్నాము.",
-                statYears: "సంవత్సరాల అనుభవం",
-                statClients: "సంతోషకరమైన కస్టమర్లు",
-                contactTitle: "సంప్రదించండి",
-                locTitle: "చిరునామా",
-                locText: "KVR బ్రిక్స్ ఫ్యాక్టరీ ప్రాంతం, తెలంగాణ, భారతదేశం",
-                callTitle: "ఫోన్ చేయండి",
-                viewMap: "గూగుల్ మ్యాప్స్ లో చూడండి",
-                formName: "పూర్తి పేరు",
-                formPhone: "ఫోన్ నంబర్",
-                formMessage: "మీకు కావాల్సిన వివరాలు",
-                formBtn: "మెసేజ్ పంపండి",
-                footerTag: "నాణ్యమైన నిర్మాణం, తరతరాల భద్రత.",
-                success: "సందేశం విజయవంతంగా పంపబడింది!"
-            }
-        };
-
-        let currentLang = 'en';
-
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'te' : 'en';
-            updateContent();
-        }
-
-        function updateContent() {
-            const content = translations[currentLang];
-            document.querySelectorAll('[data-key]').forEach(elem => {
-                const key = elem.getAttribute('data-key');
-                if (content[key]) {
-                    elem.innerHTML = content[key];
-                }
-            });
-            document.getElementById('lang-btn').innerText = content.langBtn;
-            document.getElementById('lang-btn-mobile').innerText = content.langBtn;
-            
-            // Toggle Telugu Font Class
-            if (currentLang === 'te') {
-                document.body.classList.add('telugu');
-            } else {
-                document.body.classList.remove('telugu');
-            }
-        }
-
-        // Product Filtering
-        function filterProducts(category) {
-            const cards = document.querySelectorAll('.product-card');
-            const btns = document.querySelectorAll('.filter-btn');
-            
-            btns.forEach(btn => {
-                btn.classList.remove('bg-[#b33939]', 'text-white');
-                btn.classList.add('bg-gray-100');
-            });
-            event.currentTarget.classList.remove('bg-gray-100');
-            event.currentTarget.classList.add('bg-[#b33939]', 'text-white');
-
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-
-        // Mobile Menu
-        const menuBtn = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Form Submission
-        function showSuccessMessage() {
-            const msg = document.getElementById('success-msg');
-            msg.innerText = translations[currentLang].success;
-            msg.classList.remove('hidden');
-            setTimeout(() => msg.classList.add('hidden'), 3000);
-        }
-
-        // Initialize
-        window.onload = () => {
-            updateContent();
-        };
-    </script>
-</body>
-</html>
-
+        {/* Home Tab */}
+        {activeTab === 'home' && (
+          <>
+            {/* Hero Section */}
+            <section className="relative h-[80vh] flex items-center justify-center overflow-hidden bg-gray-900">
+              <div className="absolute inset-0 z-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1590069230002-70cc3044a739?auto=format&fit=crop&q=80')] bg-cover bg-center"></div>
+              <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/80"></div>
               
+              <div className="relative z-10 text-center px-4 max-w-4xl">
+                <div className="mb-4 inline-block px-4 py-1 bg-red-600 text-white text-xs font-bold tracking-widest rounded-full uppercase">
+                  {t.common.bulk}
+                </div>
+                <h1 className="text-4xl md:text-6xl font-black text-white mb-4 drop-shadow-lg">
+                  {t.hero.headline}
+                </h1>
+                <p className="text-lg md:text-xl text-gray-200 mb-8 max-w-2xl mx-auto font-medium">
+                  {t.hero.tagline}
+                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <button onClick={handleCall} className="w-full sm:w-auto flex items-center justify-center gap-2 bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-lg font-bold transition-all shadow-xl hover:scale-105 active:scale-95">
+                    <Phone size={20} /> {t.hero.cta}
+                  </button>
+                  <button onClick={handleWhatsApp} className="w-full sm:w-auto flex items-center justify-center gap-2 bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-lg font-bold transition-all shadow-xl hover:scale-105 active:scale-95">
+                    <MessageSquare size={20} /> {t.hero.whatsapp}
+                  </button>
+                </div>
+              </div>
+            </section>
+
+            {/* Quick Stats/Features */}
+            <section className="bg-white py-12 px-4">
+              <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+                {[
+                  { icon: <Construction className="text-red-600" />, title: t.common.readyStock, desc: "Immediate fulfillment for all order sizes." },
+                  { icon: <BrickWall className="text-red-600" />, title: t.common.bulk, desc: "Sufficient capacity for large infrastructure projects." },
+                  { icon: <MapPin className="text-red-600" />, title: t.common.fastDelivery, desc: "Optimized logistics based in Cherlapalli, Hyderabad." }
+                ].map((item, idx) => (
+                  <div key={idx} className="flex flex-col items-center text-center p-6 border rounded-xl bg-gray-50">
+                    <div className="mb-4 p-3 bg-white rounded-full shadow-sm">{item.icon}</div>
+                    <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                    <p className="text-sm text-gray-600">{item.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* Featured Product Preview */}
+            <section className="py-16 px-4 bg-gray-50">
+              <div className="max-w-7xl mx-auto">
+                <div className="flex justify-between items-end mb-10">
+                  <div>
+                    <h2 className="text-3xl font-black mb-2">{t.products.title}</h2>
+                    <div className="h-1.5 w-20 bg-red-600 rounded-full"></div>
+                  </div>
+                  <button onClick={() => setActiveTab('products')} className="text-red-600 font-bold flex items-center gap-1 hover:gap-2 transition-all">
+                    View All <ArrowRight size={18} />
+                  </button>
+                </div>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                  <div className="group relative overflow-hidden rounded-xl h-64 shadow-lg cursor-pointer" onClick={() => setActiveTab('products')}>
+                    <img src={`${ASSET_BASE}${productData.hardBricks[0]}`} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Hard Bricks" />
+                    <div className="absolute inset-0 bg-black/40 flex items-end p-4">
+                      <span className="text-white font-bold text-sm">{t.products.hardBricks}</span>
+                    </div>
+                  </div>
+                  <div className="group relative overflow-hidden rounded-xl h-64 shadow-lg cursor-pointer" onClick={() => setActiveTab('products')}>
+                    <img src={`${ASSET_BASE}${productData.softBricks[0]}`} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Soft Bricks" />
+                    <div className="absolute inset-0 bg-black/40 flex items-end p-4">
+                      <span className="text-white font-bold text-sm">{t.products.softBricks}</span>
+                    </div>
+                  </div>
+                  <div className="group relative overflow-hidden rounded-xl h-64 shadow-lg cursor-pointer" onClick={() => setActiveTab('products')}>
+                    <img src={`${ASSET_BASE}${productData.granite[0]}`} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Granite" />
+                    <div className="absolute inset-0 bg-black/40 flex items-end p-4">
+                      <span className="text-white font-bold text-sm">{t.products.granite}</span>
+                    </div>
+                  </div>
+                  <div className="group relative overflow-hidden rounded-xl h-64 shadow-lg cursor-pointer" onClick={() => setActiveTab('products')}>
+                    <img src={`${ASSET_BASE}${productData.walls[0]}`} className="w-full h-full object-cover transition-transform group-hover:scale-110" alt="Walls" />
+                    <div className="absolute inset-0 bg-black/40 flex items-end p-4">
+                      <span className="text-white font-bold text-sm">{t.products.walls}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </>
+        )}
+
+        {/* Products Tab */}
+        {activeTab === 'products' && (
+          <section className="py-12 px-4 max-w-7xl mx-auto">
+            <h1 className="text-4xl font-black mb-12 text-center uppercase tracking-tight">{t.products.title}</h1>
+            
+            {/* Hard Bricks */}
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-6">
+                <LayoutDashboard className="text-red-600" />
+                <h2 className="text-2xl font-bold">{t.products.hardBricks}</h2>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+                {productData.hardBricks.map((img, i) => (
+                  <div key={i} className="aspect-square rounded-lg overflow-hidden border shadow-sm group">
+                    <img src={`${ASSET_BASE}${img}`} alt="Hard Brick" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Soft Bricks */}
+            <div className="mb-16">
+              <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
+                <div className="flex items-center gap-3">
+                  <LayoutDashboard className="text-red-600" />
+                  <h2 className="text-2xl font-bold">{t.products.softBricks}</h2>
+                </div>
+                <div className="bg-red-50 border border-red-200 px-4 py-2 rounded-lg text-sm font-bold text-red-700">
+                   {t.products.softSpecs}
+                </div>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {productData.softBricks.map((img, i) => (
+                  <div key={i} className="aspect-square rounded-lg overflow-hidden border shadow-sm group">
+                    <img src={`${ASSET_BASE}${img}`} alt="Soft Brick" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Solid Bricks Sizes */}
+            <div className="mb-16">
+               <div className="flex items-center gap-3 mb-6">
+                <LayoutDashboard className="text-red-600" />
+                <h2 className="text-2xl font-bold">{t.products.solidBricks}</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {productData.solidCementBricks.map((item, i) => (
+                  <div key={i} className="bg-white p-6 rounded-xl border-l-4 border-red-600 shadow-md flex justify-between items-center">
+                    <div>
+                      <p className="text-xs uppercase text-gray-500 font-bold mb-1">Dimensions (Inches)</p>
+                      <h3 className="text-xl font-black text-gray-800">{item.size}</h3>
+                    </div>
+                    <div className="text-center">
+                      <span className="text-3xl font-black text-red-600">{item.value}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Granite */}
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-6">
+                <LayoutDashboard className="text-red-600" />
+                <h2 className="text-2xl font-bold">{t.products.granite}</h2>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                {productData.granite.map((img, i) => (
+                  <div key={i} className="aspect-square rounded-lg overflow-hidden border shadow-sm group">
+                    <img src={`${ASSET_BASE}${img}`} alt="Granite" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Pre-Designed Walls */}
+            <div className="mb-16">
+              <div className="flex items-center gap-3 mb-6">
+                <LayoutDashboard className="text-red-600" />
+                <h2 className="text-2xl font-bold">{t.products.walls}</h2>
+              </div>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {productData.walls.map((img, i) => (
+                  <div key={i} className="aspect-[3/4] rounded-lg overflow-hidden border shadow-sm group">
+                    <img src={`${ASSET_BASE}${img}`} alt="Wall Design" className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* About Tab */}
+        {activeTab === 'about' && (
+          <section className="py-12 px-4 max-w-4xl mx-auto">
+            <h1 className="text-4xl font-black mb-8 text-center">{t.about.title}</h1>
+            
+            <div className="bg-white p-8 rounded-2xl shadow-xl border mb-12">
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center text-red-600">
+                  <User size={32} />
+                </div>
+                <div>
+                  <h2 className="text-2xl font-bold text-gray-800">{t.common.owner}</h2>
+                  <p className="text-xl font-black text-red-600">B. Kumari</p>
+                </div>
+              </div>
+              
+              <p className="text-gray-700 leading-relaxed text-lg mb-8">
+                {t.about.description}
+              </p>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="p-6 bg-gray-50 rounded-xl">
+                  <h3 className="text-lg font-bold mb-4 border-b pb-2">{t.about.whyUs}</h3>
+                  <ul className="space-y-3">
+                    {t.about.points.map((pt, i) => (
+                      <li key={i} className="flex items-center gap-2 text-sm font-medium">
+                        <div className="w-1.5 h-1.5 bg-red-600 rounded-full"></div>
+                        {pt}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="flex flex-col justify-center items-center p-6 border-2 border-dashed rounded-xl border-gray-300">
+                  <BrickWall size={48} className="text-gray-300 mb-4" />
+                  <p className="text-center font-bold text-gray-500">{t.common.bulk}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* Contact Tab */}
+        {activeTab === 'contact' && (
+          <section className="py-12 px-4 max-w-7xl mx-auto">
+             <h1 className="text-4xl font-black mb-12 text-center uppercase tracking-tight">{t.contact.title}</h1>
+             
+             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                {/* Contact Info */}
+                <div className="space-y-8">
+                   <div className="bg-white p-8 rounded-2xl shadow-lg border">
+                      <h2 className="text-2xl font-bold mb-6">{t.contact.getInTouch}</h2>
+                      
+                      <div className="space-y-6">
+                        <div className="flex items-start gap-4">
+                           <div className="p-3 bg-red-50 text-red-600 rounded-lg">
+                              <Phone size={24} />
+                           </div>
+                           <div>
+                              <p className="text-xs text-gray-500 font-bold uppercase">Call / WhatsApp</p>
+                              <p className="text-xl font-black">97642 38494</p>
+                           </div>
+                        </div>
+
+                        <div className="flex items-start gap-4">
+                           <div className="p-3 bg-red-50 text-red-600 rounded-lg">
+                              <MapPin size={24} />
+                           </div>
+                           <div>
+                              <p className="text-xs text-gray-500 font-bold uppercase">Location</p>
+                              <p className="text-xl font-black">{t.contact.address}</p>
+                           </div>
+                        </div>
+
+                        <div className="pt-6">
+                          <button onClick={handleCall} className="w-full mb-3 bg-red-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-red-700 transition-colors shadow-lg">
+                            <Phone size={20} /> Call Now
+                          </button>
+                          <button onClick={handleWhatsApp} className="w-full bg-green-600 text-white py-4 rounded-xl font-bold flex items-center justify-center gap-2 hover:bg-green-700 transition-colors shadow-lg">
+                            <MessageSquare size={20} /> WhatsApp Us
+                          </button>
+                        </div>
+                      </div>
+                   </div>
+
+                   {/* QR Code Section */}
+                   <div className="bg-gray-800 text-white p-8 rounded-2xl flex flex-col items-center text-center">
+                      <div className="w-48 h-48 bg-white p-2 rounded-lg mb-4">
+                         {/* Placeholder for QR - In real use, a generated QR would go here */}
+                         <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">
+                           <img 
+                              src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://wa.me/919764238494" 
+                              alt="Scan for contact" 
+                              className="w-full h-full"
+                            />
+                         </div>
+                      </div>
+                      <p className="text-lg font-bold">{t.common.scan}</p>
+                      <p className="text-gray-400 text-sm mt-1">97642 38494</p>
+                   </div>
+                </div>
+
+                {/* Map Section */}
+                <div className="h-[400px] lg:h-full rounded-2xl overflow-hidden shadow-lg border">
+                  <iframe 
+                    title="KVR Bricks Location"
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.2893264426563!2d78.60156947516625!3d17.44583798345479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcb9ec0f1359c5d%3A0x7d06e23b0a7c4618!2sCherlapalli%2C%20Hyderabad%2C%20Telangana!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen="" 
+                    loading="lazy"
+                  ></iframe>
+                </div>
+             </div>
+          </section>
+        )}
+      </main>
+
+      {/* Sticky Bottom Actions (Mobile) */}
+      <div className="md:hidden fixed bottom-4 left-4 right-4 flex gap-2 z-40">
+        <button onClick={handleCall} className="flex-1 bg-red-600 text-white p-4 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black active:scale-95 transition-transform">
+          <Phone size={24} /> {t.common.call}
+        </button>
+        <button onClick={handleWhatsApp} className="flex-1 bg-green-600 text-white p-4 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black active:scale-95 transition-transform">
+          <MessageSquare size={24} /> {t.common.whatsapp}
+        </button>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-12 px-4 border-t border-gray-800">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+          <div className="text-center md:text-left">
+            <div className="flex items-center justify-center md:justify-start mb-2">
+              <span className="text-3xl font-black tracking-tighter">KVR</span>
+              <span className="ml-1 px-2 py-0.5 bg-red-600 text-white text-xs font-bold rounded">BRICKS</span>
+            </div>
+            <p className="text-gray-400 text-sm max-w-xs">{t.hero.tagline}</p>
+          </div>
+          
+          <div className="flex flex-col items-center md:items-end gap-2">
+            <p className="font-bold text-red-500">B. Kumari ({t.common.owner})</p>
+            <p className="text-gray-400 flex items-center gap-2"><Phone size={14} /> 97642 38494</p>
+            <p className="text-gray-400 flex items-center gap-2"><MapPin size={14} /> Cherlapalli, Hyderabad</p>
+          </div>
+        </div>
+        <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-xs">
+          © 2026 KVR BRICKS. All rights reserved. Professional Building Materials.
+        </div>
+      </footer>
+    </div>
+  );
+};
+
+export default App;
+
+
