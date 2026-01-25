@@ -11,6 +11,11 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&family=Outfit:wght@300;400;600;700;900&display=swap');
         
+        :root {
+            --brand-red: #e11d48;
+            --brand-dark: #0f172a;
+        }
+
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: #ffffff;
@@ -24,479 +29,427 @@
         .kinetic-word {
             display: inline-block;
             opacity: 0;
-            transform: translateY(80px) rotate(5deg);
+            transform: translateY(100px) rotate(10deg);
+            filter: blur(10px);
         }
 
         .reveal-up {
             opacity: 0;
-            transform: translateY(40px);
+            transform: translateY(60px);
         }
 
-        .float-slow {
-            animation: float 8s ease-in-out infinite;
+        .float-magnetic {
+            will-change: transform;
+            transition: transform 0.2s cubic-bezier(0.33, 1, 0.68, 1);
         }
 
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(1deg); }
-        }
-
-        /* --- Signal & UI Interactions --- */
+        /* --- Signal Styles --- */
         .glass-nav {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: saturate(180%) blur(20px);
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: saturate(180%) blur(25px);
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
 
-        .kvr-logo-draw {
+        .kvr-logo-text {
             font-family: 'Arial Black', sans-serif;
-            letter-spacing: -4px;
+            letter-spacing: -5px;
         }
 
         .product-node {
-            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+            position: relative;
         }
 
         .product-node:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 40px 80px -15px rgba(225, 29, 72, 0.15);
+            transform: scale(1.05) translateY(-10px);
+            z-index: 10;
         }
 
-        .bg-marquee-wrap {
-            white-space: nowrap;
-            overflow: hidden;
-            background: #0f172a;
-            color: white;
-            padding: 20px 0;
-            opacity: 0.04;
-            position: fixed;
-            top: 30%;
-            z-index: -1;
-            pointer-events: none;
-            width: 100%;
-        }
-
-        .marquee-inner {
-            display: inline-block;
-            animation: marquee 30s linear infinite;
-            font-weight: 900;
-            font-size: 12rem;
-            text-transform: uppercase;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .signal-pulse {
+        /* Ambient Signal Pulse */
+        .signal-aura {
             position: relative;
         }
-        .signal-pulse::after {
+        .signal-aura::before {
             content: '';
             position: absolute;
-            inset: -5px;
-            border: 1px solid #e11d48;
-            border-radius: inherit;
-            animation: pulse-ring 2s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+            inset: -20px;
+            border: 2px solid var(--brand-red);
+            border-radius: 50%;
             opacity: 0;
+            animation: radar 3s infinite;
         }
-        @keyframes pulse-ring {
-            0% { transform: scale(0.9); opacity: 0.8; }
-            100% { transform: scale(1.1); opacity: 0; }
+        @keyframes radar {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { opacity: 0.3; }
+            100% { transform: scale(1.5); opacity: 0; }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-thumb { background: #e11d48; border-radius: 10px; }
+
+        .image-container {
+            position: relative;
+            overflow: hidden;
+            background: #f1f5f9;
+        }
+        .image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .image-container:hover img {
+            transform: scale(1.15);
         }
     </style>
 </head>
 <body class="selection:bg-rose-500 selection:text-white">
 
-    <!-- Header / Nav -->
+    <!-- Multilingual Navigation -->
     <nav class="glass-nav fixed top-0 z-[100] w-full">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <div class="flex items-center gap-3">
-                    <span class="kvr-logo-draw text-5xl font-black text-slate-900 leading-none">K<span class="text-rose-600">V</span>R</span>
-                    <div class="h-10 w-[1px] bg-slate-200 mx-3 hidden sm:block"></div>
-                    <div class="hidden sm:block">
-                        <span class="block text-xl font-black tracking-tighter leading-none h-outfit">BRICKS & GRANITES</span>
-                        <span class="text-[9px] uppercase tracking-[0.2em] font-bold text-slate-400" data-t="loc">Cherlapalli, Hyderabad</span>
+                <!-- Branding -->
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center">
+                        <span class="kvr-logo-text text-5xl font-black text-slate-900 leading-none">K<span class="text-rose-600">V</span>R</span>
+                        <div class="h-10 w-[2px] bg-slate-200 mx-3 hidden sm:block"></div>
+                        <div class="hidden sm:block">
+                            <span class="block text-xl font-black tracking-tighter leading-none h-outfit uppercase">Bricks & Granites</span>
+                            <span class="text-[9px] uppercase tracking-[0.3em] font-extrabold text-rose-600" data-t="loc">Cherlapalli, Hyderabad</span>
+                        </div>
                     </div>
                 </div>
 
+                <!-- Control Center -->
                 <div class="flex items-center gap-6">
-                    <button id="lang-btn" class="bg-slate-100 hover:bg-slate-200 px-6 py-2.5 rounded-full font-black text-xs flex items-center gap-2 border border-slate-200 transition-all">
+                    <button id="lang-toggle" class="bg-slate-900 text-white hover:bg-rose-600 px-6 py-2.5 rounded-full font-black text-xs transition-all flex items-center gap-2 shadow-xl shadow-slate-200">
                         <i data-lucide="languages" class="w-4 h-4"></i>
-                        <span id="lang-text">తెలుగు</span>
+                        <span id="lang-label">తెలుగు</span>
                     </button>
-                    <a href="tel:9764238494" class="hidden lg:flex bg-slate-900 text-white px-8 py-3 rounded-2xl text-sm font-black shadow-xl hover:bg-rose-600 transition-all">
+                    
+                    <a href="tel:9764238494" class="hidden lg:flex bg-rose-600 text-white px-8 py-3 rounded-2xl text-sm font-black shadow-2xl hover:bg-slate-900 transition-all">
                         97642 38494
                     </a>
-                    <button id="menu-btn" class="lg:hidden p-2 text-slate-900"><i data-lucide="layout-grid"></i></button>
+                    
+                    <button id="menu-btn" class="lg:hidden p-2 text-slate-900"><i data-lucide="layout-grid" class="w-8 h-8"></i></button>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Background Marquee -->
-    <div class="bg-marquee-wrap">
-        <div class="marquee-inner">
-            KVR BRICKS READY STOCK CHERLAPALLI B. KUMARI PREMIUM GRANITES KVR BRICKS READY STOCK CHERLAPALLI B. KUMARI PREMIUM GRANITES
-        </div>
-    </div>
-
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-[150] bg-white hidden flex-col justify-center items-center gap-8 p-10 text-center">
-        <button id="close-menu" class="absolute top-8 right-8 p-3"><i data-lucide="x" class="w-10 h-10"></i></button>
-        <a href="#hard" class="text-3xl font-black h-outfit" data-t="nav-1">Hard Bricks</a>
-        <a href="#soft" class="text-3xl font-black h-outfit" data-t="nav-2">Soft Bricks</a>
-        <a href="#granite" class="text-3xl font-black h-outfit" data-t="nav-3">Granite</a>
-        <a href="#walls" class="text-3xl font-black h-outfit" data-t="nav-4">Wall Designs</a>
-        <a href="tel:9764238494" class="text-4xl font-black text-rose-600">CALL 38494</a>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 z-[150] bg-white hidden flex-col justify-center items-center gap-10 p-10 text-center">
+        <button id="close-menu" class="absolute top-8 right-8 p-3"><i data-lucide="x" class="w-12 h-12"></i></button>
+        <a href="#hard" class="text-4xl font-black h-outfit uppercase" data-t="n1">Hard Bricks</a>
+        <a href="#soft" class="text-4xl font-black h-outfit uppercase" data-t="n2">Soft Bricks</a>
+        <a href="#granite" class="text-4xl font-black h-outfit uppercase" data-t="n3">Granite</a>
+        <a href="#walls" class="text-4xl font-black h-outfit uppercase" data-t="n4">Wall Design</a>
+        <a href="tel:9764238494" class="text-5xl font-black text-rose-600 h-outfit">CALL</a>
     </div>
 
     <!-- Hero Section -->
-    <header class="relative min-h-screen flex items-center pt-24">
-        <div class="max-w-7xl mx-auto px-4 w-full grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-            <div>
-                <div class="inline-flex items-center gap-2 bg-rose-50 border border-rose-100 px-5 py-2 rounded-full mb-10" id="hero-badge">
-                    <span class="w-2.5 h-2.5 bg-rose-600 rounded-full animate-pulse"></span>
-                    <span class="text-rose-700 text-xs font-black uppercase tracking-widest" data-t="owner">Owner: B. Kumari</span>
+    <header class="relative min-h-screen flex items-center pt-24 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 w-full grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+            <div class="z-10">
+                <div class="inline-flex items-center gap-3 bg-slate-950 px-5 py-2 rounded-full mb-10 reveal-up">
+                    <span class="w-2 h-2 bg-rose-500 rounded-full animate-ping"></span>
+                    <span class="text-white text-[10px] font-black uppercase tracking-[0.2em]" data-t="owner">Proprietor: B. Kumari</span>
                 </div>
                 
-                <h1 class="text-7xl lg:text-[130px] font-black h-outfit leading-[0.85] tracking-tighter text-slate-900 mb-12" id="hero-title">
-                    <span class="kinetic-word" data-t="h-1">SUPPLY</span> <br/>
-                    <span class="kinetic-word text-rose-600" data-t="h-2">WITHOUT</span> <br/>
-                    <span class="kinetic-word" data-t="h-3">DELAY.</span>
+                <h1 class="text-7xl lg:text-[130px] font-black h-outfit leading-[0.85] tracking-tighter text-slate-900 mb-14" id="hero-title">
+                    <span class="kinetic-word" data-t="h1">ELITE</span> <br/>
+                    <span class="kinetic-word text-rose-600" data-t="h2">MASONRY</span> <br/>
+                    <span class="kinetic-word" data-t="h3">STOCK.</span>
                 </h1>
                 
-                <p class="text-slate-500 text-2xl max-w-lg mb-12 font-medium leading-relaxed reveal-up" id="hero-desc" data-t="h-desc">
-                    Official supplier for premium construction projects. We provide high-strength blocks and luxury stones across Hyderabad.
+                <p class="text-slate-500 text-2xl max-w-lg mb-14 font-medium leading-relaxed reveal-up" data-t="h-desc">
+                    Direct manufacturing and supply of high-grade cement blocks and polished granites in Hyderabad.
                 </p>
 
-                <div class="flex gap-5 reveal-up" id="hero-cta">
-                    <a href="tel:9764238494" class="bg-slate-900 text-white px-10 py-5 rounded-[2rem] font-black text-xl hover:bg-rose-600 transition shadow-2xl flex items-center gap-4">
-                        <i data-lucide="truck"></i> <span data-t="btn-order">Order Now</span>
+                <div class="flex flex-wrap gap-5 reveal-up">
+                    <a href="https://maps.app.goo.gl/LUvSYkV6Tcnc3VtN7" target="_blank" class="bg-slate-900 text-white px-10 py-5 rounded-[2rem] font-black text-xl hover:bg-rose-600 transition shadow-2xl flex items-center gap-4">
+                        <i data-lucide="map-pin"></i> <span data-t="btn-loc">Visit Yard</span>
                     </a>
                 </div>
             </div>
             
             <div class="relative flex justify-center items-center">
-                <div class="absolute -inset-10 bg-rose-50 rounded-full blur-[120px] opacity-40 -z-10"></div>
-                <div class="relative w-full max-w-lg float-slow" id="hero-img-box">
+                <div class="absolute -inset-20 bg-rose-50 rounded-full blur-[140px] opacity-50 -z-10"></div>
+                <div class="relative w-full max-w-lg float-magnetic" id="hero-magnetic-container">
                     <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121932.jpg" 
-                         class="rounded-[4rem] w-full h-[650px] object-cover shadow-2xl border-[16px] border-white" alt="Stock Yard">
+                         class="rounded-[5rem] w-full h-[650px] object-cover shadow-[0_50px_100px_-20px_rgba(0,0,0,0.25)] border-[15px] border-white" alt="KVR Stock">
+                    
+                    <div class="absolute -bottom-10 -left-10 bg-white p-8 rounded-[4rem] shadow-2xl border border-slate-50 signal-aura">
+                        <p class="text-[10px] font-black text-rose-600 uppercase tracking-widest" data-t="badge-1">Factory Direct</p>
+                        <p class="text-slate-900 text-2xl font-black leading-none" data-t="badge-2">READY STOCK</p>
+                    </div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- SECTION 1: HARD BRICKS -->
+    <!-- SECTION 1: HARD BRICKS (1219xx SERIES) -->
     <section id="hard" class="py-32 bg-slate-50">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8 reveal-up">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-24 gap-12 reveal-up">
                 <div>
-                    <span class="text-rose-600 font-black uppercase tracking-[0.5em] text-[10px]" data-t="s1-tag">High Strength Masonry</span>
+                    <span class="text-rose-600 font-black uppercase tracking-[0.5em] text-[10px]" data-t="s1-tag">High Density Construction</span>
                     <h2 class="text-6xl font-black h-outfit mt-4" data-t="s1-title">Hard Solid Bricks</h2>
                 </div>
-                <div class="max-w-xs text-slate-400 font-bold text-xs uppercase tracking-[0.3em] leading-loose" data-t="s1-desc">
-                    Tough density cement blocks for foundation and external load-bearing walls.
-                </div>
+                <p class="text-slate-400 font-bold text-sm uppercase tracking-widest leading-loose max-w-sm" data-t="s1-desc">
+                    Structural masonry blocks for heavy load-bearing foundations.
+                </p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-6">
-                <!-- Hard Bricks Assets -->
-                <div class="product-node reveal-up bg-white p-6 rounded-[3rem] border border-slate-100 shadow-sm group">
-                    <div class="aspect-square rounded-[2rem] overflow-hidden mb-6"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121914.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"></div>
-                    <p class="text-center font-black text-slate-900">6×8×12</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+                <!-- Assets: 121914, 121921, 121932, 121942, 122027 -->
+                <div class="product-node reveal-up bg-white p-8 rounded-[3.5rem] border border-slate-100 shadow-xl group">
+                    <div class="image-container aspect-square rounded-[2.5rem] mb-6">
+                        <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121914.jpg">
+                    </div>
+                    <h4 class="text-center font-black text-2xl h-outfit">6×8×12</h4>
                 </div>
-                <div class="product-node reveal-up bg-white p-6 rounded-[3rem] border border-slate-100 shadow-sm group" style="transition-delay: 0.1s;">
-                    <div class="aspect-square rounded-[2rem] overflow-hidden mb-6"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121921.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"></div>
-                    <p class="text-center font-black text-slate-900">6×6×12</p>
+                <div class="product-node reveal-up bg-white p-8 rounded-[3.5rem] border border-slate-100 shadow-xl group" style="transition-delay: 0.1s;">
+                    <div class="image-container aspect-square rounded-[2.5rem] mb-6">
+                        <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121921.jpg">
+                    </div>
+                    <h4 class="text-center font-black text-2xl h-outfit">6×6×12</h4>
                 </div>
-                <div class="product-node reveal-up bg-white p-6 rounded-[3rem] border border-slate-100 shadow-sm group" style="transition-delay: 0.2s;">
-                    <div class="aspect-square rounded-[2rem] overflow-hidden mb-6"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121932.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"></div>
-                    <p class="text-center font-black text-slate-900">4×8×16</p>
+                <div class="product-node reveal-up bg-white p-8 rounded-[3.5rem] border border-slate-100 shadow-xl group" style="transition-delay: 0.2s;">
+                    <div class="image-container aspect-square rounded-[2.5rem] mb-6">
+                        <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121932.jpg">
+                    </div>
+                    <h4 class="text-center font-black text-2xl h-outfit">4×8×16</h4>
                 </div>
-                <div class="product-node reveal-up bg-white p-6 rounded-[3rem] border border-slate-100 shadow-sm group" style="transition-delay: 0.3s;">
-                    <div class="aspect-square rounded-[2rem] overflow-hidden mb-6"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121942.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"></div>
-                    <p class="text-center font-black text-slate-400 text-[10px] uppercase font-bold tracking-widest">Yard Stock 1</p>
+                <div class="product-node reveal-up bg-white p-8 rounded-[3.5rem] border border-slate-100 shadow-xl group" style="transition-delay: 0.3s;">
+                    <div class="image-container aspect-square rounded-[2.5rem] mb-6">
+                        <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_121942.jpg">
+                    </div>
+                    <h4 class="text-center font-black text-xs uppercase tracking-widest text-slate-400">Yard Batch A</h4>
                 </div>
-                <div class="product-node reveal-up bg-white p-6 rounded-[3rem] border border-slate-100 shadow-sm group" style="transition-delay: 0.4s;">
-                    <div class="aspect-square rounded-[2rem] overflow-hidden mb-6"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122027.jpg" class="w-full h-full object-cover group-hover:scale-110 transition duration-700"></div>
-                    <p class="text-center font-black text-slate-400 text-[10px] uppercase font-bold tracking-widest">Yard Stock 2</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 2: SOFT BRICKS (1221xx SERIES) -->
-    <section id="soft" class="py-32 bg-white">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-20 reveal-up">
-                <span class="text-rose-600 font-black uppercase tracking-[0.5em] text-[10px]" data-t="s2-tag">Lightweight Innovation</span>
-                <h2 class="text-6xl font-black h-outfit mt-4" data-t="s2-title">Soft Cement Bricks</h2>
-                <p class="text-slate-400 mt-4 max-w-lg mx-auto font-medium" data-t="s2-desc">Light build blocks optimized for thermal insulation and rapid construction.</p>
-            </div>
-
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Soft Bricks Assets -->
-                <div class="product-node reveal-up rounded-[3rem] overflow-hidden h-[400px] border border-slate-100 shadow-lg">
-                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122114.jpg" class="w-full h-full object-cover">
-                </div>
-                <div class="product-node reveal-up rounded-[3rem] overflow-hidden h-[400px] border border-slate-100 shadow-lg" style="transition-delay: 0.1s;">
-                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122123.jpg" class="w-full h-full object-cover">
-                </div>
-                <div class="product-node reveal-up rounded-[3rem] overflow-hidden h-[400px] border border-slate-100 shadow-lg" style="transition-delay: 0.2s;">
-                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122106.jpg" class="w-full h-full object-cover">
-                </div>
-                <div class="product-node reveal-up rounded-[3rem] overflow-hidden h-[400px] border border-slate-100 shadow-lg" style="transition-delay: 0.3s;">
-                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122050.jpg" class="w-full h-full object-cover">
+                <div class="product-node reveal-up bg-white p-8 rounded-[3.5rem] border border-slate-100 shadow-xl group" style="transition-delay: 0.4s;">
+                    <div class="image-container aspect-square rounded-[2.5rem] mb-6">
+                        <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122027.jpg">
+                    </div>
+                    <h4 class="text-center font-black text-xs uppercase tracking-widest text-slate-400">Yard Batch B</h4>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SECTION 3: GRANITE COLLECTION (1235xx & 1238xx) -->
-    <section id="granite" class="py-32 bg-slate-950 text-white overflow-hidden relative">
-        <div class="max-w-7xl mx-auto px-4 relative z-10">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
-                <div class="reveal-up">
-                    <span class="text-rose-500 font-black uppercase tracking-[0.5em] text-[10px]" data-t="s3-tag">Premium Stone Collection</span>
-                    <h2 class="text-6xl font-black h-outfit mt-4 leading-tight" data-t="s3-title">Luxury Polished Granites</h2>
-                    <p class="text-slate-400 text-xl mt-8 mb-12" data-t="s3-desc">High-gloss, durable granite slabs for floorings and kitchen countertops.</p>
-                    
-                    <a href="tel:9764238494" class="inline-flex items-center gap-4 bg-rose-600 px-10 py-5 rounded-2xl font-black text-xl hover:bg-rose-500 transition shadow-2xl">
-                        <span data-t="s3-call">Check Availability</span> <i data-lucide="chevron-right"></i>
-                    </a>
-                </div>
-
-                <div class="grid grid-cols-2 gap-4">
-                    <!-- Granite Assets -->
-                    <div class="product-node reveal-up rounded-[2.5rem] overflow-hidden aspect-[3/4]"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123522.jpg" class="w-full h-full object-cover"></div>
-                    <div class="product-node reveal-up rounded-[2.5rem] overflow-hidden aspect-[3/4] mt-8"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123516.jpg" class="w-full h-full object-cover"></div>
-                    <div class="product-node reveal-up rounded-[2.5rem] overflow-hidden aspect-[3/4] -mt-8"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123510.jpg" class="w-full h-full object-cover"></div>
-                    <div class="product-node reveal-up rounded-[2.5rem] overflow-hidden aspect-[3/4]"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123816.jpg" class="w-full h-full object-cover"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- SECTION 4: PRE-DESIGNED WALLS (1236xx & 1235xx SITE PHOTOS) -->
-    <section id="walls" class="py-32 bg-white">
+    <!-- SECTION 2: GRANITE COLLECTION (1235xx & 1238xx) -->
+    <section id="granite" class="py-32 bg-white">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-24 reveal-up">
-                <span class="text-rose-600 font-black uppercase tracking-[0.5em] text-[10px]" data-t="s4-tag">Visual Inspiration</span>
-                <h2 class="text-6xl font-black h-outfit mt-4" data-t="s4-title">Wall Design Gallery</h2>
+                <span class="text-rose-600 font-black uppercase tracking-[0.5em] text-[10px]" data-t="s2-tag">High-End Aesthetics</span>
+                <h2 class="text-6xl font-black h-outfit mt-4" data-t="s2-title">Polished Granite Collection</h2>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-                <!-- Wall Designs Assets -->
-                <div class="product-node reveal-up rounded-[4rem] overflow-hidden h-[500px] relative group signal-pulse">
-                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123600.jpg" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span class="px-8 py-3 bg-white text-slate-900 font-black rounded-full shadow-2xl">Pattern 1</span>
-                    </div>
+            <div class="grid grid-cols-2 lg:grid-cols-3 gap-10">
+                <!-- Assets: 20260125-123522.jpg, 20260125_123516.jpg, 20260125 123510.jpg, 20260125_123504.jpg, 20260125 123816.jpg, 20260125_123820.jpg -->
+                <div class="product-node reveal-up image-container rounded-[3rem] h-[450px]">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125-123522.jpg">
                 </div>
-                <div class="product-node reveal-up rounded-[4rem] overflow-hidden h-[500px] relative group signal-pulse" style="transition-delay: 0.2s;">
-                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123602.jpg" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span class="px-8 py-3 bg-white text-slate-900 font-black rounded-full shadow-2xl">Pattern 2</span>
-                    </div>
+                <div class="product-node reveal-up image-container rounded-[3rem] h-[450px]">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123516.jpg">
                 </div>
-                <div class="product-node reveal-up rounded-[4rem] overflow-hidden h-[500px] relative group signal-pulse" style="transition-delay: 0.3s;">
-                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123537.jpg" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span class="px-8 py-3 bg-white text-slate-900 font-black rounded-full shadow-2xl">Site Implementation</span>
-                    </div>
+                <div class="product-node reveal-up image-container rounded-[3rem] h-[450px]">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125%20123510.jpg">
                 </div>
-                <div class="product-node reveal-up rounded-[4rem] overflow-hidden h-[500px] relative group signal-pulse" style="transition-delay: 0.4s;">
-                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123526.jpg" class="w-full h-full object-cover">
-                    <div class="absolute inset-0 bg-black/30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                        <span class="px-8 py-3 bg-white text-slate-900 font-black rounded-full shadow-2xl">Site View</span>
-                    </div>
+                <div class="product-node reveal-up image-container rounded-[3rem] h-[450px]">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123504.jpg">
+                </div>
+                <div class="product-node reveal-up image-container rounded-[3rem] h-[450px]">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125%20123816.jpg">
+                </div>
+                <div class="product-node reveal-up image-container rounded-[3rem] h-[450px]">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123820.jpg">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Map & Contact Footer -->
+    <!-- SECTION 3: PRE-DESIGNED WALLS (1236xx SITE PHOTOS) -->
+    <section id="walls" class="py-32 bg-slate-950 text-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+                <div class="reveal-up">
+                    <h2 class="text-6xl lg:text-9xl font-black h-outfit leading-none mb-12 uppercase" data-t="s3-title">Wall <br/><span class="text-rose-600">Assets</span></h2>
+                    <p class="text-slate-400 text-2xl font-medium leading-relaxed mb-12" data-t="s3-desc">Architectural examples of our bricks applied in modern wall designs and real construction sites.</p>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-6 reveal-up">
+                    <!-- Assets: 20260125_123600.jpg, 20260125_123602.jpg, 20260125_123537.jpg, 20260125_123526.jpg -->
+                    <div class="image-container rounded-[2.5rem] h-[350px]"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123600.jpg"></div>
+                    <div class="image-container rounded-[2.5rem] h-[350px] mt-12"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123602.jpg"></div>
+                    <div class="image-container rounded-[2.5rem] h-[350px] -mt-12"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123537.jpg"></div>
+                    <div class="image-container rounded-[2.5rem] h-[350px]"><img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_123526.jpg"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: SOFT BRICKS (1221xx SERIES) -->
+    <section id="soft" class="py-32 bg-white">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-24 reveal-up">
+                <span class="text-rose-600 font-black uppercase tracking-[0.5em] text-[10px]" data-t="s4-tag">Thermal Efficient</span>
+                <h2 class="text-6xl font-black h-outfit mt-4" data-t="s4-title">Soft Lightweight Bricks</h2>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+                <!-- Assets: 20260125_122114, 20260125_122123, 20260125_122106, 20260125_122050 -->
+                <div class="product-node reveal-up image-container rounded-[3rem] h-[400px] border border-slate-100 shadow-xl">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122114.jpg">
+                </div>
+                <div class="product-node reveal-up image-container rounded-[3rem] h-[400px] border border-slate-100 shadow-xl">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122123.jpg">
+                </div>
+                <div class="product-node reveal-up image-container rounded-[3rem] h-[400px] border border-slate-100 shadow-xl">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122106.jpg">
+                </div>
+                <div class="product-node reveal-up image-container rounded-[3rem] h-[400px] border border-slate-100 shadow-xl">
+                    <img src="https://raw.githubusercontent.com/vengababu-X/kvr-blocks-/main/Assets/20260125_122050.jpg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 reveal-up text-center">
+            <h3 class="text-3xl font-black mb-10 h-outfit uppercase">Visit Our Cherlapalli Facility</h3>
+            <div class="rounded-[4rem] overflow-hidden h-[500px] shadow-2xl border-8 border-white">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3806.5050518711463!2d78.608381!3d17.435552!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMTfCsDI2JzA4LjAiTiA3OMKwMzYnMzAuMiJF!5e0!3m2!1sen!2sin!4v1700000000000" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer class="bg-slate-950 text-white pt-32 pb-16 relative overflow-hidden">
         <div class="max-w-7xl mx-auto px-4">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-24 mb-32">
                 <div class="reveal-up">
-                    <span class="kvr-logo-draw text-7xl font-black">K<span class="text-rose-600">V</span>R</span>
-                    <p class="mt-10 text-slate-500 font-medium text-lg leading-relaxed" data-t="f-desc">Leading manufacturer of high-density cement bricks and premium granites in Hyderabad.</p>
+                    <span class="kvr-logo-text text-7xl font-black">K<span class="text-rose-600">V</span>R</span>
+                    <p class="mt-10 text-slate-500 font-medium text-lg leading-relaxed" data-t="f-desc">Leading provider of high-strength masonry and luxury stones. Dedicated to quality dispatch across Hyderabad.</p>
                 </div>
                 
                 <div class="reveal-up" style="transition-delay: 0.2s;">
-                    <h4 class="text-xs font-black uppercase tracking-[0.4em] text-rose-500 mb-10" data-t="f-info">Direct Contact</h4>
+                    <h4 class="text-rose-600 font-black uppercase tracking-[0.4em] text-[10px] mb-10" data-t="f-info">Contact Hub</h4>
                     <div class="space-y-8">
                         <div class="flex items-center gap-6">
-                            <div class="h-16 w-16 bg-slate-900 border border-slate-800 rounded-3xl flex items-center justify-center text-rose-500 shadow-2xl"><i data-lucide="user"></i></div>
+                            <div class="h-16 w-16 bg-slate-900 border border-slate-800 rounded-3xl flex items-center justify-center text-rose-600 shadow-2xl"><i data-lucide="user"></i></div>
                             <div>
                                 <p class="text-slate-600 text-[10px] font-black uppercase tracking-widest">Proprietor</p>
-                                <p class="text-2xl font-black tracking-tighter uppercase">B. Kumari</p>
+                                <p class="text-2xl font-black tracking-tighter uppercase h-outfit">B. Kumari</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-6">
-                            <div class="h-16 w-16 bg-slate-900 border border-slate-800 rounded-3xl flex items-center justify-center text-rose-500 shadow-2xl"><i data-lucide="map-pin"></i></div>
+                            <div class="h-16 w-16 bg-slate-900 border border-slate-800 rounded-3xl flex items-center justify-center text-rose-600 shadow-2xl"><i data-lucide="map-pin"></i></div>
                             <div>
                                 <p class="text-slate-600 text-[10px] font-black uppercase tracking-widest">Location</p>
-                                <p class="text-2xl font-black tracking-tighter uppercase" data-t="f-city">Cherlapalli, Hyd</p>
+                                <p class="text-2xl font-black tracking-tighter uppercase h-outfit" data-t="f-city">Cherlapalli, Hyd</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="reveal-up" style="transition-delay: 0.4s;">
-                    <div class="bg-slate-900 p-10 rounded-[4rem] border border-slate-800 backdrop-blur-xl text-center">
-                        <h4 class="text-2xl font-black h-outfit mb-8" data-t="f-cta">Visit or Order</h4>
-                        <a href="https://maps.app.goo.gl/LUvSYkV6Tcnc3VtN7" target="_blank" class="block w-full py-5 bg-white text-slate-950 rounded-2xl font-black text-xl mb-4 hover:bg-slate-200 transition">Open Google Maps</a>
-                        <a href="tel:9764238494" class="block w-full py-5 bg-rose-600 rounded-2xl font-black text-xl hover:bg-rose-500 transition shadow-2xl">Call 97642 38494</a>
+                    <div class="bg-slate-900 p-12 rounded-[4.5rem] border border-slate-800 text-center">
+                        <h4 class="text-2xl font-black h-outfit mb-8" data-t="f-cta">Instant Dispatch</h4>
+                        <a href="tel:9764238494" class="block w-full py-6 bg-rose-600 rounded-[2.5rem] font-black text-3xl hover:bg-white hover:text-slate-900 transition-all shadow-[0_20px_50px_-10px_rgba(225,29,72,0.4)]">97642 38494</a>
+                        <p class="mt-8 text-slate-500 text-xs font-bold uppercase tracking-widest" data-t="f-days">Open 24/7 For Orders</p>
                     </div>
                 </div>
             </div>
 
-            <div class="pt-12 border-t border-slate-900 text-center flex flex-col md:flex-row justify-between items-center gap-8">
-                <p class="text-slate-600 font-bold uppercase text-[9px] tracking-[0.5em]" data-t="f-copy">© 2026 KVR BRICKS & GRANITES. ALL RIGHTS RESERVED.</p>
-                <div class="flex gap-12">
-                    <a href="#" class="text-slate-600 hover:text-white transition"><i data-lucide="instagram"></i></a>
+            <div class="pt-12 border-t border-slate-900 text-center flex flex-col md:flex-row justify-between items-center gap-6">
+                <p class="text-slate-700 font-bold uppercase text-[9px] tracking-[0.5em]" data-t="f-copy">© 2026 KVR BRICKS & GRANITES. ALL RIGHTS RESERVED.</p>
+                <div class="flex gap-10">
                     <a href="https://wa.me/919764238494" class="text-slate-600 hover:text-white transition"><i data-lucide="message-circle"></i></a>
+                    <a href="https://maps.app.goo.gl/LUvSYkV6Tcnc3VtN7" class="text-slate-600 hover:text-white transition"><i data-lucide="map"></i></a>
                 </div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Language Dictionary
-        const dict = {
+        // Multilingual Logic
+        const i18n = {
             en: {
                 "loc": "Cherlapalli, Hyderabad",
-                "nav-1": "Hard Bricks",
-                "nav-2": "Soft Bricks",
-                "nav-3": "Granite",
-                "nav-4": "Wall Designs",
-                "owner": "Owner: B. Kumari",
-                "h-1": "SUPPLY",
-                "h-2": "WITHOUT",
-                "h-3": "DELAY.",
-                "h-desc": "Official supplier for premium construction projects. We provide high-strength blocks and luxury stones across Hyderabad.",
-                "btn-order": "Order Now",
-                "s1-tag": "High Strength Masonry",
-                "s1-title": "Hard Solid Bricks",
-                "s1-desc": "Tough density cement blocks for foundation and external load-bearing walls.",
-                "s2-tag": "Lightweight Innovation",
-                "s2-title": "Soft Cement Bricks",
-                "s2-desc": "Light build blocks optimized for thermal insulation and rapid construction.",
-                "s3-tag": "Premium Stone Collection",
-                "s3-title": "Luxury Polished Granites",
-                "s3-desc": "High-gloss, durable granite slabs for floorings and kitchen countertops.",
-                "s3-call": "Check Availability",
-                "s4-tag": "Visual Inspiration",
-                "s4-title": "Wall Design Gallery",
-                "f-desc": "Leading manufacturer of high-density cement bricks and premium granites in Hyderabad.",
-                "f-info": "Direct Contact",
-                "f-city": "Cherlapalli, Hyd",
-                "f-cta": "Visit or Order",
+                "owner": "Proprietor: B. Kumari",
+                "h1": "ELITE", "h2": "MASONRY", "h3": "SUPPLY.",
+                "h-desc": "Direct manufacturing and supply of high-grade cement blocks and polished granites in Hyderabad.",
+                "btn-loc": "Visit Yard",
+                "badge-1": "Factory Direct", "badge-2": "READY STOCK",
+                "s1-tag": "High Density Construction", "s1-title": "Hard Solid Bricks",
+                "s1-desc": "Structural masonry blocks for heavy load-bearing foundations.",
+                "s2-tag": "High-End Aesthetics", "s2-title": "Polished Granite Collection",
+                "s3-title": "Wall Assets", "s3-desc": "Architectural examples of our bricks applied in modern wall designs.",
+                "s4-tag": "Thermal Efficient", "s4-title": "Soft Lightweight Bricks",
+                "f-desc": "Leading provider of high-strength masonry and luxury stones. Dedicated to quality dispatch across Hyderabad.",
+                "f-info": "Contact Hub", "f-city": "Cherlapalli, Hyd", "f-cta": "Instant Dispatch", "f-days": "Open 24/7 For Orders",
                 "f-copy": "© 2026 KVR BRICKS & GRANITES. ALL RIGHTS RESERVED."
             },
             te: {
                 "loc": "చెర్లపల్లి, హైదరాబాద్",
-                "nav-1": "హార్డ్ ఇటుకలు",
-                "nav-2": "సాఫ్ట్ ఇటుకలు",
-                "nav-3": "గ్రానైట్",
-                "nav-4": "గోడలు",
                 "owner": "యజమాని: బి. కుమారి",
-                "h-1": "వేగవంతమైన",
-                "h-2": "సరఫరా",
-                "h-3": "మరియు బలం.",
-                "h-desc": "ప్రీమియం నిర్మాణ ప్రాజెక్టుల అధికారిక సరఫరాదారు. మేము హైదరాబాద్ అంతటా అధిక బలం గల బ్లాక్స్ మరియు లగ్జరీ రాళ్లను అందిస్తాము.",
-                "btn-order": "ఇప్పుడే ఆర్డర్ చేయండి",
-                "s1-tag": "అధిక బలం గల మేసనరీ",
-                "s1-title": "హార్డ్ సాలిడ్ ఇటుకలు",
-                "s1-desc": "పునాదులు మరియు బాహ్య గోడల కోసం కఠినమైన సాంద్రత కలిగిన సిమెంట్ బ్లాక్స్.",
-                "s2-tag": "లైట్ వెయిట్ ఇన్నోవేషన్",
-                "s2-title": "సాఫ్ట్ సిమెంట్ ఇటుకలు",
-                "s2-desc": "వేగవంతమైన నిర్మాణం కోసం రూపొందించబడిన తేలికపాటి బ్లాక్స్.",
-                "s3-tag": "ప్రీమియం స్టోన్ కలెక్షన్",
-                "s3-title": "లగ్జరీ పాలిష్ గ్రానైట్స్",
-                "s3-desc": "ఫ్లోరింగ్ మరియు కిచెన్ కౌంటర్‌టాప్‌ల కోసం మన్నికైన గ్రానైట్ స్లాబ్‌లు.",
-                "s3-call": "స్టాక్ వివరాలు",
-                "s4-tag": "నిర్మాణ స్ఫూర్తి",
-                "s4-title": "వాల్ డిజైన్ గ్యాలరీ",
-                "f-desc": "హైదరాబాద్‌లో అధిక సాంద్రత గల సిమెంట్ ఇటుకలు మరియు గ్రానైట్ల అగ్రగామి తయారీదారు.",
-                "f-info": "నేరుగా సంప్రదించండి",
-                "f-city": "చెర్లపల్లి, హైద్రాబాద్",
-                "f-cta": "సందర్శించండి లేదా ఆర్డర్ చేయండి",
+                "h1": "ఎలైట్", "h2": "మేసనరీ", "h3": "సప్లై.",
+                "h-desc": "హైదరాబాద్‌లో హై-గ్రేడ్ సిమెంట్ బ్లాక్స్ మరియు పాలిష్ చేసిన గ్రానైట్ల తయారీ మరియు సరఫరా.",
+                "btn-loc": "యార్డ్ సందర్శించండి",
+                "badge-1": "ఫ్యాక్టరీ డైరెక్ట్", "badge-2": "స్టాక్ సిద్ధంగా ఉంది",
+                "s1-tag": "హై డెన్సిటీ నిర్మాణం", "s1-title": "హార్డ్ సాలిడ్ ఇటుకలు",
+                "s1-desc": "భారీ లోడ్ మోసే పునాదుల కోసం నిర్మాణ బ్లాకులు.",
+                "s2-tag": "హై-ఎండ్ అలంకరణ", "s2-title": "పాలిష్ చేసిన గ్రానైట్ సేకరణ",
+                "s3-title": "వాల్ డిజైన్లు", "s3-desc": "గోడ డిజైన్లలో మా ఇటుకల ఉపయోగం యొక్క నిర్మాణ ఉదాహరణలు.",
+                "s4-tag": "థర్మల్ ఎఫిషియంట్", "s4-title": "సాఫ్ట్ లైట్ వెయిట్ ఇటుకలు",
+                "f-desc": "హై-స్ట్రెంత్ మేసనరీ మరియు లగ్జరీ స్టోన్స్ సరఫరాదారు. హైదరాబాద్ అంతటా నాణ్యమైన సేవలు.",
+                "f-info": "సంప్రదింపు కేంద్రం", "f-city": "చెర్లపల్లి, హైద్రాబాద్", "f-cta": "తక్షణ సరఫరా", "f-days": "ఆర్డర్ల కోసం 24/7 తెరిచి ఉంటుంది",
                 "f-copy": "© 2026 KVR ఇటుకలు & గ్రానైట్స్. అన్ని హక్కులు ప్రత్యేకించబడ్డాయి."
             }
         };
 
-        let currentLang = 'en';
-
-        function toggleLang() {
-            currentLang = currentLang === 'en' ? 'te' : 'en';
+        let lang = 'en';
+        function updateLang() {
+            lang = lang === 'en' ? 'te' : 'en';
             document.querySelectorAll('[data-t]').forEach(el => {
                 const key = el.getAttribute('data-t');
-                if (dict[currentLang][key]) el.textContent = dict[currentLang][key];
+                if (i18n[lang][key]) el.textContent = i18n[lang][key];
             });
-            document.getElementById('lang-text').textContent = currentLang === 'en' ? 'తెలుగు' : 'English';
-            
-            gsap.from(".kinetic-word", {
-                opacity: 0,
-                y: 50,
-                stagger: 0.1,
-                duration: 1,
-                ease: "power4.out"
-            });
+            document.getElementById('lang-label').textContent = lang === 'en' ? 'తెలుగు' : 'English';
+            gsap.from(".kinetic-word", { opacity: 0, y: 50, stagger: 0.1, duration: 1, ease: "power4.out" });
         }
+        document.getElementById('lang-toggle').addEventListener('click', updateLang);
 
-        document.getElementById('lang-btn').addEventListener('click', toggleLang);
-
-        // --- ANIMATION ENGINE ---
+        // --- GSAP ANIMATION ENGINE ---
         window.addEventListener('load', () => {
             gsap.registerPlugin(ScrollTrigger);
 
-            // Kinetic Title Entrance
+            // Intro kinetic typography
             const tl = gsap.timeline();
-            tl.to(".kinetic-word", {
-                opacity: 1,
-                y: 0,
-                rotate: 0,
-                stagger: 0.15,
-                duration: 1.5,
-                ease: "power4.out"
-            })
-            .to("#hero-desc", { opacity: 1, y: 0, duration: 1 }, "-=1")
-            .to("#hero-cta", { opacity: 1, y: 0, duration: 1 }, "-=0.8");
+            tl.to(".kinetic-word", { opacity: 1, y: 0, rotate: 0, filter: "blur(0px)", stagger: 0.15, duration: 1.5, ease: "power4.out" })
+              .to("#hero-desc, #hero-cta", { opacity: 1, y: 0, duration: 1 }, "-=1");
+
+            // Magnetic Hero Image
+            document.addEventListener('mousemove', (e) => {
+                const container = document.getElementById('hero-magnetic-container');
+                const x = (e.clientX - window.innerWidth / 2) / 35;
+                const y = (e.clientY - window.innerHeight / 2) / 35;
+                gsap.to(container, { x: x, y: y, rotationY: x/2, rotationX: -y/2, duration: 0.8 });
+            });
 
             // Section reveals
             document.querySelectorAll('.reveal-up').forEach(el => {
-                gsap.from(el, {
-                    scrollTrigger: {
-                        trigger: el,
-                        start: "top 90%",
-                        toggleActions: "play none none reverse"
-                    },
-                    opacity: 0,
-                    y: 60,
-                    duration: 1.2,
-                    ease: "power3.out"
-                });
-            });
-
-            // Reactive Mouse Cursor Parallax
-            document.addEventListener('mousemove', (e) => {
-                const x = (window.innerWidth / 2 - e.clientX) / 40;
-                const y = (window.innerHeight / 2 - e.clientY) / 40;
-                gsap.to("#hero-img-box", { rotationY: x, rotationX: -y, duration: 0.5 });
+                gsap.from(el, { scrollTrigger: { trigger: el, start: "top 90%" }, opacity: 0, y: 60, duration: 1.2, ease: "power3.out" });
             });
         });
 
-        // Mobile Menu
-        const menuBtn = document.getElementById('menu-btn');
-        const closeMenu = document.getElementById('close-menu');
-        const mobileMenu = document.getElementById('mobile-menu');
-
+        // Menu Toggle
+        const menuBtn = document.getElementById('menu-btn'), closeMenu = document.getElementById('close-menu'), mobileMenu = document.getElementById('mobile-menu');
         menuBtn.onclick = () => { mobileMenu.classList.remove('hidden'); mobileMenu.classList.add('flex'); };
         closeMenu.onclick = () => { mobileMenu.classList.add('hidden'); };
 
