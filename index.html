@@ -27,101 +27,139 @@
 <body class="bg-slate-50 text-slate-800">
 
 <!-- NAVBAR -->
-<nav class="bg-slate-900 text-white sticky top-0 z-50">
+<nav class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
   <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
     <div class="flex items-center space-x-2">
-      <i data-lucide="layers" class="text-orange-500"></i>
-      <span class="font-bold text-lg">KVR Bricks</span>
+      <i data-lucide="layers" class="text-orange-500 w-8 h-8"></i>
+      <span class="font-bold text-xl tracking-tight">KVR Bricks</span>
     </div>
 
-    <div class="hidden md:flex space-x-6 items-center">
-      <a href="#products" class="hover:text-orange-400 transition">Products</a>
+    <div class="hidden md:flex space-x-8 items-center text-sm font-medium">
+      <a href="#products" class="hover:text-orange-400 transition">Solid Blocks</a>
       <a href="#gallery" class="hover:text-orange-400 transition">Gallery</a>
-      <a href="tel:9764238394" class="bg-orange-600 hover:bg-orange-700 px-4 py-2 rounded font-bold transition flex items-center">
+      <a href="tel:9764238394" class="bg-orange-600 hover:bg-orange-700 px-5 py-2.5 rounded-lg font-bold transition flex items-center shadow-lg shadow-orange-900/20">
         <i data-lucide="phone" class="w-4 h-4 mr-2"></i> 9764238394
       </a>
     </div>
 
     <!-- Mobile Menu Button (Simple) -->
     <div class="md:hidden">
-        <a href="tel:9764238394" class="bg-orange-600 px-3 py-2 rounded text-sm font-bold">Call Now</a>
+        <a href="tel:9764238394" class="bg-orange-600 px-4 py-2 rounded-lg text-sm font-bold shadow-lg">Call Now</a>
     </div>
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="bg-slate-900 text-white py-20 text-center relative overflow-hidden">
-  <div class="max-w-4xl mx-auto px-4 relative z-10">
-      <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-        Solid Cement Bricks<br>
-        <span class="text-orange-500">Direct From Manufacturer</span>
-      </h1>
-      <p class="text-slate-300 text-lg md:text-xl max-w-2xl mx-auto mb-8">
-        Quality Solid Blocks in Hyderabad. <br>Ready Stock. Best Market Prices.
-      </p>
+<!-- NEW SPLIT HERO SECTION -->
+<section class="bg-slate-900 relative">
+  <div class="grid md:grid-cols-2 min-h-[600px]">
+    
+    <!-- Left Side: Static Content -->
+    <div class="flex flex-col justify-center p-8 md:p-16 lg:p-20 z-10 order-2 md:order-1">
+        <div class="max-w-lg">
+            <span class="inline-flex items-center px-3 py-1 rounded-full bg-orange-500/10 border border-orange-500/20 text-orange-400 text-sm font-semibold mb-6">
+                <span class="flex h-2 w-2 rounded-full bg-orange-500 mr-2 animate-pulse"></span>
+                Direct From Manufacturer
+            </span>
+            
+            <h1 class="text-4xl md:text-6xl font-extrabold text-white mb-6 leading-tight">
+                Solid Cement <br>
+                <span class="text-orange-500">Blocks</span>
+            </h1>
+            
+            <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+                Premium quality, high-strength solid blocks for all construction needs. Manufactured in Cherlapalli, Hyderabad with ready stock available.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+                <a href="tel:9764238394" class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition flex items-center justify-center shadow-lg shadow-orange-900/20">
+                    <i data-lucide="phone-call" class="w-5 h-5 mr-2"></i> Call Now
+                </a>
+                <a href="https://wa.me/919764238394" target="_blank" class="bg-slate-800 hover:bg-slate-700 text-white px-8 py-4 rounded-xl font-bold text-lg transition flex items-center justify-center border border-slate-700">
+                    <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i> WhatsApp
+                </a>
+            </div>
 
-      <div class="flex flex-col sm:flex-row justify-center gap-4">
-        <a href="tel:9764238394"
-           class="bg-orange-600 hover:bg-orange-700 text-white px-8 py-4 rounded-lg font-bold text-lg transition flex items-center justify-center">
-           <i data-lucide="phone-call" class="w-5 h-5 mr-2"></i> Call Now
-        </a>
-        <a href="https://wa.me/919764238394"
-           target="_blank"
-           class="bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg font-bold text-lg transition flex items-center justify-center">
-           <i data-lucide="message-circle" class="w-5 h-5 mr-2"></i> WhatsApp
-        </a>
-      </div>
+            <div class="mt-10 flex items-center text-slate-500 text-sm font-medium">
+                <div class="flex -space-x-2 mr-4">
+                   <!-- Placeholder avatars to simulate "Trusted by" feel -->
+                   <div class="w-8 h-8 rounded-full bg-slate-700 border-2 border-slate-900"></div>
+                   <div class="w-8 h-8 rounded-full bg-slate-600 border-2 border-slate-900"></div>
+                   <div class="w-8 h-8 rounded-full bg-slate-500 border-2 border-slate-900"></div>
+                </div>
+                <p>Trusted by Builders in Hyderabad</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Side: Photo (One Side Only) -->
+    <div class="relative h-[300px] md:h-auto order-1 md:order-2 bg-slate-800">
+        <!-- Main Hero Image -->
+        <img src="1000233259.jpg" alt="KVR Bricks Stock Pile" class="absolute inset-0 w-full h-full object-cover">
+        
+        <!-- Gradient overlay to blend with left side on smaller screens or just for style -->
+        <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-slate-900/90 via-slate-900/20 to-transparent md:via-transparent"></div>
+    </div>
   </div>
 </section>
 
 <!-- PRODUCTS & PRICING -->
-<section id="products" class="py-16 bg-white">
+<section id="products" class="py-20 bg-white">
   <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-bold mb-10 text-center">Our Solid Cement Bricks</h2>
+    <div class="text-center mb-16">
+        <span class="text-orange-600 font-bold tracking-wider uppercase text-sm">Category 1</span>
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2">Solid Cement Blocks</h2>
+        <p class="mt-4 text-slate-600 max-w-2xl mx-auto">Our primary product line. High density blocks designed for load-bearing and partition walls.</p>
+    </div>
 
     <div class="grid md:grid-cols-3 gap-8">
       
       <!-- Product 1: 6x8x12 -->
-      <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+      <div class="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
         <div class="h-64 overflow-hidden relative">
-            <img src="1000233258.jpg" alt="6x8x12 Solid Cement Brick" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-            <div class="absolute top-0 right-0 bg-slate-900 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">CALL FOR PRICE</div>
+            <img src="1000233258.jpg" alt="6x8x12 Solid Cement Brick" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur text-slate-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">CALL FOR PRICE</div>
         </div>
         <div class="p-6 flex-grow flex flex-col">
-            <h3 class="text-2xl font-bold text-slate-900 mb-2">6" × 8" × 12" Solid Block</h3>
-            <p class="text-slate-600 mb-4 flex-grow">Heavy duty block. Excellent for main load-bearing walls.</p>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">6" × 8" × 12" Solid Block</h3>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Heavy duty block. Excellent for main load-bearing walls. High durability.</p>
             <div class="mt-auto">
-                <a href="https://wa.me/919764238394?text=Interested in 6x8x12 bricks" class="block w-full text-center bg-orange-600 text-white py-3 rounded-lg font-bold hover:bg-orange-700 transition">Get Best Price</a>
+                <a href="https://wa.me/919764238394?text=Interested in 6x8x12 bricks" class="block w-full text-center bg-white border-2 border-slate-200 text-slate-900 py-3 rounded-xl font-bold hover:border-orange-600 hover:text-orange-600 transition-colors">
+                    Get Best Price
+                </a>
             </div>
         </div>
       </div>
 
       <!-- Product 2: 6x6x12 -->
-      <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+      <div class="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
         <div class="h-64 overflow-hidden relative">
-            <img src="1000233248.jpg" alt="6x6x12 Solid Cement Brick" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-            <div class="absolute top-0 right-0 bg-slate-900 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">CALL FOR PRICE</div>
+            <img src="1000233248.jpg" alt="6x6x12 Solid Cement Brick" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur text-slate-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">CALL FOR PRICE</div>
         </div>
         <div class="p-6 flex-grow flex flex-col">
-            <h3 class="text-2xl font-bold text-slate-900 mb-2">6" × 6" × 12" Solid Block</h3>
-            <p class="text-slate-600 mb-4 flex-grow">Standard size. Perfect balance of strength and cost.</p>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">6" × 6" × 12" Solid Block</h3>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Standard size. Perfect balance of strength and cost efficiency.</p>
             <div class="mt-auto">
-                <a href="https://wa.me/919764238394?text=Interested in 6x6x12 bricks" class="block w-full text-center bg-orange-600 text-white py-3 rounded-lg font-bold hover:bg-orange-700 transition">Get Best Price</a>
+                <a href="https://wa.me/919764238394?text=Interested in 6x6x12 bricks" class="block w-full text-center bg-white border-2 border-slate-200 text-slate-900 py-3 rounded-xl font-bold hover:border-orange-600 hover:text-orange-600 transition-colors">
+                    Get Best Price
+                </a>
             </div>
         </div>
       </div>
 
       <!-- Product 3: 4x8x16 -->
-      <div class="bg-slate-50 border border-slate-200 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition flex flex-col">
+      <div class="group bg-slate-50 border border-slate-200 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
         <div class="h-64 overflow-hidden relative">
-            <img src="1000233262.jpg" alt="4x8x16 Solid Cement Block" class="w-full h-full object-cover hover:scale-105 transition duration-500">
-            <div class="absolute top-0 right-0 bg-slate-900 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">CALL FOR PRICE</div>
+            <img src="1000233262.jpg" alt="4x8x16 Solid Cement Block" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur text-slate-900 text-xs font-bold px-3 py-1.5 rounded-full shadow-sm">CALL FOR PRICE</div>
         </div>
         <div class="p-6 flex-grow flex flex-col">
-            <h3 class="text-2xl font-bold text-slate-900 mb-2">4" × 8" × 16" Solid Block</h3>
-            <p class="text-slate-600 mb-4 flex-grow">Large surface area. Best for compound walls and partitions.</p>
+            <h3 class="text-xl font-bold text-slate-900 mb-2">4" × 8" × 16" Solid Block</h3>
+            <p class="text-slate-600 text-sm mb-6 flex-grow leading-relaxed">Large surface area. Best for compound walls and fast partitions.</p>
             <div class="mt-auto">
-                <a href="https://wa.me/919764238394?text=Interested in 4x8x16 bricks" class="block w-full text-center bg-orange-600 text-white py-3 rounded-lg font-bold hover:bg-orange-700 transition">Get Best Price</a>
+                <a href="https://wa.me/919764238394?text=Interested in 4x8x16 bricks" class="block w-full text-center bg-white border-2 border-slate-200 text-slate-900 py-3 rounded-xl font-bold hover:border-orange-600 hover:text-orange-600 transition-colors">
+                    Get Best Price
+                </a>
             </div>
         </div>
       </div>
@@ -131,31 +169,41 @@
 </section>
 
 <!-- GALLERY -->
-<section id="gallery" class="py-16 bg-slate-100">
+<section id="gallery" class="py-20 bg-slate-50">
   <div class="max-w-7xl mx-auto px-4">
-    <h2 class="text-3xl font-bold text-center mb-4">
-      Stock Gallery
-    </h2>
-    <p class="text-center text-slate-600 mb-10">
-      Current stock available at our Cherlapalli site.
-    </p>
+    <div class="flex flex-col md:flex-row justify-between items-end mb-10">
+        <div>
+            <h2 class="text-3xl font-bold text-slate-900">Stock Gallery</h2>
+            <p class="text-slate-600 mt-2">Real photos from our manufacturing site.</p>
+        </div>
+        <!-- Placeholder for potential filter buttons if categories added later -->
+    </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
 
-      <div class="aspect-square overflow-hidden rounded-xl shadow-md bg-white group relative">
-        <img src="1000233259.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover hover:scale-110 transition duration-500">
-        <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs p-2 text-center opacity-0 group-hover:opacity-100 transition">Quality Check</div>
+      <!-- Large item -->
+      <div class="col-span-2 row-span-2 rounded-2xl overflow-hidden relative group">
+        <img src="1000233259.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+            <span class="text-white font-medium">Large Stock Available</span>
+        </div>
       </div>
 
-      <div class="aspect-square overflow-hidden rounded-xl shadow-md bg-white group relative">
-        <img src="1000233250.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover hover:scale-110 transition duration-500">
-        <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs p-2 text-center opacity-0 group-hover:opacity-100 transition">Ready for Load</div>
+      <!-- Standard items -->
+      <div class="rounded-2xl overflow-hidden relative group">
+        <img src="1000233250.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
       </div>
       
-       <!-- Re-using one image to fill the grid nicely for now -->
-      <div class="aspect-square overflow-hidden rounded-xl shadow-md bg-white group relative">
-        <img src="1000233258.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover hover:scale-110 transition duration-500">
-        <div class="absolute bottom-0 left-0 right-0 bg-black/60 text-white text-xs p-2 text-center opacity-0 group-hover:opacity-100 transition">Solid Edges</div>
+      <div class="rounded-2xl overflow-hidden relative group">
+        <img src="1000233258.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+      </div>
+
+       <div class="rounded-2xl overflow-hidden relative group">
+        <img src="1000233248.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+      </div>
+
+       <div class="rounded-2xl overflow-hidden relative group">
+        <img src="1000233262.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
       </div>
 
     </div>
@@ -163,21 +211,23 @@
 </section>
 
 <!-- CONTACT -->
-<footer id="contact" class="bg-slate-900 text-white py-12 border-t border-slate-800">
+<footer id="contact" class="bg-slate-900 text-white py-16 border-t border-slate-800">
   <div class="max-w-6xl mx-auto px-4 text-center">
-    <h2 class="text-2xl font-bold mb-6">Contact KVR Bricks</h2>
+    <div class="inline-flex items-center justify-center p-3 bg-slate-800 rounded-full mb-6">
+        <i data-lucide="layers" class="text-orange-500 w-8 h-8"></i>
+    </div>
+    <h2 class="text-3xl font-bold mb-8">Contact KVR Bricks</h2>
 
-    <div class="flex flex-col md:flex-row justify-center gap-6 mb-8 text-slate-300">
-        <p class="flex items-center justify-center"><i data-lucide="map-pin" class="w-5 h-5 mr-2 text-orange-500"></i> Cherlapalli, Hyderabad</p>
-        <p class="flex items-center justify-center"><i data-lucide="phone" class="w-5 h-5 mr-2 text-orange-500"></i> <a href="tel:9764238394" class="hover:text-white">9764238394</a></p>
-        <p class="flex items-center justify-center"><i data-lucide="clock" class="w-5 h-5 mr-2 text-orange-500"></i> Open All Days</p>
+    <div class="flex flex-col md:flex-row justify-center gap-8 mb-12 text-slate-300 text-lg">
+        <p class="flex items-center justify-center"><i data-lucide="map-pin" class="w-6 h-6 mr-3 text-orange-500"></i> Cherlapalli, Hyderabad</p>
+        <p class="flex items-center justify-center"><i data-lucide="phone" class="w-6 h-6 mr-3 text-orange-500"></i> <a href="tel:9764238394" class="hover:text-white transition">9764238394</a></p>
     </div>
 
-    <a href="tel:9764238394" class="inline-block bg-white text-slate-900 px-6 py-2 rounded-full font-bold hover:bg-slate-200 transition">
+    <a href="tel:9764238394" class="inline-block bg-white text-slate-900 px-8 py-3 rounded-full font-bold hover:bg-slate-200 transition shadow-lg shadow-white/10">
         Call Now
     </a>
 
-    <p class="text-slate-500 text-sm mt-10">
+    <p class="text-slate-500 text-sm mt-16">
       © <script>document.write(new Date().getFullYear())</script> KVR Bricks. All rights reserved.
     </p>
   </div>
@@ -192,687 +242,3 @@
 </html>
 
 
-        <img src="Assets/20260125_121932.jpg"
-             alt="Solid cement blocks"
-             class="w-full h-full object-cover hover:scale-110 transition">
-      </div>
-
-      <div class="aspect-square overflow-hidden rounded-xl">
-        <img src="Assets/20260125_121942.jpg"
-             alt="Cement brick manufacturing"
-             class="w-full h-full object-cover hover:scale-110 transition">
-      </div>
-
-      <div class="aspect-square overflow-hidden rounded-xl">
-        <img src="Assets/20260125_122027.jpg"
-             alt="Cement bricks ready stock"
-             class="w-full h-full object-cover hover:scale-110 transition">
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<footer id="contact" class="bg-slate-900 text-white py-12">
-  <div class="max-w-6xl mx-auto px-4 text-center">
-    <h2 class="text-2xl font-bold mb-4">Contact KVR Bricks</h2>
-
-    <p class="mb-2">📍 Cherlapalli, Hyderabad</p>
-    <p class="mb-2">📞 9764238394</p>
-
-    <p class="text-slate-400 text-sm mt-6">
-      © <script>document.write(new Date().getFullYear())</script> KVR Bricks
-    </p>
-  </div>
-</footer>
-
-<script>
-  lucide.createIcons();
-</script>
-
-</body>
-</html>      </div>
-
-      <div class="aspect-square overflow-hidden rounded-xl">
-        <img src="assets/images/bricks-4.jpg"
-             class="w-full h-full object-cover hover:scale-110 transition">
-      </div>
-
-      <div class="aspect-square overflow-hidden rounded-xl">
-        <img src="assets/images/bricks-5.jpg"
-             class="w-full h-full object-cover hover:scale-110 transition">
-      </div>
-
-      <div class="aspect-square overflow-hidden rounded-xl">
-        <img src="assets/images/bricks-yard.jpg"
-             class="w-full h-full object-cover hover:scale-110 transition">
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<footer id="contact" class="bg-slate-900 text-white py-12">
-  <div class="max-w-6xl mx-auto px-4 text-center">
-    <h2 class="text-2xl font-bold mb-4">Contact KVR Bricks</h2>
-
-    <p class="mb-2">📍 Cherlapalli, Hyderabad</p>
-    <p class="mb-2">📞 9764238394</p>
-    <p class="text-slate-400 text-sm mt-6">
-      © <script>document.write(new Date().getFullYear())</script> KVR Bricks
-    </p>
-  </div>
-</footer>
-
-<script>
-  lucide.createIcons();
-</script>
-
-</body>
-</html>            <p class="text-lg text-slate-600 mb-12 max-w-3xl mx-auto">
-                KVR Bricks is a locally operated cement brick manufacturing and supply business based in <strong>Cherlapalli, Hyderabad</strong>. We cut out the middlemen.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Sticker Card 1: Quality -->
-                <div class="bg-slate-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-blue-200 group">
-                    <div class="mx-auto h-20 w-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="shield-check" class="h-10 w-10 text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-xl text-slate-900 mb-2">Consistent Quality</h3>
-                    <p class="text-slate-500">Strong & uniform bricks manufactured with strict quality checks.</p>
-                </div>
-
-                <!-- Sticker Card 2: Communication -->
-                <div class="bg-slate-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-green-200 group">
-                    <div class="mx-auto h-20 w-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="message-square" class="h-10 w-10 text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-xl text-slate-900 mb-2">Honest Dealings</h3>
-                    <p class="text-slate-500">No hidden costs or fake promises. We deliver exactly what we say.</p>
-                </div>
-
-                <!-- Sticker Card 3: Delivery -->
-                <div class="bg-slate-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-orange-200 group">
-                    <div class="mx-auto h-20 w-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="truck" class="h-10 w-10 text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-xl text-slate-900 mb-2">Reliable Delivery</h3>
-                    <p class="text-slate-500">Timely dispatch from Cherlapalli directly to your construction site.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products Section -->
-    <section id="products" class="py-16 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-base text-orange-600 font-semibold tracking-wide uppercase">Our Products</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                    High Strength Cement Bricks
-                </p>
-                <p class="mt-4 max-w-2xl text-xl text-slate-500 mx-auto">
-                    Low breakage, clean finish, and good load strength.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 max-w-4xl mx-auto">
-                <!-- Product 1 -->
-                <div class="bg-white overflow-hidden shadow rounded-2xl border border-slate-200 flex flex-col hover:shadow-lg transition-shadow duration-300">
-                    <!-- Image Area -->
-                    <div class="h-64 w-full bg-slate-200 overflow-hidden relative">
-                        <img src="1000233258.jpg" alt="6x6x12 Cement Brick" class="w-full h-full object-cover transform hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1590074160453-62529a738435?auto=format&fit=crop&q=80&w=800'; this.parentElement.innerHTML+='<div class=\'absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-1 text-center\'>Photo missing - add 1000233258.jpg to folder</div>'">
-                    </div>
-                    
-                    <div class="px-6 py-8 flex-grow">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-2xl font-bold text-slate-900">Standard Block</h3>
-                            <span class="bg-slate-100 text-slate-800 text-xs px-2 py-1 rounded-full font-semibold uppercase">Popular</span>
-                        </div>
-                        <div class="text-4xl font-extrabold text-orange-600 mb-2">6" × 6" × 12"</div>
-                        <p class="text-slate-500 text-sm mb-6">Dimensions in inches</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <i data-lucide="check" class="flex-shrink-0 h-5 w-5 text-green-500"></i>
-                                <span class="ml-3 text-base text-slate-700">Perfect for main walls</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="check" class="flex-shrink-0 h-5 w-5 text-green-500"></i>
-                                <span class="ml-3 text-base text-slate-700">High load-bearing capacity</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-50 px-6 py-4">
-                        <a href="https://wa.me/919764238394?text=I%20am%20interested%20in%206x6x12%20bricks" target="_blank" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-slate-900 hover:bg-slate-800 transition">
-                            Get Quote for 6"
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="bg-white overflow-hidden shadow rounded-2xl border border-slate-200 flex flex-col hover:shadow-lg transition-shadow duration-300">
-                    <!-- Image Area -->
-                    <div class="h-64 w-full bg-slate-200 overflow-hidden relative">
-                        <img src="1000233248.jpg" alt="4x8x16 Solid Cement Block" class="w-full h-full object-cover transform hover:scale-105 transition duration-500" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&q=80&w=800'; this.parentElement.innerHTML+='<div class=\'absolute bottom-0 left-0 right-0 bg-black/50 text-white text-xs p-1 text-center\'>Photo missing - add 1000233248.jpg to folder</div>'">
-                    </div>
-
-                    <div class="px-6 py-8 flex-grow">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-2xl font-bold text-slate-900">Solid Block</h3>
-                            <span class="bg-slate-100 text-slate-800 text-xs px-2 py-1 rounded-full font-semibold uppercase">Heavy Duty</span>
-                        </div>
-                        <div class="text-4xl font-extrabold text-orange-600 mb-2">4" × 8" × 16"</div>
-                        <p class="text-slate-500 text-sm mb-6">Dimensions in inches</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <i data-lucide="check" class="flex-shrink-0 h-5 w-5 text-green-500"></i>
-                                <span class="ml-3 text-base text-slate-700">Ideal for partitions</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="check" class="flex-shrink-0 h-5 w-5 text-green-500"></i>
-                                <span class="ml-3 text-base text-slate-700">Cost-effective coverage</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-50 px-6 py-4">
-                        <a href="https://wa.me/919764238394?text=I%20am%20interested%20in%204x8x16%20bricks" target="_blank" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-slate-900 hover:bg-slate-800 transition">
-                            Get Quote for 4"
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-8 text-center">
-                <p class="text-slate-600 font-medium bg-green-100 inline-flex items-center px-4 py-2 rounded-full">
-                    <i data-lucide="package-check" class="w-5 h-5 mr-2 text-green-600"></i>
-                    Bulk stock available for immediate dispatch
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Site Gallery Section -->
-    <section id="gallery" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-slate-900 mb-12">Stock & Facility Gallery</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <!-- Gallery Item 1 -->
-                <div class="aspect-square rounded-lg overflow-hidden bg-slate-100">
-                    <img src="1000233262.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover hover:scale-110 transition duration-500" onerror="this.style.display='none'">
-                </div>
-                <!-- Gallery Item 2 -->
-                <div class="aspect-square rounded-lg overflow-hidden bg-slate-100">
-                    <img src="1000233259.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover hover:scale-110 transition duration-500" onerror="this.style.display='none'">
-                </div>
-                <!-- Gallery Item 3 -->
-                <div class="aspect-square rounded-lg overflow-hidden bg-slate-100">
-                    <img src="1000233250.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover hover:scale-110 transition duration-500" onerror="this.style.display='none'">
-                </div>
-                <!-- Gallery Item 4 -->
-                <div class="aspect-square rounded-lg overflow-hidden bg-slate-100">
-                    <img src="1000233246.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover hover:scale-110 transition duration-500" onerror="this.style.display='none'">
-                </div>
-                 <!-- Gallery Item 5 -->
-                 <div class="aspect-square rounded-lg overflow-hidden bg-slate-100 md:col-span-2">
-                    <img src="1000233249.jpg" alt="KVR Bricks Stock" class="w-full h-full object-cover hover:scale-110 transition duration-500" onerror="this.style.display='none'">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Us Grid (Updated for Mobile Stability) -->
-    <section id="why-us" class="py-16 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-slate-900 mb-12">Why Choose KVR Bricks?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                <!-- Item 1 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
-                        <i data-lucide="clock" class="h-6 w-6"></i>
-                    </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg font-bold text-slate-900">Ready Stock</h3>
-                        <p class="mt-2 text-slate-500">No waiting periods. We keep stock ready so your construction never stops.</p>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
-                        <i data-lucide="box" class="h-6 w-6"></i>
-                    </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg font-bold text-slate-900">Bulk & Small Orders</h3>
-                        <p class="mt-2 text-slate-500">Whether you need a truckload or a small batch, we cater to all requirements.</p>
-                    </div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
-                        <i data-lucide="map-pin" class="h-6 w-6"></i>
-                    </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg font-bold text-slate-900">Local Delivery</h3>
-                        <p class="mt-2 text-slate-500">Fast delivery from Cherlapalli to surrounding areas. Truck delivery available.</p>
-                    </div>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
-                        <i data-lucide="eye" class="h-6 w-6"></i>
-                    </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg font-bold text-slate-900">Inspection Available</h3>
-                        <p class="mt-2 text-slate-500">Visit our site to check the quality yourself before placing an order.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing & Ordering Info -->
-    <section class="py-16 bg-slate-800 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-                <div class="mb-10 lg:mb-0">
-                    <h2 class="text-3xl font-extrabold mb-4">Pricing & Negotiation</h2>
-                    <p class="text-slate-300 text-lg mb-6">
-                        We believe in fair pricing. Our rates are <strong>flexible and negotiable</strong> depending on your order size and delivery location.
-                    </p>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center">
-                            <i data-lucide="check-circle" class="text-green-400 mr-3 flex-shrink-0"></i>
-                            Final rate depends on quantity
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check-circle" class="text-green-400 mr-3 flex-shrink-0"></i>
-                            Special consideration for bulk orders
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check-circle" class="text-green-400 mr-3 flex-shrink-0"></i>
-                            Delivery costs discussed upfront
-                        </li>
-                    </ul>
-                    <a href="tel:9764238394" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-white hover:bg-slate-50 transition">
-                        Call to Negotiate Deal
-                    </a>
-                </div>
-                
-                <div class="bg-slate-700 rounded-lg p-6 md:p-8 border border-slate-600">
-                    <h3 class="text-xl font-bold mb-6">Simple Order Process</h3>
-                    <div class="space-y-6">
-                        <div class="flex">
-                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-slate-900 border border-slate-500 flex items-center justify-center font-bold">1</div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium">Contact Us</h4>
-                                <p class="text-slate-300">Call or WhatsApp <strong>9764238394</strong></p>
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-slate-900 border border-slate-500 flex items-center justify-center font-bold">2</div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium">Confirm Details</h4>
-                                <p class="text-slate-300">Specify brick size (6" or 4") and quantity.</p>
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-slate-900 border border-slate-500 flex items-center justify-center font-bold">3</div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium">Dispatch</h4>
-                                <p class="text-slate-300">Share location. We schedule truck loading immediately.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA / Footer -->
-    <footer id="contact" class="bg-slate-900 border-t border-slate-800 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="md:flex md:justify-between md:items-center mb-12">
-                <div class="mb-8 md:mb-0">
-                    <h2 class="text-2xl font-bold text-white mb-4">Contact KVR Bricks</h2>
-                    <div class="space-y-3 text-slate-300">
-                        <p class="flex items-center"><i data-lucide="map-pin" class="mr-2 text-orange-500 flex-shrink-0"></i> Cherlapalli, Hyderabad</p>
-                        <p class="flex items-center"><i data-lucide="phone" class="mr-2 text-orange-500 flex-shrink-0"></i> <a href="tel:9764238394" class="hover:text-white transition">9764238394</a></p>
-                        <p class="flex items-center"><i data-lucide="clock" class="mr-2 text-orange-500 flex-shrink-0"></i> Always Open - Call Anytime</p>
-                    </div>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-lg text-center md:text-left max-w-sm w-full">
-                    <h3 class="text-white font-bold text-lg mb-2">Need Cement Bricks Now?</h3>
-                    <p class="text-slate-400 mb-4 text-sm">Stock is ready and orders are accepted daily. Contact us to check availability.</p>
-                    <a href="tel:9764238394" class="block w-full text-center bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded transition">
-                        Call 9764238394
-                    </a>
-                </div>
-            </div>
-            
-            <div class="border-t border-slate-800 pt-8 text-center md:flex md:justify-between">
-                <p class="text-slate-500 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> KVR Bricks. All rights reserved.</p>
-                <p class="text-slate-600 text-sm mt-2 md:mt-0">Quality Cement Bricks | Hyderabad</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Initialize Icons securely
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.lucide) {
-                lucide.createIcons();
-            }
-        });
-
-        // Mobile Menu Logic
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const links = document.querySelectorAll('.mobile-link');
-
-        // Toggle menu
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        // Close menu when a link is clicked
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-    </script>
-</body>
-</html>
-
-
-            <p class="text-lg text-slate-600 mb-12 max-w-3xl mx-auto">
-                KVR Bricks is a locally operated cement brick manufacturing and supply business based in <strong>Cherlapalli, Hyderabad</strong>. We cut out the middlemen.
-            </p>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Sticker Card 1: Quality -->
-                <div class="bg-slate-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-blue-200 group">
-                    <div class="mx-auto h-20 w-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="shield-check" class="h-10 w-10 text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-xl text-slate-900 mb-2">Consistent Quality</h3>
-                    <p class="text-slate-500">Strong & uniform bricks manufactured with strict quality checks.</p>
-                </div>
-
-                <!-- Sticker Card 2: Communication -->
-                <div class="bg-slate-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-green-200 group">
-                    <div class="mx-auto h-20 w-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="message-square" class="h-10 w-10 text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-xl text-slate-900 mb-2">Honest Dealings</h3>
-                    <p class="text-slate-500">No hidden costs or fake promises. We deliver exactly what we say.</p>
-                </div>
-
-                <!-- Sticker Card 3: Delivery -->
-                <div class="bg-slate-50 rounded-2xl p-8 hover:bg-white hover:shadow-xl transition-all duration-300 border border-slate-100 hover:border-orange-200 group">
-                    <div class="mx-auto h-20 w-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center shadow-lg mb-6 group-hover:scale-110 transition-transform duration-300">
-                        <i data-lucide="truck" class="h-10 w-10 text-white"></i>
-                    </div>
-                    <h3 class="font-bold text-xl text-slate-900 mb-2">Reliable Delivery</h3>
-                    <p class="text-slate-500">Timely dispatch from Cherlapalli directly to your construction site.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products Section -->
-    <section id="products" class="py-16 bg-slate-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-12">
-                <h2 class="text-base text-orange-600 font-semibold tracking-wide uppercase">Our Products</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-                    High Strength Cement Bricks
-                </p>
-                <p class="mt-4 max-w-2xl text-xl text-slate-500 mx-auto">
-                    Low breakage, clean finish, and good load strength.
-                </p>
-            </div>
-
-            <div class="grid grid-cols-1 gap-8 md:grid-cols-2 max-w-4xl mx-auto">
-                <!-- Product 1 -->
-                <div class="bg-white overflow-hidden shadow rounded-2xl border border-slate-200 flex flex-col hover:shadow-lg transition-shadow duration-300">
-                    <div class="px-6 py-8 flex-grow">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-2xl font-bold text-slate-900">Standard Block</h3>
-                            <span class="bg-slate-100 text-slate-800 text-xs px-2 py-1 rounded-full font-semibold uppercase">Popular</span>
-                        </div>
-                        <div class="text-4xl font-extrabold text-orange-600 mb-2">6" × 6" × 12"</div>
-                        <p class="text-slate-500 text-sm mb-6">Dimensions in inches</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <i data-lucide="check" class="flex-shrink-0 h-5 w-5 text-green-500"></i>
-                                <span class="ml-3 text-base text-slate-700">Perfect for main walls</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="check" class="flex-shrink-0 h-5 w-5 text-green-500"></i>
-                                <span class="ml-3 text-base text-slate-700">High load-bearing capacity</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="check" class="flex-shrink-0 h-5 w-5 text-green-500"></i>
-                                <span class="ml-3 text-base text-slate-700">Uniform edges</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-50 px-6 py-4">
-                        <a href="https://wa.me/919764238394?text=I%20am%20interested%20in%206x6x12%20bricks" target="_blank" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-slate-900 hover:bg-slate-800 transition">
-                            Get Quote for 6"
-                        </a>
-                    </div>
-                </div>
-
-                <!-- Product 2 -->
-                <div class="bg-white overflow-hidden shadow rounded-2xl border border-slate-200 flex flex-col hover:shadow-lg transition-shadow duration-300">
-                    <div class="px-6 py-8 flex-grow">
-                        <div class="flex items-center justify-between mb-4">
-                            <h3 class="text-2xl font-bold text-slate-900">Solid Block</h3>
-                            <span class="bg-slate-100 text-slate-800 text-xs px-2 py-1 rounded-full font-semibold uppercase">Heavy Duty</span>
-                        </div>
-                        <div class="text-4xl font-extrabold text-orange-600 mb-2">4" × 8" × 16"</div>
-                        <p class="text-slate-500 text-sm mb-6">Dimensions in inches</p>
-                        <ul class="space-y-3">
-                            <li class="flex items-start">
-                                <i data-lucide="check" class="flex-shrink-0 h-5 w-5 text-green-500"></i>
-                                <span class="ml-3 text-base text-slate-700">Ideal for partitions</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="check" class="flex-shrink-0 h-5 w-5 text-green-500"></i>
-                                <span class="ml-3 text-base text-slate-700">Cost-effective coverage</span>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="check" class="flex-shrink-0 h-5 w-5 text-green-500"></i>
-                                <span class="ml-3 text-base text-slate-700">Smooth finish</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="bg-slate-50 px-6 py-4">
-                        <a href="https://wa.me/919764238394?text=I%20am%20interested%20in%204x8x16%20bricks" target="_blank" class="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-base font-medium text-white bg-slate-900 hover:bg-slate-800 transition">
-                            Get Quote for 4"
-                        </a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="mt-8 text-center">
-                <p class="text-slate-600 font-medium bg-green-100 inline-flex items-center px-4 py-2 rounded-full">
-                    <i data-lucide="package-check" class="w-5 h-5 mr-2 text-green-600"></i>
-                    Bulk stock available for immediate dispatch
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Us Grid (Updated for Mobile Stability) -->
-    <section id="why-us" class="py-16 bg-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-bold text-center text-slate-900 mb-12">Why Choose KVR Bricks?</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-                <!-- Item 1 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
-                        <i data-lucide="clock" class="h-6 w-6"></i>
-                    </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg font-bold text-slate-900">Ready Stock</h3>
-                        <p class="mt-2 text-slate-500">No waiting periods. We keep stock ready so your construction never stops.</p>
-                    </div>
-                </div>
-
-                <!-- Item 2 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
-                        <i data-lucide="box" class="h-6 w-6"></i>
-                    </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg font-bold text-slate-900">Bulk & Small Orders</h3>
-                        <p class="mt-2 text-slate-500">Whether you need a truckload or a small batch, we cater to all requirements.</p>
-                    </div>
-                </div>
-
-                <!-- Item 3 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
-                        <i data-lucide="map-pin" class="h-6 w-6"></i>
-                    </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg font-bold text-slate-900">Local Delivery</h3>
-                        <p class="mt-2 text-slate-500">Fast delivery from Cherlapalli to surrounding areas. Truck delivery available.</p>
-                    </div>
-                </div>
-
-                <!-- Item 4 -->
-                <div class="flex items-start">
-                    <div class="flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-md bg-orange-500 text-white">
-                        <i data-lucide="eye" class="h-6 w-6"></i>
-                    </div>
-                    <div class="ml-4">
-                        <h3 class="text-lg font-bold text-slate-900">Inspection Available</h3>
-                        <p class="mt-2 text-slate-500">Visit our site to check the quality yourself before placing an order.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing & Ordering Info -->
-    <section class="py-16 bg-slate-800 text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:grid lg:grid-cols-2 lg:gap-8 items-center">
-                <div class="mb-10 lg:mb-0">
-                    <h2 class="text-3xl font-extrabold mb-4">Pricing & Negotiation</h2>
-                    <p class="text-slate-300 text-lg mb-6">
-                        We believe in fair pricing. Our rates are <strong>flexible and negotiable</strong> depending on your order size and delivery location.
-                    </p>
-                    <ul class="space-y-4 mb-8">
-                        <li class="flex items-center">
-                            <i data-lucide="check-circle" class="text-green-400 mr-3 flex-shrink-0"></i>
-                            Final rate depends on quantity
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check-circle" class="text-green-400 mr-3 flex-shrink-0"></i>
-                            Special consideration for bulk orders
-                        </li>
-                        <li class="flex items-center">
-                            <i data-lucide="check-circle" class="text-green-400 mr-3 flex-shrink-0"></i>
-                            Delivery costs discussed upfront
-                        </li>
-                    </ul>
-                    <a href="tel:9764238394" class="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-slate-900 bg-white hover:bg-slate-50 transition">
-                        Call to Negotiate Deal
-                    </a>
-                </div>
-                
-                <div class="bg-slate-700 rounded-lg p-6 md:p-8 border border-slate-600">
-                    <h3 class="text-xl font-bold mb-6">Simple Order Process</h3>
-                    <div class="space-y-6">
-                        <div class="flex">
-                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-slate-900 border border-slate-500 flex items-center justify-center font-bold">1</div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium">Contact Us</h4>
-                                <p class="text-slate-300">Call or WhatsApp <strong>9764238394</strong></p>
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-slate-900 border border-slate-500 flex items-center justify-center font-bold">2</div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium">Confirm Details</h4>
-                                <p class="text-slate-300">Specify brick size (6" or 4") and quantity.</p>
-                            </div>
-                        </div>
-                        <div class="flex">
-                            <div class="flex-shrink-0 h-8 w-8 rounded-full bg-slate-900 border border-slate-500 flex items-center justify-center font-bold">3</div>
-                            <div class="ml-4">
-                                <h4 class="text-lg font-medium">Dispatch</h4>
-                                <p class="text-slate-300">Share location. We schedule truck loading immediately.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Final CTA / Footer -->
-    <footer id="contact" class="bg-slate-900 border-t border-slate-800 pt-16 pb-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="md:flex md:justify-between md:items-center mb-12">
-                <div class="mb-8 md:mb-0">
-                    <h2 class="text-2xl font-bold text-white mb-4">Contact KVR Bricks</h2>
-                    <div class="space-y-3 text-slate-300">
-                        <p class="flex items-center"><i data-lucide="map-pin" class="mr-2 text-orange-500 flex-shrink-0"></i> Cherlapalli, Hyderabad</p>
-                        <p class="flex items-center"><i data-lucide="phone" class="mr-2 text-orange-500 flex-shrink-0"></i> <a href="tel:9764238394" class="hover:text-white transition">9764238394</a></p>
-                        <p class="flex items-center"><i data-lucide="clock" class="mr-2 text-orange-500 flex-shrink-0"></i> Always Open - Call Anytime</p>
-                    </div>
-                </div>
-                <div class="bg-slate-800 p-6 rounded-lg text-center md:text-left max-w-sm w-full">
-                    <h3 class="text-white font-bold text-lg mb-2">Need Cement Bricks Now?</h3>
-                    <p class="text-slate-400 mb-4 text-sm">Stock is ready and orders are accepted daily. Contact us to check availability.</p>
-                    <a href="tel:9764238394" class="block w-full text-center bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-4 rounded transition">
-                        Call 9764238394
-                    </a>
-                </div>
-            </div>
-            
-            <div class="border-t border-slate-800 pt-8 text-center md:flex md:justify-between">
-                <p class="text-slate-500 text-sm">&copy; <script>document.write(new Date().getFullYear())</script> KVR Bricks. All rights reserved.</p>
-                <p class="text-slate-600 text-sm mt-2 md:mt-0">Quality Cement Bricks | Hyderabad</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Initialize Icons securely
-        document.addEventListener('DOMContentLoaded', () => {
-            if (window.lucide) {
-                lucide.createIcons();
-            }
-        });
-
-        // Mobile Menu Logic
-        const btn = document.getElementById('mobile-menu-btn');
-        const menu = document.getElementById('mobile-menu');
-        const links = document.querySelectorAll('.mobile-link');
-
-        // Toggle menu
-        btn.addEventListener('click', () => {
-            menu.classList.toggle('hidden');
-        });
-
-        // Close menu when a link is clicked
-        links.forEach(link => {
-            link.addEventListener('click', () => {
-                menu.classList.add('hidden');
-            });
-        });
-    </script>
-</body>
-</html>
