@@ -1,139 +1,704 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>KVR BRICKS | Construction Materials Supplier</title>
-<link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KVR BRICKS | Construction Materials Supplier</title>
+    <meta name="description" content="Premium quality solid cement bricks, soft bricks, granite, and pre-designed walls in Cherlapalli, Hyderabad.">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Noto+Sans+Telugu:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
 
+    <style>
+        /* --- CORE VARIABLES & RESET --- */
+        :root {
+            --primary: #1e293b; /* Slate 800 */
+            --accent: #f59e0b; /* Amber 500 */
+            --bg-light: #f8fafc;
+            --bg-white: #ffffff;
+            --text-dark: #0f172a;
+            --text-gray: #475569;
+            --transition-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            --shadow-card: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            --shadow-hover: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Telugu Font Override when active */
+        body.telugu-active {
+            font-family: 'Noto Sans Telugu', sans-serif;
+        }
+
+        h1, h2, h3, h4 {
+            line-height: 1.2;
+            font-weight: 700;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        /* --- NAVIGATION --- */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            transition: all 0.4s ease;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .brand {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand span {
+            color: var(--accent);
+        }
+
+        .lang-toggle {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .lang-toggle:hover {
+            transform: scale(1.05);
+            background: var(--accent);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Animated Background Elements */
+        .hero-bg-shape {
+            position: absolute;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.15) 0%, rgba(0,0,0,0) 70%);
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            top: -10%;
+            left: -10%;
+            animation: floatShape 10s infinite ease-in-out alternate;
+        }
+        
+        .hero-bg-shape:nth-child(2) {
+            top: auto;
+            bottom: -10%;
+            left: auto;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            animation-delay: -5s;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            margin-bottom: 1rem;
+            letter-spacing: -1px;
+            /* Gradient Text */
+            background: linear-gradient(to right, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: #94a3b8;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+            opacity: 0.7;
+        }
+
+        /* --- SECTIONS COMMON --- */
+        section {
+            padding: 6rem 5%;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+            max-width: 700px;
+        }
+
+        .section-subtitle {
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 3vw, 2.5rem);
+            color: var(--primary);
+        }
+
+        /* --- ABOUT US --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            max-width: 800px;
+        }
+
+        .about-card {
+            background: white;
+            padding: 2rem;
+            border-left: 4px solid var(--accent);
+            box-shadow: var(--shadow-card);
+            border-radius: 0 12px 12px 0;
+        }
+
+        /* --- GRID SYSTEM FOR PRODUCTS --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            transition: transform 0.4s var(--transition-smooth), box-shadow 0.4s var(--transition-smooth);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card-image-wrapper {
+            width: 100%;
+            aspect-ratio: 4/3; /* Consistent aspect ratio */
+            background-color: #e2e8f0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .product-card:hover .card-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .card-specs {
+            list-style: none;
+            margin-bottom: 1.5rem;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+        }
+
+        .card-specs li {
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-whatsapp {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background-color: #25D366;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+            width: 100%;
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1ebc57;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: #cbd5e1;
+        }
+
+        .contact-item i {
+            color: var(--accent);
+        }
+
+        .copyright {
+            margin-top: 3rem;
+            font-size: 0.8rem;
+            color: #64748b;
+            border-top: 1px solid #334155;
+            padding-top: 2rem;
+            width: 100%;
+        }
+
+        /* --- ANIMATION UTILITIES --- */
+        @keyframes floatShape {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(20px, 40px) rotate(5deg); }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateX(-50%) translateY(0);}
+            40% {transform: translateX(-50%) translateY(-10px);}
+            60% {transform: translateX(-50%) translateY(-5px);}
+        }
+
+        /* Scroll Reveal Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-stagger {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s var(--transition-smooth), transform 0.6s var(--transition-smooth);
+        }
+        
+        /* Fallback for broken images to keep layout nice */
+        img.error-placeholder {
+            object-fit: contain;
+            padding: 2rem;
+            background: #f1f5f9;
+            opacity: 0.5;
+        }
+
+        /* Responsive Fixes */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            section { padding: 4rem 5%; }
+        }
+    </style>
+</head>
 <body>
 
-<header class="header">
-  <div class="logo">KVR BRICKS</div>
-  <button class="lang-btn" onclick="toggleLanguage()">English | తెలుగు</button>
-</header>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="brand">
+            <i data-lucide="blocks" color="#f59e0b"></i>
+            KVR BRICKS
+        </div>
+        <button class="lang-toggle" onclick="toggleLanguage()">
+            <i data-lucide="globe" size="16"></i>
+            <span id="lang-btn-text">తెలుగు</span>
+        </button>
+    </nav>
 
-<!-- HERO -->
-<section class="hero">
-  <h1 class="float" data-en="Cement Brick Suppliers"
-      data-te="సిమెంట్ ఇటుకల సరఫరాదారులు"></h1>
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-bg-shape"></div>
+        <div class="hero-bg-shape"></div>
+        <div class="hero-content">
+            <h1 class="reveal" data-en="Building Strong Foundations" data-te="బలమైన పునాది, మా బాధ్యత">Building Strong Foundations</h1>
+            <p class="reveal" style="transition-delay: 0.1s;" data-en="Premium quality construction materials for your dream projects. Reliable, Durable, and Trusted." data-te="మీ కలల నిర్మాణానికి నాణ్యమైన సామాగ్రి. నమ్మకం మరియు నాణ్యత మా ప్రాధాన్యత.">Premium quality construction materials for your dream projects. Reliable, Durable, and Trusted.</p>
+        </div>
+        <div class="scroll-indicator">
+            <i data-lucide="chevron-down" color="white" size="32"></i>
+        </div>
+    </header>
 
-  <p class="float delay"
-     data-en="Quality Cement & Clay Bricks Supplier"
-     data-te="నాణ్యమైన సిమెంట్ & మట్టి ఇటుకల సరఫరాదారు"></p>
-</section>
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header reveal">
+            <span class="section-subtitle" data-en="Who We Are" data-te="మా గురించి">Who We Are</span>
+            <h2 class="section-title" data-en="About KVR Bricks" data-te="KVR Bricks గురించి">About KVR Bricks</h2>
+        </div>
+        <div class="about-grid reveal" style="transition-delay: 0.2s;">
+            <div class="about-card">
+                <p data-en="Located in Cherlapalli, Hyderabad, KVR Bricks is dedicated to supplying high-quality construction materials. We believe in simple, honest business. We don't claim fake awards; we simply deliver solid products that stand the test of time." 
+                   data-te="చర్లపల్లి, హైదరాబాద్‌లో ఉన్న KVR Bricks, నాణ్యమైన నిర్మాణ సామాగ్రిని అందించడానికి అంకితభావంతో పనిచేస్తుంది. మేము నిజాయితీతో కూడిన వ్యాపారాన్ని నమ్ముతాము. మేము లేని గొప్పలు చెప్పుకోము; కాలానికి నిలిచే బలమైన ఉత్పత్తులను మాత్రమే అందిస్తాము.">
+                   Located in Cherlapalli, Hyderabad, KVR Bricks is dedicated to supplying high-quality construction materials. We believe in simple, honest business. We don't claim fake awards; we simply deliver solid products that stand the test of time.
+                </p>
+                <br>
+                <strong data-en="Location: Cherlapalli, Hyderabad" data-te="ప్రాంతం: చర్లపల్లి, హైదరాబాద్">Location: Cherlapalli, Hyderabad</strong>
+            </div>
+        </div>
+    </section>
 
-<!-- ABOUT -->
-<section class="section">
-  <h2 data-en="About Us" data-te="మా గురించి"></h2>
-  <p class="text"
-     data-en="KVR BRICKS is a local construction material supplier based in Cherlapalli, Hyderabad. We supply solid cement bricks, soft bricks, granite, and pre-designed walls. For pricing and availability, customers can directly contact us through WhatsApp."
-     data-te="KVR BRICKS చెర్లపల్లి, హైదరాబాద్‌లో ఉన్న స్థానిక నిర్మాణ సామగ్రి సరఫరాదారు. మేము సాలిడ్ సిమెంట్ ఇటుకలు, సాఫ్ట్ ఇటుకలు, గ్రానైట్ మరియు ముందుగా డిజైన్ చేసిన గోడలను సరఫరా చేస్తాము. వివరాల కోసం వాట్సాప్ ద్వారా సంప్రదించవచ్చు.">
-  </p>
-</section>
+    <!-- Solid Cement Bricks Section -->
+    <section id="solid-bricks">
+        <div class="section-header reveal">
+            <span class="section-subtitle" data-en="Our Core Product" data-te="మా ప్రధాన ఉత్పత్తి">Our Core Product</span>
+            <h2 class="section-title" data-en="Solid Cement Bricks" data-te="సిమెంట్ ఇటుకలు">Solid Cement Bricks</h2>
+        </div>
+        <div class="product-grid" id="solid-grid">
+            <!-- Injected via JS -->
+        </div>
+    </section>
 
-<!-- SOLID CEMENT BRICKS -->
-<section class="section dark">
-  <h2 data-en="Solid Cement Bricks"
-      data-te="సాలిడ్ సిమెంట్ ఇటుకలు"></h2>
+    <!-- Soft Bricks Section -->
+    <section id="soft-bricks" style="background-color: #fff;">
+        <div class="section-header reveal">
+            <span class="section-subtitle" data-en="Lightweight & Durable" data-te="తేలికైనవి & మన్నికైనవి">Lightweight & Durable</span>
+            <h2 class="section-title" data-en="Soft Bricks (AAC)" data-te="సాఫ్ట్ బ్రిక్స్ (AAC)">Soft Bricks (AAC)</h2>
+        </div>
+        <div class="product-grid" id="soft-grid">
+            <!-- Injected via JS -->
+        </div>
+    </section>
 
-  <div class="badges">
-    <span>6 × 8 × 12</span>
-    <span>16 × 16 × 12</span>
-    <span>4 × 16 × 16</span>
-  </div>
+    <!-- Granite Section -->
+    <section id="granite">
+        <div class="section-header reveal">
+            <span class="section-subtitle" data-en="Premium Finish" data-te="ప్రీమియం ఫినిషింగ్">Premium Finish</span>
+            <h2 class="section-title" data-en="Granite Collection" data-te="గ్రెనైట్ కలెక్షన్">Granite Collection</h2>
+        </div>
+        <div class="product-grid" id="granite-grid">
+            <!-- Injected via JS -->
+        </div>
+    </section>
 
-  <div class="grid breathe">
-    <img src="Assets/20260125_121914.jpg">
-    <img src="Assets/20260125_121921.jpg">
-    <img src="Assets/20260125_121932.jpg">
-    <img src="Assets/20260125_121942.jpg">
-    <img src="Assets/20260125_122027.jpg">
-  </div>
+    <!-- Pre-Designed Walls Section -->
+    <section id="walls" style="background-color: #fff;">
+        <div class="section-header reveal">
+            <span class="section-subtitle" data-en="Modern Solutions" data-te="ఆధునిక పరిష్కారాలు">Modern Solutions</span>
+            <h2 class="section-title" data-en="Pre-Designed Walls" data-te="ముందుగా రూపొందించిన గోడలు">Pre-Designed Walls</h2>
+            <p style="margin-top: 1rem; color: var(--text-gray);" data-en="Ready-to-install wall solutions that save time and add aesthetic value to your property." data-te="మీ సమయాన్ని ఆదా చేసే మరియు మీ ఇంటికి అందాన్నిచ్చే రెడీమేడ్ గోడలు.">
+                Ready-to-install wall solutions that save time and add aesthetic value to your property.
+            </p>
+        </div>
+        <div class="product-grid" id="walls-grid">
+            <!-- Injected via JS -->
+        </div>
+    </section>
 
-  <button class="cta inquiry"
-    data-en="Solid Cement Bricks"
-    data-te="సాలిడ్ సిమెంట్ ఇటుకలు">
-    Inquiry on WhatsApp
-  </button>
-</section>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content reveal">
+            <div class="brand" style="color: white;">
+                <i data-lucide="blocks" color="#f59e0b"></i>
+                KVR BRICKS
+            </div>
+            
+            <div class="contact-item">
+                <i data-lucide="map-pin"></i>
+                <span data-en="Cherlapalli, Hyderabad" data-te="చర్లపల్లి, హైదరాబాద్">Cherlapalli, Hyderabad</span>
+            </div>
+            
+            <div class="contact-item">
+                <i data-lucide="phone"></i>
+                <span>9764238394</span>
+            </div>
 
-<!-- SOFT BRICKS -->
-<section class="section soft">
-  <h2 data-en="Soft Bricks"
-      data-te="సాఫ్ట్ ఇటుకలు"></h2>
+            <a href="https://wa.me/919764238394" class="btn-whatsapp" style="width: auto; background-color: var(--accent); color: var(--primary);">
+                <i data-lucide="message-circle"></i>
+                <span data-en="Chat on WhatsApp" data-te="వాట్సాప్ చాట్">Chat on WhatsApp</span>
+            </a>
+        </div>
+        <div class="copyright">
+            &copy; 2026 KVR Bricks. All Rights Reserved.
+        </div>
+    </footer>
 
-  <div class="badges">
-    <span data-en="Length: 2 feet" data-te="పొడవు: 2 అడుగులు"></span>
-    <span data-en="Width: 8 inches" data-te="వెడల్పు: 8 అంగుళాలు"></span>
-  </div>
+    <script>
+        // --- DATA CONFIGURATION ---
+        const products = {
+            solid: {
+                specs: {
+                    en: ["Size: 6 × 8 × 12", "Size: 16 × 16 × 12", "Size: 4 × 16 × 16"],
+                    te: ["సైజు: 6 × 8 × 12", "సైజు: 16 × 16 × 12", "సైజు: 4 × 16 × 16"]
+                },
+                images: [
+                    "20260125_121914.jpg", "20260125_121921.jpg", "20260125_121932.jpg", 
+                    "20260125_121942.jpg", "20260125_122027.jpg"
+                ],
+                name: { en: "Solid Cement Brick", te: "సిమెంట్ ఇటుక" }
+            },
+            soft: {
+                specs: {
+                    en: ["Length: 2 feet", "Width: 8 inches"],
+                    te: ["పొడవు: 2 అడుగులు", "వెడల్పు: 8 అంగుళాలు"]
+                },
+                images: [
+                    "20260125_123600.jpg", "20260125_123602.jpg", "20260125_123537.jpg", "20260125_123526.jpg"
+                ],
+                name: { en: "Soft Brick (AAC)", te: "సాఫ్ట్ బ్రిక్ (AAC)" }
+            },
+            granite: {
+                specs: {
+                    en: ["Premium Quality", "Durable Finish"],
+                    te: ["ప్రీమియం క్వాలిటీ", "మన్నికైన ఫినిషింగ్"]
+                },
+                images: [
+                    "20260125_123522.jpg", "20260125_123516.jpg", "20260125_123510.jpg", 
+                    "20260125_123504.jpg", "20260125_123816.jpg", "20260125_123820.jpg"
+                ],
+                name: { en: "Granite Slab", te: "గ్రెనైట్ రాయి" }
+            },
+            walls: {
+                specs: {
+                    en: ["Pre-Designed", "Easy Installation"],
+                    te: ["ముందుగా రూపొందించినవి", "సులభమైన నిర్మాణం"]
+                },
+                images: [
+                    "20260125_122114.jpg", "20260125_122123.jpg", "20260125_122106.jpg", "20260125_122050.jpg"
+                ],
+                name: { en: "Pre-Designed Wall", te: "రెడీమేడ్ గోడ" }
+            }
+        };
 
-  <div class="grid breathe">
-    <img src="Assets/20260125_123600.jpg">
-    <img src="Assets/20260125_123602.jpg">
-    <img src="Assets/20260125_123537.jpg">
-    <img src="Assets/20260125_123526.jpg">
-  </div>
+        // --- STATE MANAGEMENT ---
+        let currentLang = 'en';
 
-  <button class="cta inquiry"
-    data-en="Soft Bricks (2ft x 8in)"
-    data-te="సాఫ్ట్ ఇటుకలు (2 అడుగులు x 8 అంగుళాలు)">
-    Inquiry on WhatsApp
-  </button>
-</section>
+        // --- RENDER FUNCTIONS ---
+        function renderCard(type, imageUrl, index) {
+            const data = products[type];
+            // Delay calculation for stagger effect
+            const delay = index * 100;
+            
+            return `
+                <div class="product-card reveal-stagger" style="transition-delay: ${delay}ms">
+                    <div class="card-image-wrapper">
+                        <img src="${imageUrl}" alt="${data.name.en}" loading="lazy" onerror="this.onerror=null;this.classList.add('error-placeholder');this.src='https://placehold.co/600x400/e2e8f0/1e293b?text=KVR+Product';">
+                    </div>
+                    <div class="card-content">
+                        <div>
+                            <h3 class="card-title" data-product-type="${type}">${currentLang === 'en' ? data.name.en : data.name.te}</h3>
+                            <ul class="card-specs" data-product-type="${type}">
+                                ${data.specs[currentLang].map(spec => `
+                                    <li><i data-lucide="check" size="16" color="#f59e0b"></i> ${spec}</li>
+                                `).join('')}
+                            </ul>
+                        </div>
+                        <button onclick="inquire('${type}')" class="btn-whatsapp">
+                            <i data-lucide="message-circle" size="18"></i>
+                            <span class="btn-text">${currentLang === 'en' ? 'Inquiry on WhatsApp' : 'వాట్సాప్ లో అడగండి'}</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
 
-<!-- GRANITE -->
-<section class="section granite">
-  <h2 data-en="Granite"
-      data-te="గ్రానైట్"></h2>
+        function populateGrids() {
+            // Render all grids based on image arrays
+            document.getElementById('solid-grid').innerHTML = products.solid.images.map((img, i) => renderCard('solid', img, i)).join('');
+            document.getElementById('soft-grid').innerHTML = products.soft.images.map((img, i) => renderCard('soft', img, i)).join('');
+            document.getElementById('granite-grid').innerHTML = products.granite.images.map((img, i) => renderCard('granite', img, i)).join('');
+            document.getElementById('walls-grid').innerHTML = products.walls.images.map((img, i) => renderCard('walls', img, i)).join('');
+            
+            // Re-initialize icons for new elements
+            lucide.createIcons();
+            // Re-observe new elements
+            observeElements();
+        }
 
-  <div class="grid breathe">
-    <img src="Assets/20260125_123522.jpg">
-    <img src="Assets/20260125_123516.jpg">
-    <img src="Assets/20260125_123510.jpg">
-    <img src="Assets/20260125_123504.jpg">
-    <img src="Assets/20260125_123816.jpg">
-    <img src="Assets/20260125_123820.jpg">
-  </div>
+        // --- LANGUAGE LOGIC ---
+        function toggleLanguage() {
+            currentLang = currentLang === 'en' ? 'te' : 'en';
+            const body = document.body;
+            const btnText = document.getElementById('lang-btn-text');
+            
+            if (currentLang === 'te') {
+                body.classList.add('telugu-active');
+                btnText.innerText = "English";
+            } else {
+                body.classList.remove('telugu-active');
+                btnText.innerText = "తెలుగు";
+            }
 
-  <button class="cta inquiry"
-    data-en="Granite"
-    data-te="గ్రానైట్">
-    Inquiry on WhatsApp
-  </button>
-</section>
+            // Update static elements with data attributes
+            document.querySelectorAll('[data-en]').forEach(el => {
+                el.innerText = el.getAttribute(`data-${currentLang}`);
+            });
 
-<!-- PRE-DESIGNED WALLS -->
-<section class="section">
-  <h2 data-en="Pre-Designed Walls"
-      data-te="ముందుగా డిజైన్ చేసిన గోడలు"></h2>
+            // Update Dynamic Cards (Re-render mainly spec lists and titles)
+            document.querySelectorAll('.product-card').forEach(card => {
+                const title = card.querySelector('.card-title');
+                const specs = card.querySelector('.card-specs');
+                const btn = card.querySelector('.btn-text');
+                
+                if (title && specs) {
+                    const type = title.getAttribute('data-product-type');
+                    title.innerText = products[type].name[currentLang];
+                    specs.innerHTML = products[type].specs[currentLang].map(spec => `
+                        <li><i data-lucide="check" size="16" color="#f59e0b"></i> ${spec}</li>
+                    `).join('');
+                    btn.innerText = currentLang === 'en' ? 'Inquiry on WhatsApp' : 'వాట్సాప్ లో అడగండి';
+                }
+            });
+            
+            lucide.createIcons();
+        }
 
-  <p class="text"
-     data-en="Pre-designed wall blocks suitable for boundary walls and compound walls."
-     data-te="బౌండరీ గోడలు మరియు కంపౌండ్ గోడల కోసం అనువైన ముందుగా డిజైన్ చేసిన గోడలు.">
-  </p>
+        // --- WHATSAPP LOGIC ---
+        function inquire(type) {
+            const phone = "919764238394";
+            const product = products[type];
+            let message = "";
 
-  <div class="grid breathe">
-    <img src="Assets/20260125_122114.jpg">
-    <img src="Assets/20260125_122123.jpg">
-    <img src="Assets/20260125_122106.jpg">
-    <img src="Assets/20260125_122050.jpg">
-  </div>
+            if (currentLang === 'en') {
+                message = `Hello KVR Bricks, I am interested in your ${product.name.en}. Please share more details.`;
+            } else {
+                message = `నమస్తే KVR Bricks, నాకు ${product.name.te} గురించి మరిన్ని వివరాలు కావాలి.`;
+            }
 
-  <button class="cta inquiry"
-    data-en="Pre-Designed Walls"
-    data-te="ముందుగా డిజైన్ చేసిన గోడలు">
-    Inquiry on WhatsApp
-  </button>
-</section>
+            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            window.open(url, '_blank');
+        }
 
-<footer>
-  📞 9764238394<br>
-  Cherlapalli, Hyderabad<br>
-  © KVR BRICKS
-</footer>
+        // --- ANIMATION LOGIC (Intersection Observer) ---
+        function observeElements() {
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
 
-<script src="script.js"></script>
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: Stop observing once revealed
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => {
+                observer.observe(el);
+            });
+        }
+
+        // --- INITIALIZATION ---
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            populateGrids();
+            observeElements(); // Will pick up both static and dynamic elements
+        });
+
+    </script>
 </body>
 </html>
+
