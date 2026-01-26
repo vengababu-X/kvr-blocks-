@@ -1,130 +1,225 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>KVR BRICKS</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KVR Bricks | Quality Cement Bricks in Hyderabad</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@0.263.1/dist/umd/lucide.js"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+body { font-family: 'Inter', sans-serif; }
+html, body { overflow-x: hidden; }
+
+/* ===== ANIMATIONS ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+.reveal.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* idle floating */
+.float {
+  animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+</style>
 </head>
-<body>
 
-<header class="header">
-  <div class="logo">KVR BRICKS</div>
-  <button class="lang-btn" onclick="toggleLanguage()">English | తెలుగు</button>
-</header>
+<body class="bg-slate-50 text-slate-800">
 
-<section class="hero">
-  <h1 data-en="Cement Brick Suppliers"
-      data-te="సిమెంట్ ఇటుకల సరఫరాదారులు"></h1>
-  <p data-en="Quality Cement & Clay Bricks Supplier"
-     data-te="నాణ్యమైన సిమెంట్ & మట్టి ఇటుకల సరఫరాదారు"></p>
-</section>
+<!-- NAV -->
+<nav class="bg-slate-900 text-white sticky top-0 z-50 shadow">
+  <div class="max-w-7xl mx-auto px-4 h-16 flex justify-between items-center">
+    <div class="flex items-center gap-2">
+      <i data-lucide="layers" class="text-orange-500"></i>
+      <span class="font-bold text-xl">KVR Bricks</span>
+    </div>
+    <div class="hidden md:flex items-center gap-6">
+      <a href="#home">Home</a>
+      <a href="#products">Products</a>
+      <a href="#contact">Contact</a>
+      <button id="langToggle" class="border border-orange-500 text-orange-400 px-3 py-1 rounded">
+        EN | తెలుగు
+      </button>
+      <a href="tel:9764238394" class="bg-orange-600 px-4 py-2 rounded font-bold">
+        9764238394
+      </a>
+    </div>
+  </div>
+</nav>
 
-<section class="section animate">
-  <h2 data-en="About Us" data-te="మా గురించి"></h2>
-  <p class="text"
-     data-en="KVR BRICKS is a local construction material supplier based in Cherlapalli, Hyderabad. We supply solid cement bricks, soft bricks, granite, and pre-designed walls. Customers can contact us directly through WhatsApp for enquiries."
-     data-te="KVR BRICKS చెర్లపల్లి, హైదరాబాద్‌లో ఉన్న స్థానిక నిర్మాణ సామగ్రి సరఫరాదారు. మేము సాలిడ్ సిమెంట్ ఇటుకలు, సాఫ్ట్ ఇటుకలు, గ్రానైట్ మరియు ముందుగా డిజైన్ చేసిన గోడలను సరఫరా చేస్తాము. వివరాల కోసం వాట్సాప్ ద్వారా సంప్రదించవచ్చు.">
+<!-- HERO -->
+<section id="home" class="bg-slate-900 text-white py-24 text-center">
+  <h1 class="text-4xl sm:text-5xl font-extrabold mb-4 float reveal"
+      data-en="Quality Cement Bricks Ready for Delivery"
+      data-te="నాణ్యమైన సిమెంట్ ఇటుకలు వెంటనే అందుబాటులో ఉన్నాయి">
+    Quality Cement Bricks Ready for Delivery
+  </h1>
+  <p class="text-slate-300 reveal"
+     data-en="Trusted supplier in Cherlapalli, Hyderabad"
+     data-te="చెర్లపల్లి, హైదరాబాద్‌లో నమ్మకమైన సరఫరాదారు">
+    Trusted supplier in Cherlapalli, Hyderabad
   </p>
 </section>
 
-<!-- SOLID CEMENT BRICKS -->
-<section class="section animate">
-  <h2 data-en="Solid Cement Bricks" data-te="సాలిడ్ సిమెంట్ ఇటుకలు"></h2>
-
-  <div class="badges">
-    <span>6 × 8 × 12</span>
-    <span>16 × 16 × 12</span>
-    <span>4 × 16 × 16</span>
+<!-- ABOUT -->
+<section class="py-16 bg-white reveal">
+  <div class="max-w-5xl mx-auto px-4 text-center">
+    <h2 class="text-3xl font-bold mb-4"
+        data-en="About Us"
+        data-te="మా గురించి">About Us</h2>
+    <p class="text-slate-600"
+       data-en="KVR Bricks is a local construction material supplier based in Cherlapalli, Hyderabad. We supply cement bricks, soft bricks, granite and pre-designed walls."
+       data-te="KVR బ్రిక్స్ చెర్లపల్లి, హైదరాబాద్‌లో ఉన్న స్థానిక నిర్మాణ సామగ్రి సరఫరాదారు. మేము సిమెంట్ ఇటుకలు, సాఫ్ట్ ఇటుకలు, గ్రానైట్ మరియు ముందుగా డిజైన్ చేసిన గోడలను సరఫరా చేస్తాము.">
+    </p>
   </div>
-
-  <div class="grid">
-    <img src="Assets/20260125_121914.jpg">
-    <img src="Assets/20260125_121921.jpg">
-    <img src="Assets/20260125_121932.jpg">
-    <img src="Assets/20260125_121942.jpg">
-    <img src="Assets/20260125_122027.jpg">
-  </div>
-
-  <button class="cta inquiry"
-    data-product-en="Solid Cement Bricks"
-    data-product-te="సాలిడ్ సిమెంట్ ఇటుకలు">
-    Inquiry on WhatsApp
-  </button>
 </section>
+
+<!-- PRODUCTS -->
+<section id="products" class="py-16 reveal">
+<div class="max-w-7xl mx-auto px-4">
+
+<!-- SOLID BRICKS -->
+<h3 class="text-2xl font-bold mb-4"
+    data-en="Solid Cement Bricks"
+    data-te="సాలిడ్ సిమెంట్ ఇటుకలు">Solid Cement Bricks</h3>
+
+<p class="mb-4 font-semibold">6×8×12 | 16×16×12 | 4×16×16</p>
+
+<div class="grid grid-cols-2 md:grid-cols-5 gap-4 mb-4">
+<img src="Assets/20260125_121914.jpg">
+<img src="Assets/20260125_121921.jpg">
+<img src="Assets/20260125_121932.jpg">
+<img src="Assets/20260125_121942.jpg">
+<img src="Assets/20260125_122027.jpg">
+</div>
+
+<button class="waBtn bg-green-500 text-white px-6 py-2 rounded"
+ data-en="Inquiry for Solid Cement Bricks"
+ data-te="సాలిడ్ సిమెంట్ ఇటుకల గురించి విచారణ">
+ Inquiry on WhatsApp
+</button>
 
 <!-- SOFT BRICKS -->
-<section class="section soft animate">
-  <h2 data-en="Soft Bricks" data-te="సాఫ్ట్ ఇటుకలు"></h2>
+<h3 class="text-2xl font-bold mt-12 mb-4"
+ data-en="Soft Bricks"
+ data-te="సాఫ్ట్ ఇటుకలు">Soft Bricks</h3>
 
-  <div class="badges">
-    <span data-en="Length: 2 feet" data-te="పొడవు: 2 అడుగులు"></span>
-    <span data-en="Width: 8 inches" data-te="వెడల్పు: 8 అంగుళాలు"></span>
-  </div>
+<p class="mb-4">Length: 2 feet | Width: 8 inches</p>
 
-  <div class="grid">
-    <img src="Assets/20260125_123600.jpg">
-    <img src="Assets/20260125_123602.jpg">
-    <img src="Assets/20260125_123537.jpg">
-    <img src="Assets/20260125_123526.jpg">
-  </div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+<img src="Assets/20260125_123600.jpg">
+<img src="Assets/20260125_123602.jpg">
+<img src="Assets/20260125_123537.jpg">
+<img src="Assets/20260125_123526.jpg">
+</div>
 
-  <button class="cta inquiry"
-    data-product-en="Soft Bricks (2ft x 8in)"
-    data-product-te="సాఫ్ట్ ఇటుకలు (2 అడుగులు x 8 అంగుళాలు)">
-    Inquiry on WhatsApp
-  </button>
-</section>
+<button class="waBtn bg-green-500 text-white px-6 py-2 rounded"
+ data-en="Inquiry for Soft Bricks"
+ data-te="సాఫ్ట్ ఇటుకల గురించి విచారణ">
+ Inquiry on WhatsApp
+</button>
 
 <!-- GRANITE -->
-<section class="section granite animate">
-  <h2 data-en="Granite" data-te="గ్రానైట్"></h2>
+<h3 class="text-2xl font-bold mt-12 mb-4"
+ data-en="Granite"
+ data-te="గ్రానైట్">Granite</h3>
 
-  <div class="grid">
-    <img src="Assets/20260125_123522.jpg">
-    <img src="Assets/20260125_123516.jpg">
-    <img src="Assets/20260125_123510.jpg">
-    <img src="Assets/20260125_123504.jpg">
-    <img src="Assets/20260125_123816.jpg">
-    <img src="Assets/20260125_123820.jpg">
-  </div>
+<div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
+<img src="Assets/20260125_123522.jpg">
+<img src="Assets/20260125_123516.jpg">
+<img src="Assets/20260125_123510.jpg">
+<img src="Assets/20260125_123504.jpg">
+<img src="Assets/20260125_123816.jpg">
+<img src="Assets/20260125_123820.jpg">
+</div>
 
-  <button class="cta inquiry"
-    data-product-en="Granite"
-    data-product-te="గ్రానైట్">
-    Inquiry on WhatsApp
-  </button>
+<button class="waBtn bg-green-500 text-white px-6 py-2 rounded"
+ data-en="Inquiry for Granite"
+ data-te="గ్రానైట్ గురించి విచారణ">
+ Inquiry on WhatsApp
+</button>
+
+<!-- WALLS -->
+<h3 class="text-2xl font-bold mt-12 mb-4"
+ data-en="Pre-Designed Walls"
+ data-te="ముందుగా డిజైన్ చేసిన గోడలు">Pre-Designed Walls</h3>
+
+<p class="mb-4"
+ data-en="Ready-made wall blocks for boundary and compound walls."
+ data-te="బౌండరీ మరియు కంపౌండ్ గోడల కోసం ముందుగా తయారుచేసిన గోడ బ్లాక్స్.">
+</p>
+
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+<img src="Assets/20260125_122114.jpg">
+<img src="Assets/20260125_122123.jpg">
+<img src="Assets/20260125_122106.jpg">
+<img src="Assets/20260125_122050.jpg">
+</div>
+
+<button class="waBtn bg-green-500 text-white px-6 py-2 rounded"
+ data-en="Inquiry for Pre-Designed Walls"
+ data-te="ముందుగా డిజైన్ చేసిన గోడల గురించి విచారణ">
+ Inquiry on WhatsApp
+</button>
+
+</div>
 </section>
 
-<!-- PRE-DESIGNED WALLS -->
-<section class="section animate">
-  <h2 data-en="Pre-Designed Walls" data-te="ముందుగా డిజైన్ చేసిన గోడలు"></h2>
+<!-- FOOTER -->
+<footer id="contact" class="bg-slate-900 text-white py-16 text-center reveal">
+<p><i data-lucide="map-pin"></i> Cherlapalli, Hyderabad</p>
+<p class="mt-2"><i data-lucide="phone"></i> 9764238394</p>
 
-  <p class="text"
-     data-en="Pre-designed wall blocks suitable for boundary and compound walls."
-     data-te="బౌండరీ మరియు కంపౌండ్ గోడల కోసం ముందుగా డిజైన్ చేసిన గోడలు.">
-  </p>
-
-  <div class="grid">
-    <img src="Assets/20260125_122114.jpg">
-    <img src="Assets/20260125_122123.jpg">
-    <img src="Assets/20260125_122106.jpg">
-    <img src="Assets/20260125_122050.jpg">
-  </div>
-
-  <button class="cta inquiry"
-    data-product-en="Pre-Designed Walls"
-    data-product-te="ముందుగా డిజైన్ చేసిన గోడలు">
-    Inquiry on WhatsApp
-  </button>
-</section>
-
-<footer>
-  📞 9764238394<br>
-  Cherlapalli, Hyderabad<br>
-  © KVR BRICKS
+<div class="mt-6 h-64">
+<iframe class="w-full h-full rounded"
+ src="https://www.google.com/maps?q=Cherlapalli,Hyderabad&output=embed"
+ loading="lazy"></iframe>
+</div>
 </footer>
 
-<script src="script.js"></script>
+<script>
+lucide.createIcons();
+
+/* reveal animation */
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries=>{
+ entries.forEach(e=>{
+  if(e.isIntersecting) e.target.classList.add('show');
+ });
+});
+reveals.forEach(r=>obs.observe(r));
+
+/* language toggle */
+let lang = "en";
+document.getElementById("langToggle").onclick = ()=>{
+ lang = lang==="en"?"te":"en";
+ document.querySelectorAll("[data-en]").forEach(el=>{
+  el.textContent = el.getAttribute("data-"+lang);
+ });
+};
+
+/* WhatsApp buttons */
+document.querySelectorAll(".waBtn").forEach(btn=>{
+ btn.onclick = ()=>{
+  const msg = btn.getAttribute("data-"+lang);
+  window.open(
+   "https://wa.me/919764238394?text="+encodeURIComponent(msg),
+   "_blank"
+  );
+ };
+});
+</script>
+
 </body>
 </html>
