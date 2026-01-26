@@ -1,19 +1,15 @@
-* { box-sizing: border-box; }
-
 body {
   margin: 0;
   font-family: system-ui, sans-serif;
-  background: #f2f2f2;
-  color: #111;
+  background: #f4f4f4;
 }
 
 .header {
   position: fixed;
-  top: 0;
   width: 100%;
   background: #111;
   color: white;
-  padding: 12px 16px;
+  padding: 14px;
   display: flex;
   justify-content: space-between;
   z-index: 1000;
@@ -21,87 +17,144 @@ body {
 
 .hero {
   min-height: 100vh;
-  background: linear-gradient(135deg, #b22222, #111);
+  background: linear-gradient(135deg, #c0392b, #2c3e50);
   color: white;
   padding: 120px 20px;
   text-align: center;
 }
 
-.hero h1 {
-  font-size: 2.4rem;
-  animation: pop 1s ease;
+.hero-title {
+  font-size: 2.6rem;
+  animation: slideDown 1s ease;
 }
 
-.hero-actions .btn {
+.hero-sub {
+  animation: fadeUp 1.2s ease;
+}
+
+.btn {
+  background: white;
+  color: black;
+  padding: 12px 24px;
   margin: 10px;
-  padding: 14px 26px;
   border-radius: 30px;
   text-decoration: none;
-  font-weight: 600;
 }
-
-.primary { background: white; color: black; }
-.secondary { border: 2px solid white; color: white; }
 
 .section {
-  padding: 60px 20px;
+  padding: 80px 20px;
 }
 
-.dark {
-  background: #1a1a1a;
+.soft-bg {
+  background: linear-gradient(135deg, #f39c12, #f1c40f);
+}
+
+.granite-bg {
+  background: linear-gradient(135deg, #2c3e50, #7f8c8d);
   color: white;
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 14px;
+  gap: 15px;
 }
 
 .grid img {
   width: 100%;
-  border-radius: 12px;
-  transform: scale(0.95);
-  transition: transform 0.4s;
+  border-radius: 14px;
+  animation: zoomIn 0.8s ease forwards;
 }
 
-.grid img:hover {
-  transform: scale(1);
+.soft-info span {
+  background: #111;
+  color: white;
+  padding: 10px 16px;
+  margin-right: 10px;
+  border-radius: 20px;
+  animation: float 2s infinite alternate;
 }
 
 .sizes {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   flex-wrap: wrap;
 }
 
 .size-card {
-  padding: 20px;
   background: #111;
   color: white;
-  border-radius: 12px;
+  padding: 24px;
+  border-radius: 16px;
   font-size: 1.2rem;
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: 0.8s ease;
+.bounce {
+  animation: bounce 0.8s ease;
 }
 
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
+.delay1 { animation-delay: 0.2s; }
+.delay2 { animation-delay: 0.4s; }
+
+.slide-left {
+  animation: slideLeft 1s ease;
 }
 
-.whatsapp-float {
+.slide-right {
+  animation: slideRight 1s ease;
+}
+
+.whatsapp {
   position: fixed;
   bottom: 20px;
   right: 20px;
   background: #25d366;
-  color: white;
-  font-size: 26px;
   padding: 14px;
   border-radius: 50%;
+  font-size: 26px;
+  color: white;
   text-decoration: none;
+  animation: pulse 1.5s infinite;
+}
+
+/* KEYFRAMES */
+@keyframes slideDown {
+  from { transform: translateY(-40px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fadeUp {
+  from { transform: translateY(30px); opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { transform: translateX(-60px); opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideRight {
+  from { transform: translateX(60px); opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zoomIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes bounce {
+  0% { transform: scale(0.7); }
+  70% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+@keyframes float {
+  from { transform: translateY(0); }
+  to { transform: translateY(-6px); }
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
 }
