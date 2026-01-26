@@ -1,26 +1,24 @@
-let currentLang = "en";
+let lang = "en";
 
 function toggleLanguage() {
-  currentLang = currentLang === "en" ? "te" : "en";
+  lang = lang === "en" ? "te" : "en";
 
   document.querySelectorAll("[data-en]").forEach(el => {
-    el.textContent = el.getAttribute("data-" + currentLang);
+    el.textContent = el.getAttribute("data-" + lang);
   });
 }
 
-// WhatsApp inquiry handling
 document.querySelectorAll(".inquiry").forEach(btn => {
   btn.addEventListener("click", () => {
-    const product = btn.getAttribute(
-      currentLang === "en" ? "data-product-en" : "data-product-te"
-    );
-
+    const product = btn.getAttribute(lang === "en" ? "data-en" : "data-te");
     const message =
-      currentLang === "en"
+      lang === "en"
         ? `Hello, I want to inquire about ${product}.`
         : `హలో, నాకు ${product} గురించి సమాచారం కావాలి.`;
 
-    const url = `https://wa.me/919764238394?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
+    window.open(
+      `https://wa.me/919764238394?text=${encodeURIComponent(message)}`,
+      "_blank"
+    );
   });
 });
