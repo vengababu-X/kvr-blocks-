@@ -1,12 +1,22 @@
-let currentLang = "en";
+let lang = "en";
 
 function toggleLanguage() {
-  currentLang = currentLang === "en" ? "te" : "en";
-
+  lang = lang === "en" ? "te" : "en";
   document.querySelectorAll("[data-en]").forEach(el => {
-    el.innerText = el.getAttribute("data-" + currentLang);
+    el.textContent = el.getAttribute("data-" + lang);
   });
 }
 
-toggleLanguage();
-toggleLanguage();
+const reveals = document.querySelectorAll(".reveal");
+
+function revealOnScroll() {
+  reveals.forEach(el => {
+    const top = el.getBoundingClientRect().top;
+    if (top < window.innerHeight - 100) {
+      el.classList.add("active");
+    }
+  });
+}
+
+window.addEventListener("scroll", revealOnScroll);
+revealOnScroll();
